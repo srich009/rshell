@@ -22,6 +22,12 @@ class Node
     	Node(std::string);
     	
     	~Node();
+
+    	void setPar(Node* n);
+    	
+    	void setLeft(Node* n);
+    	
+    	void setRight(Node* n);
     	
     	Node* getPar();
     	
