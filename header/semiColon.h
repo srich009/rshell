@@ -1,14 +1,16 @@
 #ifndef SEMICOLON_H
 #define SEMICOLON_H
-#define <vector>
-#define <string>
+#include <vector>
+#include <string>
 
 class Semicolon : public Connector
 {
     private:
+    
         vector<string> v;
     
     public:
+    
         vector<string> get();
 };
 #endif

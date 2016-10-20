@@ -10,17 +10,23 @@ class Pattern
     
     private:
     
-    Line* l;
-    Interpreter* i;
-    Maketree* m;
-    Action* a;
+        Line* l;
+    
+        Interpreter* i;
+    
+        Maketree* m;
+    
+        Action* a;
     
     public:
     
-    Line* getL();
-    Interpreter getI();
-    Maketree* getM();
-    Action* getA();
+        Line* getL();
+    
+        Interpreter getI();
+    
+        Maketree* getM();
+    
+        Action* getA();
     
 };
 
