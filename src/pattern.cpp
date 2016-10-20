@@ -1,4 +1,4 @@
-#include "pattern.h"
+#include "../header/pattern.h"
 
 Pattern(std::string str)
 {
