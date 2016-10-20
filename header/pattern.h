@@ -20,9 +20,13 @@ class Pattern
     
     public:
     
+        Pattern(std::string);
+        
+        ~Pattern();
+    
         Line* getL();
     
-        Interpreter getI();
+        Interpreter* getI();
     
         Maketree* getM();
     
