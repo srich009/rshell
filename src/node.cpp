@@ -1,6 +1,6 @@
 // Node class implementation
 
-#include "node.h"
+#include "../header/node.h"
 
 
 Node::Node(std::string s)
