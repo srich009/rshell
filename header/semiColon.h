@@ -9,6 +9,8 @@ class Semicolon : public Connector
     
     public:
     
+        Semicolon(std::vector<std::string> vs);
+    
         std::vector<std::string> get();
         
 };
