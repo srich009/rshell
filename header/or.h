@@ -6,10 +6,7 @@
 
 class Or : public Connector
 {
-    private:
-    
-        std::vector<std::string> v;
-    
+
     public:
     
         Or(std::vector<std::string> vs);
