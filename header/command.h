@@ -7,7 +7,7 @@
 class Command : public object
 {
     
-    private:
+    protected:
     
         std::vector<std::string> v;
     

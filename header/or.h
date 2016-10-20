@@ -6,7 +6,7 @@
 
 class Or : public Connector
 {
-    private:
+    protected:
     
         std::vector<std::string> v;
     
