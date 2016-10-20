@@ -7,10 +7,6 @@
 class Command : public object
 {
     
-    protected:
-    
-        std::vector<std::string> v;
-    
     public:
         
         Command(std::vector<std::string> vs);

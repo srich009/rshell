@@ -7,10 +7,6 @@
 class And : public Connector
 {
     
-    protected:
-    
-        std::vector<std::string> v;
-    
     public:
     
         And(std::vector<std::string> vs);

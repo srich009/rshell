@@ -7,10 +7,6 @@
 class Semicolon : public Connector
 {
     
-    protected:
-    
-        std::vector<std::string> v;
-    
     public:
     
         std::vector<std::string> get();
