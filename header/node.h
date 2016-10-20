@@ -22,6 +22,8 @@ class Node
     	Node(std::string);
     	
     	~Node();
+    
+        void clear(Node* n);
 
     	void setPar(Node* n);
     	

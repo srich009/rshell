@@ -8,23 +8,34 @@ Node::Node(std::string s)
 {}
 //-----------------------------------------------   
 
-Node::~Node()
+Node::~Node() // called on root
 {
+    //clear(this->left);
+    //clear(this->right);
 }
 //------------------------------------------------
 
+void Node::clear(Node* n)
+{
+    
+}
+//-----------------------------------------------
+
 void Node::setPar(Node* n)
 {
+    this->parent = n;
 }
 //-----------------------------------------------
 
 void Node::setLeft(Node* n)
 {
+    this->left = n;
 }
 //-----------------------------------------------
 
 void Node::setRight(Node* n)
 {
+    this->right = n;
 }
 //-----------------------------------------------
 
