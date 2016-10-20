@@ -22,7 +22,7 @@ class Pattern
     
         Line* getL();
     
-        Interpreter getI();
+        Interpreter* getI();
     
         Maketree* getM();
     

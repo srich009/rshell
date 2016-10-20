@@ -5,6 +5,10 @@
 
 class Action
 {
+
     public:
+    
         void exec(Node*)
+        
 };
+#endif
