@@ -2,15 +2,18 @@
 #define COMMAND_H
 #include <vector>
 #include <string>
+#include "object.h"
 
 class Command : public object
 {
+    
     private:
     
-        vector<string> v;
+        std::vector<std::string> v;
     
     public:
     
-        vector<string> get();
+        std::vector<std::string> get();
+        
 };
 #endif

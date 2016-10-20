@@ -2,15 +2,16 @@
 #define OR_H
 #include <vector>
 #include <string>
+#include "connector.h"
 
 class Or : public Connector
 {
     private:
     
-        vector<string> v;
+        std::vector<std::string> v;
     
     public:
     
-        vector<string> get();
+        std::vector<std::string> get();
 };
 #endif

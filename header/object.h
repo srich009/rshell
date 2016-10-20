@@ -5,12 +5,14 @@
 
 class Object
 {
+    
     protected:
     
-        vector<string> v;
+        std::vector<std::string> v;
     
     public:
     
-        virtual vector<string> get() = 0;
+        virtual std::vector<string> get() = 0;
+        
 };
 #endif

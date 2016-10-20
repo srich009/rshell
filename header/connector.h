@@ -2,15 +2,18 @@
 #define CONNECTOR_H
 #include <vector>
 #include <string>
+#include "object.h"
 
 class Connector : public Object
 {
+    
     protected:
     
-        vector<string> v;
+        std::vector<std::string> v;
         
     public:
     
-        virtual vector<string> get() = 0;
+        virtual std::vector<std::string> get() = 0;
+        
 };
 #endif

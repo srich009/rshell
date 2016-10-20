@@ -2,15 +2,14 @@
 #define INTERPRETER_H
 #include <vector>
 #include <string>
+#include "object.h"
 
-class And : public Connector
+class Interpreter
 {
-    private:
-    
-        vector<string> v;
     
     public:
     
-        vector<string> get();
+        std::vector<Object*> parse(std::string s);
+        
 };
 #endif
