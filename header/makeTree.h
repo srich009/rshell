@@ -11,12 +11,12 @@ class Maketree
 
 	public:
 	
-	Maketree();
-	
-	~Maketree();
-	
-	// create and return the syntax tree
-	Node* build(std::vector<Object*>);
+		Maketree();
+		
+		~Maketree();
+		
+		// create and return the syntax tree
+		Node* build(std::vector<Object*>);
 
 };
 
