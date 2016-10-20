@@ -11,7 +11,14 @@ Pattern(std::string str)
 
 ~Pattern()
 {
-    // later
+    delete l;
+    l = 0;
+    delete i;
+    i = 0;
+    delete m;
+    m = 0;
+    delete a;
+    a = 0;
 }
 //-------------------------------------
 

@@ -12,7 +12,9 @@ class Command : public object
         std::vector<std::string> v;
     
     public:
-    
+        
+        Command(std::vector<std::string> vs);
+        
         std::vector<std::string> get();
         
 };

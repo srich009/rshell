@@ -8,7 +8,7 @@ class Interpreter
 {
     
     public:
-    
+        
         std::vector<Object*> parse(std::string s);
         
 };

@@ -13,6 +13,8 @@ class And : public Connector
     
     public:
     
+        And(std::vector<std::string> vs);
+        
         std::vector<std::string> get();
 
 };

@@ -13,6 +13,8 @@ class Connector : public Object
         
     public:
     
+        Connector(std::vector<std::string> vs);
+        
         virtual std::vector<std::string> get() = 0;
         
 };
