@@ -7,7 +7,7 @@
 class Semicolon : public Connector
 {
     
-    private:
+    protected:
     
         std::vector<std::string> v;
     
