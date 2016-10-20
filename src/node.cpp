@@ -10,14 +10,19 @@ Node::Node(std::string s)
 
 Node::~Node() // called on root
 {
-    //clear(this->left);
-    //clear(this->right);
+    clear(this*);
 }
 //------------------------------------------------
 
 void Node::clear(Node* n)
 {
-    
+    if(n != 0)
+    {
+        clear(this->left);
+        clear(this->right);
+        delete this;
+        this = 0;
+    }
 }
 //-----------------------------------------------
 

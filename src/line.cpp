@@ -10,6 +10,17 @@ Line::Line(std::string str)
 Line::~Line()
 {
     // come back for
+    
+    //delete objects
+    for(unsigned i = 0; i < v.size(); i++)
+    {
+        delete v.at(i);
+        v.at(i) = 0;
+    }
+    
+    //delete root
+    delete root;
+    root = 0;
 }
 //-------------------------------------
 
