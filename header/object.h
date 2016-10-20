@@ -12,7 +12,7 @@ class Object
     
     public:
     
-        virtual std::vector<string> get() = 0;
+        virtual std::vector<std::string> get() = 0;
         
 };
 #endif
