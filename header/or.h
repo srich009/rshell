@@ -10,9 +10,9 @@ class Or : public Connector
 {
     public:
     
-        Or(std::vector<std::string> vs);
+        Or(std::string vs);
     
-        std::vector<std::string> get();
+        std::string get();
 };
 
 #endif

@@ -11,9 +11,9 @@ class Semicolon : public Connector
     
     public:
     
-        Semicolon(std::vector<std::string> vs);
+        Semicolon(std::string vs);
     
-        std::vector<std::string> get();
+        std::string get();
         
 };
 #endif

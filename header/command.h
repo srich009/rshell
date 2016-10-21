@@ -11,9 +11,9 @@ class Command : public Object
     
     public:
         
-        Command(std::vector<std::string> vs);
+        Command(std::string vs);
         
-        std::vector<std::string> get();
+        std::string get();
         
 };
 

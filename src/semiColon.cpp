@@ -1,11 +1,11 @@
 #include "../header/semiColon.h"
 
-Semicolon::Semicolon(std::vector<std::string> vs)
+Semicolon::Semicolon(std::string vs)
 {
     v = vs;
 }
 
-std::vector<std::string> Semicolon::get()
+std::string Semicolon::get()
 {
     return v;
 }
