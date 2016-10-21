@@ -5,6 +5,11 @@
 #include <string>
 
 #include "object.h"
+#include "command.h"
+#include "connector.h"
+#include "or.h"
+#include "and.h"
+#include "semiColon.h"
 
 class Interpreter
 {
