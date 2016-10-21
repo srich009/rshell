@@ -2,8 +2,8 @@
 #include <string>
 #include <vector>
 
-#include "object.h"
-#include "interpreter.h"
+#include "header/object.h"
+#include "header/interpreter.h"
 
 int main()
 {
