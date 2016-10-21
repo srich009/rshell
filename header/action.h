@@ -1,6 +1,8 @@
 #ifndef ACTION_H
 #define ACTION_H
+
 #include <string>
+
 #include "node.h"
 
 class Action
@@ -11,4 +13,5 @@ class Action
         void exec(Node*)
         
 };
+
 #endif

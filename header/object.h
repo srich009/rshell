@@ -1,5 +1,6 @@
 #ifndef OBJECT_H
 #define OBJECT_H
+
 #include <vector>
 #include <string>
 
@@ -17,4 +18,5 @@ class Object
         virtual std::vector<std::string> get() = 0;
         
 };
+
 #endif

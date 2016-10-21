@@ -1,7 +1,9 @@
 #ifndef COMMAND_H
 #define COMMAND_H
+
 #include <vector>
 #include <string>
+
 #include "object.h"
 
 class Command : public object
@@ -14,4 +16,5 @@ class Command : public object
         std::vector<std::string> get();
         
 };
+
 #endif

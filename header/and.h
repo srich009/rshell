@@ -1,7 +1,9 @@
 #ifndef AND_H
 #define AND_H
+
 #include <vector>
 #include <string>
+
 #include "connector.h"
 
 class And : public Connector
@@ -14,4 +16,5 @@ class And : public Connector
         std::vector<std::string> get();
 
 };
+
 #endif

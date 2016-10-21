@@ -1,5 +1,6 @@
 #ifndef PATTERN_H
 #define PATTERN_H
+
 #include "line.h"
 #include "interpreter.h"
 #include "maketree.h"
