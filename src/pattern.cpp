@@ -1,15 +1,15 @@
 #include "../header/pattern.h"
 
-Pattern(std::string str)
+Pattern::Pattern(std::string str)
 {
-    l = new Line();
+    l = new Line(str);
     i = new Interpreter();
     m = new Maketree();
-    a = new Action()
+    a = new Action();
 }
 //-------------------------------------
 
-~Pattern()
+Pattern::~Pattern()
 {
     delete l;
     l = 0;
@@ -22,25 +22,25 @@ Pattern(std::string str)
 }
 //-------------------------------------
 
-Line* getL()
+Line* Pattern::getL()
 {
     return l;
 }
 //-------------------------------------
 
-Interpreter* getI()
+Interpreter* Pattern::getI()
 {
     return i;
 }
 //-------------------------------------
 
-Maketree* getM()
+Maketree* Pattern::getM()
 {
     return m;
 }
 //-------------------------------------
 
-Action* getA()
+Action* Pattern::getA()
 {
     return a;
 }

@@ -10,7 +10,7 @@ Node::Node(std::string s)
 
 Node::~Node() // called on root
 {
-    clear(this*);
+    Node::clear(this);
 }
 //------------------------------------------------
 
@@ -21,7 +21,9 @@ void Node::clear(Node* n)
         clear(this->left);
         clear(this->right);
         delete this;
-        this = 0;
+        this->parent = 0;
+        this->left = 0;
+        this->right = 0;
     }
 }
 //-----------------------------------------------

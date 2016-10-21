@@ -6,7 +6,7 @@
 
 #include "object.h"
 
-class Command : public object
+class Command : public Object
 {
     
     public:

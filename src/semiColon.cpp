@@ -1,4 +1,4 @@
-#include "../header/semiColon"
+#include "../header/semiColon.h"
 
 Semicolon::Semicolon(std::vector<std::string> vs)
 {

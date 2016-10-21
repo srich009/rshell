@@ -3,7 +3,7 @@
 
 #include "line.h"
 #include "interpreter.h"
-#include "maketree.h"
+#include "makeTree.h"
 #include "action.h"
 
 class Pattern 

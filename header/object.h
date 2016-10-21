@@ -13,6 +13,8 @@ class Object
     
     public:
     
+        virtual ~Object(); // Virtual destructor because abstract...
+    
         Object(std::vector<std::string> vs);
         
         virtual std::vector<std::string> get() = 0;
