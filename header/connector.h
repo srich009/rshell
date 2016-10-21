@@ -8,16 +8,12 @@
 
 class Connector : public Object
 {
-    
-    protected:
-    
-        std::vector<std::string> v;
         
     public:
     
-        Connector(std::vector<std::string> vs);
+        Connector(std::string vs);
         
-        virtual std::vector<std::string> get() = 0;
+        virtual std::string get() = 0;
         
 };
 #endif

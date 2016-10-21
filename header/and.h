@@ -11,9 +11,9 @@ class And : public Connector
     
     public:
     
-        And(std::vector<std::string> vs);
+        And(std::string vs);
         
-        std::vector<std::string> get();
+        std::string get();
 
 };
 

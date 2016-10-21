@@ -9,15 +9,15 @@ class Object
     
     protected:
     
-        std::vector<std::string> v;
+        std::string v;
     
     public:
     
         virtual ~Object(); // Virtual destructor because abstract...
     
-        Object(std::vector<std::string> vs);
+        Object(std::string vs);
         
-        virtual std::vector<std::string> get() = 0;
+        virtual std::string get() = 0;
         
 };
 
