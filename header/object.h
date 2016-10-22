@@ -14,6 +14,8 @@ class Object
     public:
     
         virtual ~Object(); // Virtual destructor because abstract...
+        
+        Object();
     
         Object(std::string vs);
         

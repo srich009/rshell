@@ -11,6 +11,8 @@ class Connector : public Object
         
     public:
     
+        Connector();
+        
         Connector(std::string vs);
         
         virtual std::string get() = 0;
