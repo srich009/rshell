@@ -5,7 +5,7 @@ Or::Or(std::string vs)
     v = vs;
 }
 
-std::string get()
+std::string Or::get()
 {
     return v;
 }
