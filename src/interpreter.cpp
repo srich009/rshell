@@ -2,6 +2,9 @@
 
 #include <cstring> //library for strtok
 
+// THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
+#include <iostream>
+
 std::vector<Object*> Interpreter::parse(std::string s)
 {
     // REMOVE_COMMENTS
@@ -34,14 +37,16 @@ std::vector<Object*> Interpreter::parse(std::string s)
     }
     //======================================================================
     
-    /*
+    
+    // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
+    // /*
     // check to see if parsed out spaces correctly
     for(unsigned i = 0; i < sholder.size(); i++)
     {
         std::cout << "\""<< sholder.at(i) << "\" ";
     }    
     std::cout << std::endl;
-    */
+    // */
     
     
     // HANDLE_SEMICOLON
@@ -59,15 +64,17 @@ std::vector<Object*> Interpreter::parse(std::string s)
         }
     }    
     //==================================================================
-
-    /*
+    
+    
+    // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
+    // /*
     // check to see if parsed ';' correctly
     for(unsigned i = 0; i < sholder.size(); i++)
     {
         std::cout << "\""<< sholder.at(i) << "\" ";
     }    
     std::cout << std::endl;
-    */
+    // */
     
     
     // next step is putting the commands and args together as well as pushing it into object

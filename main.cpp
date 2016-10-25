@@ -19,7 +19,14 @@
 
 int main()
 {
-    std::cout << "HEY" << std::endl;
+    std::string userInput = "";
+    
+    std::cout << "$ ";
+    std::getline(std::cin, userInput);
+    
+    Interpreter* I = new Interpreter();
+    I->parse(userInput);
+    
 
     return 0;
 }
