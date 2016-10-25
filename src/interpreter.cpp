@@ -134,5 +134,15 @@ std::vector<Object*> Interpreter::parse(std::string s)
     }
     
     
+        
+    // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
+    // /*
+    // check to see if rejoined correctly
+    for(unsigned i = 0; i < final_form.size(); i++)
+    {
+        std::cout << "\""<< final_form.at(i)->get() << "\" ";
+    }    
+    std::cout << std::endl;
+    
     return final_form;    
 }
