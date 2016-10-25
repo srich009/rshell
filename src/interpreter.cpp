@@ -34,14 +34,14 @@ std::vector<Object*> Interpreter::parse(std::string s)
     }
     //======================================================================
     
-    
+    /*
     // check to see if parsed out spaces correctly
-    //Before
-    /*for(unsigned i = 0; i < sholder.size(); i++)
+    for(unsigned i = 0; i < sholder.size(); i++)
     {
         std::cout << "\""<< sholder.at(i) << "\" ";
     }    
-    std::cout << std::endl;*/
+    std::cout << std::endl;
+    */
     
     
     // HANDLE_SEMICOLON
@@ -68,6 +68,7 @@ std::vector<Object*> Interpreter::parse(std::string s)
     }    
     std::cout << std::endl;
     */
+    
     
     // next step is putting the commands and args together as well as pushing it into object
     

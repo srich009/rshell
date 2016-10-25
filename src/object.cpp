@@ -3,6 +3,9 @@
 Object::Object()
 {}
 
+Object::~Object()
+{}
+
 Object::Object(std::string vs)
 {
     v = vs;

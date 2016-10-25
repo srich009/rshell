@@ -3,6 +3,9 @@
 Connector::Connector()
 {}
 
+Connector::~Connector()
+{}
+
 Connector::Connector(std::string vs)
 {
     v = vs;

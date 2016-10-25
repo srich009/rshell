@@ -11,7 +11,7 @@ class Connector : public Object
         
     public:
     
-        //virtual ~Connector();
+        virtual ~Connector(); // abstract class needs virtual destructor
     
         Connector();
         
