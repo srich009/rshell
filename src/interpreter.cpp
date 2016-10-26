@@ -93,7 +93,7 @@ std::vector<Object*> Interpreter::parse(std::string s)
         
         if(semiBool || andBool || orBool)
         {
-            final_form.push_back(new Command(tempString));
+            final_form.push_back(new Command(tempString)); // push command to vector
             
             if(semiBool)
             {                
@@ -112,18 +112,26 @@ std::vector<Object*> Interpreter::parse(std::string s)
         else
         {
             tempString += sholder.at(i);
-            tempString += " ";
+            
+            if(tempString.at(tempString.size() - 1) != ' ') // prevent double space error discussed below?
+            {
+                tempString += " ";
+            }
         }
         
-        if(i + 1 == sholder.size())
+        if(i + 1 == sholder.size()) 
         {
             if(tempString != "")
             {
-                final_form.push_back(new Command(tempString));
+                final_form.push_back(new Command(tempString)); // get the last part
                 
             }
         }
     }
+    // ** handles some cases with semiColon abd adds an extra space at end
+    // ex1: ["A; B"]  -> ["A "] ["; "] ["B "]
+    // ex2: ["A ; B"] -> ["A  "] ["; "] ["B "]
+    
     //==================================================================
     
         
@@ -139,6 +147,7 @@ std::vector<Object*> Interpreter::parse(std::string s)
     
     // CONVERSION FROM INFIX TO POSTFIX
     //==================================================================
+    // algorithm should do: [A && B] -> [A B &&]
     //==================================================================
     
     
