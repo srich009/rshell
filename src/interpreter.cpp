@@ -117,11 +117,21 @@ std::vector<Object*> Interpreter::parse(std::string s)
             {
                 final_form.push_back(new Or("|| "));
             }
+            tempString.clear();
         }
         else
         {
             tempString += sholder.at(i);
             tempString += " ";
+        }
+        
+        if(i + 1 == sholder.size())
+        {
+            if(tempString != "")
+            {
+                final_form.push_back(new Command(tempString));
+                
+            }
         }
     }
     
