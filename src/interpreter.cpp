@@ -77,27 +77,9 @@ std::vector<Object*> Interpreter::parse(std::string s)
     // */
     
     
-    // next step is putting the commands and args together as well as pushing it into object
-    
-    //============READ THE FOLLOWING WALL OF TEXT===============
-    
-    //what the following algorithm should do is there should be a vector of strings
-    //declared outside of the for loop which commands and their args can be added to
-    //and once a connector has been found, the vector of strings with the commands and
-    //args should be constructed into an Object and pushed back into a vector of Object
-    //pointers. After that, the vector of strings will be cleared so that we can
-    //put the found connector into it and construct it into an Object and push it
-    //back too. Next we will clear the vector of strings so we can push back the
-    //next string to start a new vector of commands and args in the next iteration.
-    //This algorithm should work because Crites told us that the input will be appended
-    //by a semicolon and so there shouldn't be any left over unpushed string of vectors
-    //
-    //
-    //Problem: we cannot allocate memory for Object so we cannot return a pointer
-    //Potential Solution: we can allocate the specific subclass using their foundBools
-    //
-    //Problem: 
-    
+    // REJOIN COMMANDS TO THEIR ARGS && SEPARATE WITH CONNECTORS (INFIX)
+    //==================================================================
+    // vector of Object pointers, represents commands joined with their arguments separated by connectors
     std::vector<Object*> final_form;
     
     std::string tempString; //for each iteration, puts together command and args and pushes
@@ -142,7 +124,7 @@ std::vector<Object*> Interpreter::parse(std::string s)
             }
         }
     }
-    
+    //==================================================================
     
         
     // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
@@ -154,5 +136,11 @@ std::vector<Object*> Interpreter::parse(std::string s)
     }    
     std::cout << std::endl;
     
-    return final_form;    
+    
+    // CONVERSION FROM INFIX TO POSTFIX
+    //==================================================================
+    //==================================================================
+    
+    
+    return final_form;   // final ordering of the parsed text. Postfix order 
 }
