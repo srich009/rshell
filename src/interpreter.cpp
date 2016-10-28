@@ -37,16 +37,15 @@ std::vector<Object*> Interpreter::parse(std::string s)
     }
     //======================================================================
     
-    
+    /*
     // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
-    // /*
     // check to see if parsed out spaces correctly
     for(unsigned i = 0; i < sholder.size(); i++)
     {
         std::cout << "\""<< sholder.at(i) << "\" ";
     }    
     std::cout << std::endl;
-    // */
+    */
     
     
     // HANDLE_SEMICOLON
@@ -65,17 +64,15 @@ std::vector<Object*> Interpreter::parse(std::string s)
     }    
     //==================================================================
     
-    
+    /*
     // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
-    // /*
     // check to see if parsed ';' correctly
     for(unsigned i = 0; i < sholder.size(); i++)
     {
         std::cout << "\""<< sholder.at(i) << "\" ";
     }    
     std::cout << std::endl;
-    // */
-    
+    */
     
     // REJOIN COMMANDS TO THEIR ARGS && SEPARATE WITH CONNECTORS (INFIX)
     //==================================================================
@@ -134,22 +131,15 @@ std::vector<Object*> Interpreter::parse(std::string s)
     
     //==================================================================
     
-        
+     /*   
     // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
-    // /*
     // check to see if rejoined correctly
     for(unsigned i = 0; i < final_form.size(); i++)
     {
         std::cout << "\""<< final_form.at(i)->get() << "\" ";
     }    
     std::cout << std::endl;
-    
-    
-    // CONVERSION FROM INFIX TO POSTFIX
-    //==================================================================
-    // algorithm should do: [A && B] -> [A B &&]
-    //==================================================================
-    
+    */
     
     return final_form;   // final ordering of the parsed text. Postfix order 
 }
