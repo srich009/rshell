@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-#include "unistd.h"
+#include "unistd.h" // gethostname(), getlogin()
 
 // JUST PUT ALL FOR NOW CHANGE LATER...
 #include "header/action.h"
@@ -22,9 +22,11 @@
 int main()
 {
     std::string userInput = "";
-    //char*
+    char hostName[64];
     
+    gethostname(hostName, sizeof(hostName));
     
+    std::cout << std::string(hostName) << "@";
     std::cout << "$ ";
     std::getline(std::cin, userInput);
     

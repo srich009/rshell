@@ -3,6 +3,7 @@
 Line::Line(std::string str)
 {
     input = str;
+    
     //root = 0;
 }
 //-------------------------------------
