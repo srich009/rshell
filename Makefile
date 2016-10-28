@@ -2,7 +2,9 @@
 
 #Variables
 COMP = g++ -Wall -Werror -ansi -pedantic
-FILES = main.cpp src/action.cpp src/and.cpp src/command.cpp src/connector.cpp src/interpreter.cpp src/line.cpp src/makeTree.cpp src/node.cpp src/object.cpp src/or.cpp src/pattern.cpp src/semiColon.cpp
+FILES = main.cpp src/action.cpp src/and.cpp src/command.cpp src/connector.cpp src/interpreter.cpp src/line.cpp src/node.cpp src/object.cpp src/or.cpp src/pattern.cpp src/semiColon.cpp
+
+#src/makeTree.cpp
 
 #Targets
 all: $(FILES) 

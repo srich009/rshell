@@ -10,7 +10,7 @@
 #include "header/connector.h"
 #include "header/interpreter.h"
 #include "header/line.h"
-#include "header/makeTree.h"
+//#include "header/makeTree.h"
 #include "header/node.h"
 #include "header/object.h"
 #include "header/or.h"

@@ -4,7 +4,7 @@ Pattern::Pattern(std::string str)
 {
     l = new Line(str);
     i = new Interpreter();
-    m = new Maketree();
+    //m = new Maketree();
     a = new Action();
 }
 //-------------------------------------
@@ -15,8 +15,8 @@ Pattern::~Pattern()
     l = 0;
     delete i;
     i = 0;
-    delete m;
-    m = 0;
+    // delete m;
+    // m = 0;
     delete a;
     a = 0;
 }
@@ -34,10 +34,10 @@ Interpreter* Pattern::getI()
 }
 //-------------------------------------
 
-Maketree* Pattern::getM()
-{
-    return m;
-}
+// Maketree* Pattern::getM()
+// {
+//     return m;
+// }
 //-------------------------------------
 
 Action* Pattern::getA()
