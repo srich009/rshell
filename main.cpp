@@ -24,9 +24,14 @@ int main()
     std::string userInput = "";
     char hostName[64];
     
+    // // logic error
+    // char* loginName;
+    // loginName = getlogin();
+    
     gethostname(hostName, sizeof(hostName));
     
-    std::cout << std::string(hostName) << "@";
+    
+    std::cout << std::string(hostName) << "@";  // << std::string(loginName);
     std::cout << "$ ";
     std::getline(std::cin, userInput);
     
