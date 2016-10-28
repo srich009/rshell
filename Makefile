@@ -2,6 +2,7 @@
 
 #Variables
 COMP = g++ -Wall -Werror -ansi -pedantic
+FLAG = -g
 FILES = main.cpp src/action.cpp src/and.cpp src/command.cpp src/connector.cpp src/interpreter.cpp src/line.cpp src/object.cpp src/or.cpp src/pattern.cpp src/semiColon.cpp
 
 #src/makeTree.cpp src/node.cpp
@@ -9,6 +10,9 @@ FILES = main.cpp src/action.cpp src/and.cpp src/command.cpp src/connector.cpp sr
 #Targets
 all: $(FILES) 
 	$(COMP) $(FILES)
+	
+debug: $(FILES)
+	$(COMP) $(FLAG) $(FILES)
 
 clean:
 	rm -rf *~ *.o

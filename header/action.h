@@ -10,7 +10,7 @@ class Action
     public:
     
         void exec(std::vector<Object*>);
-        
+      
 };
 
 #endif
