@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-#include "node.h"
+//#include "node.h"
 #include "object.h"
 
 class Line
@@ -19,7 +19,7 @@ class Line
         std::vector<Object*> v;
         
         // Syntax Tree
-        Node* root;
+        //Node* root;
 
     public:
 
@@ -32,7 +32,7 @@ class Line
     	
     	std::vector<Object*> getVec();
     	
-    	Node* getNode();
+    	//Node* getNode();
 
 };
 

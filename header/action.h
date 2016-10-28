@@ -3,13 +3,13 @@
 
 #include <string>
 
-#include "node.h"
+#include "object.h"
 
 class Action
 {
     public:
     
-        void exec(Node*);
+        void exec(std::vector<Object*>);
         
 };
 

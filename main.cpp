@@ -3,6 +3,8 @@
 #include <iostream>
 #include <string>
 
+#include "unistd.h"
+
 // JUST PUT ALL FOR NOW CHANGE LATER...
 #include "header/action.h"
 #include "header/and.h"
@@ -11,7 +13,7 @@
 #include "header/interpreter.h"
 #include "header/line.h"
 //#include "header/makeTree.h"
-#include "header/node.h"
+//#include "header/node.h"
 #include "header/object.h"
 #include "header/or.h"
 #include "header/pattern.h"
@@ -20,6 +22,8 @@
 int main()
 {
     std::string userInput = "";
+    //char*
+    
     
     std::cout << "$ ";
     std::getline(std::cin, userInput);
