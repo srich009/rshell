@@ -1,21 +1,19 @@
-#Variables
+# Variables
 COMP = g++
 FLAGS = -Wall -Werror -ansi -pedantic
 DEBUG = -g
-FILES = src/action.o src/and.o src/command.o src/connector.o src/interpreter.o src/line.o src/object.o src/or.o src/pattern.o src/semiColon.o
+OFILES = src/action.o src/and.o src/command.o src/connector.o src/interpreter.o src/line.o src/object.o src/or.o src/pattern.o src/semiColon.o
 
-#Targets
-all: main.cpp $(FILES) 
-	$(COMP) $(FLAGS) main.cpp $(FILES)
-	
-debug: main.cpp $(FILES)
-	$(COMP) $(FLAGS) $(DEBUG) main.cpp $(FILES)
+# should probably rename a.out -> rshell  create /bin && move rshell there ?? ********************************************************************************************************************************************
+# ***************************************************************************************************************************************************************************
 
-clean:
-	rm -rf *~ src/*.o
+# Targets
+# every dependency should be listed
+all: main.cpp $(OFILES) 
+	$(COMP) $(FLAGS) main.cpp $(OFILES)
 	
-clear:
-	rm -rf *~ src/*.o a.out
+debug: main.cpp $(OFILES)
+	$(COMP) $(FLAGS) $(DEBUG) main.cpp $(OFILES)
 	
 action.o: src/object.cpp header/object.h src/action.cpp header/action.h
 	$(COMP) $(FLAGS) -c src/action.cpp
@@ -47,5 +45,5 @@ pattern.o: src/line.cpp header/line.h src/action.cpp header/action.h src/interpr
 semiColon.o: src/connector.cpp header/connector.h src/semiColon.cpp header/semiColon.h
 	$(COMP) $(FLAGS) -c src/semiColon.cpp
 
-
-# a nice proper Makefile
+clean:
+	rm -rf *~ src/*.o a.out

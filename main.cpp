@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <cstring>
+#include <cstdlib>
 
 #include "stdio.h"
 #include "unistd.h" // gethostname(), getlogin()
@@ -26,15 +27,22 @@ int main()
 {
     // Get user && host 
     int flag = -1;      // flag will be set to 0 on success
-    char hostName[64];  // host buffer
-    char loginName[64]; // login buffer
     
-    flag = getlogin_r(loginName, sizeof(loginName));
+    char loginName1[64]; // login buffer
+    flag = getlogin_r(loginName1, sizeof(loginName1));
     if(flag != 0)
     {
-        perror("getlogin_r()"); // ERROR ?? DOESNT EXIST ??
+        perror("getlogin_r()"); // ERROR ?? No such Process ?? but buf still gets some chars...
     }
     
+    char * loginName2 = 0; // start NULL
+    loginName2 = getlogin();  
+    if(!loginName2)
+    {
+        perror("getlogin()"); // ERROR ?? No such File or Directory ?? NULL pointer...
+    }
+    
+    char hostName[64];  // host buffer
     flag = gethostname(hostName, sizeof(hostName));
     if(flag != 0)
     {
@@ -44,11 +52,18 @@ int main()
     
     std::string userInput = ""; 
     
-    //do
+    do
     {
-        std::cout << std::string(hostName) << "@" << std::string(loginName);
+        std::cout << std::string(hostName) << "@" ; // << std::string(loginName);
         std::cout << "$ ";
         std::getline(std::cin, userInput);
+        
+        
+        if(userInput == "QUIT") // CHANGE THIS MOST LIKELY
+        {
+            exit(1);
+        }        
+        
         
         Pattern* P = new Pattern(userInput);
         P -> getI() -> parse( P -> getL() -> getString() ); // PARSE
@@ -59,11 +74,10 @@ int main()
         }
         catch(std::exception& e)
         {
-            perror( e.what() ); // MAYBE CAHNGE .???
+            perror( e.what() ); // MAYBE CAHNGE ???
         }
-
     }
-    //while(1);
+    while(1); // this should be changed later to terminate with special exit command
     
     
 
