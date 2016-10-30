@@ -3,7 +3,6 @@
 
 #include "line.h"
 #include "interpreter.h"
-//#include "makeTree.h"
 #include "action.h"
 
 class Pattern 
@@ -14,8 +13,6 @@ class Pattern
         Line* l;
     
         Interpreter* i;
-    
-        //Maketree* m;
     
         Action* a;
     
@@ -28,8 +25,6 @@ class Pattern
         Line* getL();
     
         Interpreter* getI();
-    
-        //Maketree* getM();
     
         Action* getA();
     
