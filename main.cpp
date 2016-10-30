@@ -20,22 +20,20 @@
 #include "header/or.h"
 #include "header/pattern.h"
 #include "header/semiColon.h"
-//#include "header/makeTree.h"
-//#include "header/node.h"
 
 int main()
 {
     // Get user && host 
-    int flag = -1;      // flag will be set to 0 on success
+    int flag = -1;       // flag will be set to 0 on success
     
-    char loginName1[64]; // login buffer
+    char loginName1[64] = {0}; // login buffer1
     flag = getlogin_r(loginName1, sizeof(loginName1));
     if(flag != 0)
     {
-        perror("getlogin_r()"); // ERROR ?? No such Process ?? but buf still gets some chars...
+        perror("getlogin_r()"); // ERROR ?? No such Process ?? but buffer still gets some chars...
     }
     
-    char * loginName2 = 0; // start NULL
+    char * loginName2 = 0; // login buffer2, start NULL
     loginName2 = getlogin();  
     if(!loginName2)
     {
@@ -54,12 +52,25 @@ int main()
     
     do
     {
-        std::cout << std::string(hostName) << "@" ; // << std::string(loginName);
+        std::cout << std::string(hostName) << "@";
+        
+        std::cout << "\n"; // temporary until resolve login error
+        
+        if(std::string(loginName1).empty())
+        {std::cout << "loginName1 - FAIL" << "\n";}
+        else
+        {std::cout << std::string(loginName1) << "\n";} // ???? ERROR
+        
+        if(loginName2)
+        {std::cout << std::string(loginName2) << "\n";} // ???? ERROR
+        else
+        {std::cout << "loginName2 - FAIL" << "\n";}
+        
         std::cout << "$ ";
         std::getline(std::cin, userInput);
         
         
-        if(userInput == "QUIT") // CHANGE THIS MOST LIKELY
+        if(userInput == "QUIT") // CHANGE THIS MOST LIKELY, use exitr() in Action class ***********************************
         {
             exit(1);
         }        
@@ -80,6 +91,5 @@ int main()
     while(1); // this should be changed later to terminate with special exit command
     
     
-
     return 0;
 }
