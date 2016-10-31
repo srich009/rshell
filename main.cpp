@@ -29,7 +29,7 @@ int main()
     int flag = -1;       // flag will be set to 0 on success
     
     char userName[64] = "";
-    getlogin_r(userName, sizeof(userName)-1);
+    flag = getlogin_r(userName, sizeof(userName)-1);
     if(flag != 0)
     {
         perror("getLogin_r()");

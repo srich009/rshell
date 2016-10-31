@@ -32,20 +32,20 @@ void Action::exec(std::vector<Object*> o)
         
                 if(com == "exit")
                 {
-                    exitr(); //might just use cstdlib exit
+                    exitr(); 
                 }
-                else if(com == "cd")
-                {
-                    b = cd(args);
-                }
-                else if(com == "pwd")
-                {
-                    b = pwd(args);
-                }
-                else if(com == "echo")
-                {
-                    b = echo(args);
-                }
+                // else if(com == "cd")
+                // {
+                //     b = cd(args);
+                // }
+                // else if(com == "pwd")
+                // {
+                //     b = pwd(args);
+                // }
+                // else if(com == "echo")
+                // {
+                //     b = echo(args);
+                // }
                 else
                 {
                     //bin
@@ -156,88 +156,88 @@ void Action::exitr()
 }
 //------------------------------------------------
 
-bool Action::echo(std::string str)
-{
-    if(str.empty()) // if no str, then echo "\n"
-    {
-        std::cout << std::endl;
-        return true;
-    }
-    else if(!str.empty()) // NO HANDLE FLAGS HERE***
-    {
-        std::cout << str << std::endl;    
-        return true;
-    }
-    else
-    {        
-        std::cout << "ERROR UNKNOWN echo(std::string) FAIL" << std::endl;
-    }
-    return false; // catch
-}
-//------------------------------------------------
+// bool Action::echo(std::string str)
+// {
+//     if(str.empty()) // if no str, then echo "\n"
+//     {
+//         std::cout << std::endl;
+//         return true;
+//     }
+//     else if(!str.empty()) // NO HANDLE FLAGS HERE***
+//     {
+//         std::cout << str << std::endl;    
+//         return true;
+//     }
+//     else
+//     {        
+//         std::cout << "ERROR UNKNOWN echo(std::string) FAIL" << std::endl;
+//     }
+//     return false; // catch
+// }
+// //------------------------------------------------
 
-bool Action::cd(std::string str)  // need to use: chdir(), opendir(), closedir()
-{
-    int flag = -1;
-    char curDir[64]; // not sure about what size
-    getcwd(curDir, sizeof(curDir)); // should return pointer to current working directory
+// bool Action::cd(std::string str)  // need to use: chdir(), opendir(), closedir()
+// {
+//     int flag = -1;
+//     char curDir[64]; // not sure about what size
+//     getcwd(curDir, sizeof(curDir)); // should return pointer to current working directory
     
-    if(str.empty()) 
-    {
-        // if no str, then cd ~/
-        std::string q = "~";
-        flag = chdir(q.c_str());
-        if(flag != 0)
-        {
-            perror("chdir()");
-            return false;
-        }
-        return true;
-    }
-    else
-    {
-        if(str == std::string(curDir)) // fail if try to change to the directory already in
-        {
-            std::cout << "rshell: cd: " << str << ": No such file or directory" << std::endl;
-            return false;
-        }
+//     if(str.empty()) 
+//     {
+//         // if no str, then cd ~/
+//         std::string q = "~";
+//         flag = chdir(q.c_str());
+//         if(flag != 0)
+//         {
+//             perror("chdir()");
+//             return false;
+//         }
+//         return true;
+//     }
+//     else
+//     {
+//         if(str == std::string(curDir)) // fail if try to change to the directory already in
+//         {
+//             std::cout << "rshell: cd: " << str << ": No such file or directory" << std::endl;
+//             return false;
+//         }
         
-        flag = chdir(str.c_str());
+//         flag = chdir(str.c_str());
         
-        if(flag != 0)
-        {
-            std::cout << "rshell: cd: " << str << ": No such file or directory" << std::endl;
-            perror("chdir()");
-            return false;
-        }
-        return true;
-    }
+//         if(flag != 0)
+//         {
+//             std::cout << "rshell: cd: " << str << ": No such file or directory" << std::endl;
+//             perror("chdir()");
+//             return false;
+//         }
+//         return true;
+//     }
     
-    return false;
-}
-//------------------------------------------------
+//     return false;
+// }
+// //------------------------------------------------
 
-bool Action::pwd(std::string str)
-{
-    if(!str.empty())  // NO HANDLE FLAGS HERE***
-    {
-        std::cout << "ERROR UNKNOWN FLAG" << std::endl;
-        return false;
-    }
+// bool Action::pwd(std::string str)
+// {
+//     if(!str.empty())  // NO HANDLE FLAGS HERE***
+//     {
+//         std::cout << "ERROR UNKNOWN FLAG" << std::endl;
+//         return false;
+//     }
     
-    char curDir[64]; // not sure about what size
-    getcwd(curDir, sizeof(curDir)); // should return pointer to current working directory
+//     char curDir[64]; // not sure about what size
+//     getcwd(curDir, sizeof(curDir)); // should return pointer to current working directory
     
-    if(!curDir)
-    {
-        std::cout << "ERROR UNKNOWN PWD FAIL" << std::endl;
-    }
-    else
-    {
-        std::cout << std::string(curDir) << std::endl;
-        return true;
-    }
-    return false; // catch
-}
-//------------------------------------------------
+//     if(!curDir)
+//     {
+//         std::cout << "ERROR UNKNOWN PWD FAIL" << std::endl;
+//     }
+//     else
+//     {
+//         std::cout << std::string(curDir) << std::endl;
+//         return true;
+//     }
+//     return false; // catch
+// }
+// //------------------------------------------------
 
