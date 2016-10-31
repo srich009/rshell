@@ -11,6 +11,8 @@ class Action
     
         void exec(std::vector<Object*>);
         
+        int executr(char* cmd);
+        
         // Built in commands
         void exitr();           // exit
         

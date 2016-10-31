@@ -3,6 +3,9 @@
 #include <stdio.h>
 #include <cstdlib>  // exit
 #include <iostream> // echo
+#include <cstring>
+#include <sys/wait.h>
+#include <unistd.h>
 
 void Action::exec(std::vector<Object*> o)
 {
@@ -12,7 +15,7 @@ void Action::exec(std::vector<Object*> o)
             
             if(o.at(i)->type() == "Command") //if its a command execute it
             {
-                std::string com = o.at(i)->get(); //gets string
+                std::string com = o.at(i)->get(); //gets string literal
         
                 std::string args = com.substr(com.find(" ") + 1, com.size()); //retrieves only the arguments(might not have anything)
             
@@ -24,21 +27,32 @@ void Action::exec(std::vector<Object*> o)
                 {
                     exitr(); //might just use cstdlib exit
                 }
-                else if("cd")
+                else if(com == "cd")
                 {
                     b = cd(args);
                 }
-                else if("pwd")
+                else if(com == "pwd")
                 {
                     b = pwd(args);
                 }
-                else if("echo")
+                else if(com == "echo")
                 {
                     b = echo(args);
                 }
                 else
                 {
                     //bin
+                    std::string in = o.at(i)->get();
+                    const char* in1 = in.c_str();
+                    int flag = executr((char*)(in1));
+                    if(flag == 1)
+                    {
+                        b = true;
+                    }
+                    else
+                    {
+                        false;
+                    }
                 }
             }
             else //if it is a connector
@@ -57,6 +71,74 @@ void Action::exec(std::vector<Object*> o)
                 }
             }
         }
+}
+
+int Action::executr(char* cmd)
+{
+    char* argv[64];
+    int flag = 0;
+    char* tempC;
+    unsigned c = 1;
+    tempC = strtok(cmd, " ");
+    argv[0] = tempC;
+    
+    while(tempC != NULL)
+    {
+        //cout << c << endl;
+        tempC = strtok(NULL, " ");
+        //cout << tempC << endl;
+        argv[c] = tempC;
+        //cout << argv[c] << endl;
+        c++;
+    }
+    
+    pid_t pid;
+    pid_t wpid;
+    
+    int status;
+    
+    pid = fork();
+    
+    if(pid == 0) //if child
+    {
+        //cout << "in child first" << endl;
+        flag = execvp(argv[0], argv);
+        //cout << flag;
+        //cout << "after execvp " << flag << endl;
+        if(flag == -1) //attempt to execute but if -1 calls perror
+        {
+            //cout << flag << " in child (err)" << endl;
+            std::string restring(argv[0]);
+            perror(restring.c_str());
+            exit(-1);
+        }
+        //cout << flag << " in child (norm)" << endl;
+        exit(0);
+    }
+    else if (pid < 0)
+    {
+        perror("fork");
+        exit(-1);
+    }
+    else
+    {
+        int i = 0;
+        do
+        {
+            wpid = waitpid(pid, &status, WUNTRACED); //waits on child and retrieves status
+            //cout << status << " in parent process" << endl;
+            i++;
+        }
+        while(!WIFEXITED(status) && !WIFSIGNALED(status)); //waits while child is not exited or killed by a signal
+    }
+    
+    if(status != 0)
+    {
+        return -1;
+    }
+    
+    return 1;
+    
 }
 //-----------------------------------------------
 
