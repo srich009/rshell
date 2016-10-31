@@ -14,9 +14,9 @@ Action::exec(std::vector<Object*> o)
             {
                 std::string com = o.at(i)->get(); //gets string
         
-                std::string args = com.substr(com.find(" "), com.size()); //retrieves only the arguments(might not have anything)
+                std::string args = com.substr(com.find(" ") + 1, com.size()); //retrieves only the arguments(might not have anything)
             
-                com = com.substr(0, com.find(" ")); //retrieves only the command
+                com = com.substr(0, com.find(" ") - 1); //retrieves only the command
                 
                 //try
         
@@ -60,12 +60,6 @@ Action::exec(std::vector<Object*> o)
     }
 }
 
-
-void Action::exec(std::vector<Object*>)
-{
-    // just a stub so it compiles
-}
-//------------------------------------------------
 
 void Action::exitr()
 {
