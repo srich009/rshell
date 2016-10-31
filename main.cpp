@@ -67,14 +67,7 @@ int main()
         {std::cout << "loginName2 - FAIL" << "\n";}
         
         std::cout << "$ ";
-        std::getline(std::cin, userInput);
-        
-        
-        if(userInput == "QUIT") // CHANGE THIS MOST LIKELY, use exitr() in Action class ***********************************
-        {
-            exit(1);
-        }        
-        
+        std::getline(std::cin, userInput);    
         
         Pattern* P = new Pattern(userInput);
         P -> getI() -> parse( P -> getL() -> getString() ); // PARSE

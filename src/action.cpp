@@ -4,7 +4,7 @@
 #include <cstdlib>  // exit
 #include <iostream> // echo
 
-Action::exec(std::vector<Object*> o)
+void Action::exec(std::vector<Object*> o)
 {
         bool b = true;
         for(unsigned i = 0; i < o.size(); i++)
@@ -57,13 +57,6 @@ Action::exec(std::vector<Object*> o)
                 }
             }
         }
-    }
-}
-
-
-void Action::exec(std::vector<Object*>)
-{
-    // just a stub so it compiles
 }
 //------------------------------------------------
 
@@ -82,6 +75,7 @@ bool Action::echo(std::string str)
     }
     else if(!str.empty()) // HANDLE FLAGS HERE***
     {
+                
         //if flag        
         // cut flag chunk out
         // std::string flag = ...
@@ -146,17 +140,13 @@ bool Action::pwd(std::string str)
         if(str == "-L" || str == "--logical")
         {
             // use PWD from environment, even if it contains symlinks
-            
             // print to screen
-            
             return true;
         }
         else if(str == "-P" || str == "--physical")
         {
             // avoid all symlinks
-            
             // print to screen
-            
             return true;
         }
         else if(str == "--help")
