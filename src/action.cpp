@@ -57,7 +57,8 @@ void Action::exec(std::vector<Object*> o)
                 }
             }
         }
-
+}
+//-----------------------------------------------
 
 void Action::exitr()
 {
