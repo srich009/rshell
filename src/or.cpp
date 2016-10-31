@@ -9,3 +9,8 @@ std::string Or::get()
 {
     return v;
 }
+
+std::string Or::type()
+{
+    return "Or";
+}

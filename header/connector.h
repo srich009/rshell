@@ -19,5 +19,7 @@ class Connector : public Object
         
         virtual std::string get() = 0;
         
+        std::string type();
+        
 };
 #endif

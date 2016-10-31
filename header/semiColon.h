@@ -15,5 +15,7 @@ class Semicolon : public Connector
     
         std::string get();
         
+        std::string type();
+        
 };
 #endif

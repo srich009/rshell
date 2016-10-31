@@ -14,6 +14,8 @@ class And : public Connector
         And(std::string vs);
         
         std::string get();
+        
+        std::string type();
 
 };
 
