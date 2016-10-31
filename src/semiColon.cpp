@@ -9,3 +9,8 @@ std::string Semicolon::get()
 {
     return v;
 }
+
+std::string Semicolon::type()
+{
+    return "Object";
+}

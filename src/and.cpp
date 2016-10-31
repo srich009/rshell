@@ -9,3 +9,8 @@ std::string And::get()
 {
     return v;
 }
+
+std::string And::type()
+{
+    return "And";
+}

@@ -13,6 +13,8 @@ class Or : public Connector
         Or(std::string vs);
     
         std::string get();
+        
+        std::string type();
 };
 
 #endif

@@ -15,6 +15,8 @@ class Command : public Object
         
         std::string get();
         
+        std::string type();
+        
 };
 
 #endif
