@@ -5,9 +5,11 @@
 #include <cstring>
 #include <cstdlib>
 
-#include "stdio.h"
-#include "unistd.h" // gethostname(), getlogin()
-#include "errno.h"
+#include <stdio.h>
+#include <unistd.h> // gethostname(), getlogin()
+#include <errno.h>
+#include <sys/types.h>
+#include <pwd.h>
 
 // JUST PUT ALL FOR NOW CHANGE LATER...
 #include "header/action.h"
@@ -26,45 +28,27 @@ int main()
     // Get user && host 
     int flag = -1;       // flag will be set to 0 on success
     
-    char loginName1[64] = {0}; // login buffer1
-    flag = getlogin_r(loginName1, sizeof(loginName1));
+    char userName[64] = "";
+    getlogin_r(userName, sizeof(userName)-1);
     if(flag != 0)
     {
-        perror("getlogin_r()"); // ERROR ?? No such Process ?? but buffer still gets some chars...
-    }
-    
-    char * loginName2 = 0; // login buffer2, start NULL
-    loginName2 = getlogin();  
-    if(!loginName2)
-    {
-        perror("getlogin()"); // ERROR ?? No such File or Directory ?? NULL pointer...
+        perror("getLogin_r()");
+        strcpy(userName, "UNKNOWN");
     }
     
     char hostName[64];  // host buffer
-    flag = gethostname(hostName, sizeof(hostName));
+    flag = gethostname(hostName, sizeof(hostName)-1);
     if(flag != 0)
     {
         perror("gethostname()");
     }
     
-    
     std::string userInput = ""; 
     
     do
     {
-        std::cout << std::string(hostName) << "@";
-        
-        std::cout << "\n"; // temporary until resolve login error
-        
-        if(std::string(loginName1).empty())
-        {std::cout << "loginName1 - FAIL" << "\n";}
-        else
-        {std::cout << std::string(loginName1) << "\n";} // ???? ERROR
-        
-        if(loginName2)
-        {std::cout << std::string(loginName2) << "\n";} // ???? ERROR
-        else
-        {std::cout << "loginName2 - FAIL" << "\n";}
+        std::cout << std::string(userName) << "@";
+        std::cout << std::string(hostName);
         
         std::cout << "$ ";
         std::getline(std::cin, userInput);    
