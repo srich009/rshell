@@ -3,7 +3,6 @@
 Line::Line(std::string str)
 {
     input = str;
-    //root = 0;
 }
 //-------------------------------------
 
@@ -15,10 +14,6 @@ Line::~Line()
         delete v.at(i);
         v.at(i) = 0;
     }
-    
-    // //delete root
-    // delete root;
-    // root = 0;
 }
 //-------------------------------------
 
@@ -34,8 +29,3 @@ std::vector<Object*> Line::getVec()
 }
 //-------------------------------------
 
-// Node* Line::getNode()
-// {
-//     return root;
-// }
-// //-------------------------------------

@@ -4,7 +4,6 @@
 #include <string>
 #include <vector>
 
-//#include "node.h"
 #include "object.h"
 
 class Line
@@ -17,9 +16,6 @@ class Line
         
         // tokenized vector 
         std::vector<Object*> v;
-        
-        // Syntax Tree
-        //Node* root;
 
     public:
 
@@ -31,8 +27,6 @@ class Line
     	std::string getString();
     	
     	std::vector<Object*> getVec();
-    	
-    	//Node* getNode();
 
 };
 

@@ -1,20 +1,49 @@
-#Makefile must have Targets: all, rshell 
+# Variables
+COMP = g++
+FLAGS = -Wall -Werror -ansi -pedantic
+DEBUG = -g
+OFILES = src/action.o src/and.o src/command.o src/connector.o src/interpreter.o src/line.o src/object.o src/or.o src/pattern.o src/semiColon.o
 
-#Variables
-COMP = g++ -Wall -Werror -ansi -pedantic
-FILES = main.cpp src/action.cpp src/and.cpp src/command.cpp src/connector.cpp src/interpreter.cpp src/line.cpp src/object.cpp src/or.cpp src/pattern.cpp src/semiColon.cpp
+# should probably rename a.out -> rshell  create /bin && move rshell there ?? ********************************************************************************************************************************************
+# ***************************************************************************************************************************************************************************
 
-#src/makeTree.cpp src/node.cpp
+# Targets
+# every dependency should be listed
+all: main.cpp $(OFILES) 
+	$(COMP) $(FLAGS) main.cpp $(OFILES)
+	
+debug: main.cpp $(OFILES)
+	$(COMP) $(FLAGS) $(DEBUG) main.cpp $(OFILES)
+	
+action.o: src/object.cpp header/object.h src/action.cpp header/action.h
+	$(COMP) $(FLAGS) -c src/action.cpp
 
-#Targets
-all: $(FILES) 
-	$(COMP) $(FILES)
+and.o: src/connector.cpp header/connector.h src/and.cpp header/and.h
+	$(COMP) $(FLAGS) -c src/and.cpp
+
+command.o: src/object.cpp header/object.h src/command.cpp header/command.h 
+	$(COMP) $(FLAGS) -c src/command.cpp
+
+connector.o: src/object.cpp header/object.h src/connector.cpp header/connector.h 
+	$(COMP) $(FLAGS) -c src/connector.cpp
+
+interpreter.o: src/object.cpp header/object.h src/connector.cpp header/connector.h src/command.cpp header/command.h src/semiColon.cpp header/semiColon.h src/or.cpp header/or.h src/and.cpp header/and.h src/interpreter.cpp header/interpreter.h
+	$(COMP) $(FLAGS) -c src/interpreter.cpp
+
+line.o: src/object.cpp header/object.h src/line.cpp header/line.h
+	$(COMP) $(FLAGS) -c src/line.cpp
+
+object.o: src/object.cpp header/object.h
+	$(COMP) $(FLAGS) -c src/object.cpp
+
+or.o: src/connector.cpp header/connector.h src/or.cpp header/or.h
+	$(COMP) $(FLAGS) -c src/or.cpp
+
+pattern.o: src/line.cpp header/line.h src/action.cpp header/action.h src/interpreter.cpp header/interpreter.h src/pattern.cpp header/pattern.h
+	$(COMP) $(FLAGS) -c src/pattern.cpp
+
+semiColon.o: src/connector.cpp header/connector.h src/semiColon.cpp header/semiColon.h
+	$(COMP) $(FLAGS) -c src/semiColon.cpp
 
 clean:
-	rm -rf *~ *.o
-	
-clear:
-	rm -rf *~ *.o a.out
-
-
-# fix later this is poor makefile construction because it literally just does a massive compilation of all files every time
+	rm -rf *~ src/*.o a.out
