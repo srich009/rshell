@@ -21,6 +21,5 @@ $ bin/rshell
 ```
 
 ## Bugs
-* The builtin shell commands ```pwd``` and ```echo``` do not handle flags
 * The host name obtained by ```gethostname()``` is limited to a maximum of 64 characters. Any name longer than that will be truncated.
 * ```getlogin_r()``` appears be used in conformance to The Linux Programmer's Manual and UNIX ® Specification, but usually fails and message ```"getLogin_r(): No such process"``` is printed. The userName buffer is set to "UNKNOWN" on failure.
