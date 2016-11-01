@@ -6,7 +6,7 @@ UCR CS100 Open Source Shell Project
 * Krishna Pakalapati - https://github.com/KrishnaP7
 
 ## Introduction
-This program is a working subset of Linux BASH that supports basic commands. 
+This program is a small working subset of Linux BASH that supports basic commands and connectors. 
 
 ## Installation
 Run these commands in your terminal to install and run rshell on your system
@@ -21,5 +21,5 @@ $ bin/rshell
 ```
 
 ## Bugs
-* The host name obtained by ```gethostname()``` is limited to a maximum of 64 characters. Any name longer than that will be truncated.
-* ```getlogin_r()``` appears be used in conformance to The Linux Programmer's Manual and UNIX ® Specification, but usually fails and message ```"getLogin_r(): No such process"``` is printed. The userName buffer is set to "UNKNOWN" on failure.
+* The host name obtained by ```gethostname()``` is limited to a maximum of 64 characters. Any name longer than that will be truncated. The hostName buffer is set to "UNKNOWN_HOST" on failure.
+* The user name obtained by ```gelogin_r()``` is limited to a maximum of 64 characters. Any name longer than that will be truncated. The userName buffer is set to "UNKNOWN_USER" on failure.
