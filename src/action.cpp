@@ -11,15 +11,11 @@
 #include "dirent.h" // closedir(), opendir()
 
 void Action::exec(std::vector<Object*> o)
-{
-    
-    std::cout << o.at(0)->type() << std::endl;
-    
+{        
     bool b = true;
     
     for(unsigned i = 0; i < o.size(); i++)
     {
-        
         if(o.at(i)->type() == "Command") //if its a command execute it
         {            
             std::string com = o.at(i)->get(); //gets string literal
