@@ -33,7 +33,7 @@ int main()
     if(flag != 0)
     {
         perror("getLogin_r()");
-        strcpy(userName, "UNKNOWN");
+        strcpy(userName, "UNKNOWN_USER");
     }
     
     char hostName[64];  // host buffer
@@ -41,6 +41,7 @@ int main()
     if(flag != 0)
     {
         perror("gethostname()");
+        strcpy(hostName, "UNKNOWN_HOST");
     }
     
     std::string userInput = ""; 
@@ -54,18 +55,18 @@ int main()
         std::getline(std::cin, userInput);    
         
         Pattern* P = new Pattern(userInput);
-        P -> getI() -> parse( P -> getL() -> getString() ); // PARSE
+        P->getL()->getVec() = P -> getI() -> parse( P -> getL() -> getString() ); // PARSE
         
         try
         {
-             P -> getA() -> exec( P -> getL() -> getVec() ); // EXECUTE
+            P -> getA() -> exec( P -> getL() -> getVec() ); // EXECUTE
         }
         catch(std::exception& e)
         {
             perror( e.what() ); // MAYBE CAHNGE ???
         }
     }
-    while(1); // this should be changed later to terminate with special exit command
+    while(1); // terminate with special exit command
     
     
     return 0;
