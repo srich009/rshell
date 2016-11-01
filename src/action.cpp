@@ -12,13 +12,6 @@
 
 void Action::exec(std::vector<Object*> o)
 {
-    // std::cout << "O_SZ: " << o.size() << std::endl;
-    // std::cout << "PRINT: "<< std::endl;
-    // for(unsigned i = 0; i < o.size(); i++)
-    // {
-    //     std::cout << o.at(i)->get() << ", ";
-    // }
-    // std::cout << std::endl;
     
     std::cout << o.at(0)->type() << std::endl;
     
@@ -26,56 +19,45 @@ void Action::exec(std::vector<Object*> o)
     
     for(unsigned i = 0; i < o.size(); i++)
     {
-        std::cout << "FOR_LOOP" << std::endl; // STOPS HERE
         
         if(o.at(i)->type() == "Command") //if its a command execute it
-        {
-            
-                std::cout << "IF_COMMAND" << std::endl;
-
-                
-                std::string com = o.at(i)->get(); //gets string literal
+        {            
+            std::string com = o.at(i)->get(); //gets string literal
     
-                //std::string args = com.substr(com.find(" ") + 1, com.size()); //retrieves only the arguments(might not have anything)
-            
-                //com = com.substr(0, com.find(" ") - 1); //retrieves only the command
-        
-                if(com == "exit ")
+            if(com == "exit ")
+            {
+                exitr(); 
+            }
+            // else if(com == "cd")
+            // {
+            //     b = cd(args);
+            // }
+            // else if(com == "pwd")
+            // {
+            //     b = pwd(args);
+            // }
+            // else if(com == "echo")
+            // {
+            //     b = echo(args);
+            // }
+            else
+            {
+                //bin
+                std::string in = o.at(i)->get();
+                const char* in1 = in.c_str();
+                int flag = executr((char*)(in1));
+                if(flag == 1)
                 {
-                    exitr(); 
+                    b = true;
                 }
-                // else if(com == "cd")
-                // {
-                //     b = cd(args);
-                // }
-                // else if(com == "pwd")
-                // {
-                //     b = pwd(args);
-                // }
-                // else if(com == "echo")
-                // {
-                //     b = echo(args);
-                // }
                 else
                 {
-                    //bin
-                    std::string in = o.at(i)->get();
-                    const char* in1 = in.c_str();
-                    int flag = executr((char*)(in1));
-                    if(flag == 1)
-                    {
-                        b = true;
-                    }
-                    else
-                    {
-                        b = false;
-                    }
+                    b = false;
                 }
+            }
         }
         else //if it is a connector
-        {
-            std::cout << "ELSE_CONNECT" << std::endl;
-            
+        {            
             if(o.at(i)->type() == "And" && b == false)
             {
                 i++;
@@ -104,11 +86,8 @@ int Action::executr(char* cmd)
     
     while(tempC != NULL)
     {
-        //cout << c << endl;
         tempC = strtok(NULL, " ");
-        //cout << tempC << endl;
         argv[c] = tempC;
-        //cout << argv[c] << endl;
         c++;
     }
     
@@ -121,18 +100,13 @@ int Action::executr(char* cmd)
     
     if(pid == 0) //if child
     {
-        //cout << "in child first" << endl;
         flag = execvp(argv[0], argv);
-        //cout << flag;
-        //cout << "after execvp " << flag << endl;
         if(flag == -1) //attempt to execute but if -1 calls perror
         {
-            //cout << flag << " in child (err)" << endl;
             std::string restring(argv[0]);
             perror(restring.c_str());
             exit(-1);
         }
-        //cout << flag << " in child (norm)" << endl;
         exit(0);
     }
     else if (pid < 0)
@@ -145,7 +119,6 @@ int Action::executr(char* cmd)
         int i = 0;
         do
         {
-            //cout << status << " in parent process" << endl;
             wpid = waitpid(pid, &status, WUNTRACED); //waits on child and retrieves status
             i++;
         }
