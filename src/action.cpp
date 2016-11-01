@@ -12,9 +12,19 @@
 
 void Action::exec(std::vector<Object*> o)
 {
+    // std::cout << "O_SZ: " << o.size() << std::endl;
+    // std::cout << "PRINT: "<< std::endl;
+    // for(unsigned i = 0; i < o.size(); i++)
+    // {
+    //     std::cout << o.at(i)->get() << ", ";
+    // }
+    // std::cout << std::endl;
+    
     bool b = true;
+    
     for(unsigned i = 0; i < o.size(); i++)
     {
+        
         
         if(o.at(i)->type() == "Command") //if its a command execute it
         {
@@ -23,12 +33,9 @@ void Action::exec(std::vector<Object*> o)
             {
                 std::string com = o.at(i)->get(); //gets string literal
     
-                std::string args = com.substr(com.find(" ") + 1, com.size()); //retrieves only the arguments(might not have anything)
-    
+                //std::string args = com.substr(com.find(" ") + 1, com.size()); //retrieves only the arguments(might not have anything)
             
-                com = com.substr(0, com.find(" ") - 1); //retrieves only the command
-                
-                //try
+                //com = com.substr(0, com.find(" ") - 1); //retrieves only the command
         
                 if(com == "exit")
                 {
@@ -58,7 +65,7 @@ void Action::exec(std::vector<Object*> o)
                     }
                     else
                     {
-                        false;
+                        b = false;
                     }
                 }
             }
@@ -80,6 +87,7 @@ void Action::exec(std::vector<Object*> o)
         }
     }
 }
+//---------------------------------------------------------------
 
 int Action::executr(char* cmd)
 {
@@ -105,7 +113,7 @@ int Action::executr(char* cmd)
     
     int status;
     
-    pid = fork();
+    pid = fork(); // create child process
     
     if(pid == 0) //if child
     {
@@ -133,8 +141,8 @@ int Action::executr(char* cmd)
         int i = 0;
         do
         {
-            wpid = waitpid(pid, &status, WUNTRACED); //waits on child and retrieves status
             //cout << status << " in parent process" << endl;
+            wpid = waitpid(pid, &status, WUNTRACED); //waits on child and retrieves status
             i++;
         }
         while(!WIFEXITED(status) && !WIFSIGNALED(status)); //waits while child is not exited or killed by a signal
@@ -146,7 +154,6 @@ int Action::executr(char* cmd)
     }
     
     return 1;
-    
 }
 //-----------------------------------------------
 
