@@ -23,7 +23,7 @@ std::string Line::getString()
 }
 //-------------------------------------
 
-std::vector<Object*> Line::getVec()
+std::vector<Object*>& Line::getVec()
 {
     return v;
 }

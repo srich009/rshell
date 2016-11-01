@@ -26,7 +26,7 @@ class Line
     	
     	std::string getString();
     	
-    	std::vector<Object*> getVec();
+    	std::vector<Object*>& getVec();
 
 };
 
