@@ -40,7 +40,7 @@ void Action::exec(std::vector<Object*> o)
             
                 //com = com.substr(0, com.find(" ") - 1); //retrieves only the command
         
-                if(com == "exit")
+                if(com == "exit ")
                 {
                     exitr(); 
                 }
