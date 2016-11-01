@@ -13,14 +13,15 @@ class Action
         
         int executr(char* cmd);
         
-        // Built in commands
+        // Homemade Builtin Commands
+        
         void exitr();           // exit
         
-        bool echo(std::string); // echo
+        // bool echo(std::string); // echo -> NOT USED
         
-        bool cd(std::string);   // change directory
+        // bool cd(std::string);   // change directory -> NOT USED
         
-        bool pwd(std::string);  // print working directory
+        // bool pwd(std::string);  // print working directory -> NOT USED
       
 };
 

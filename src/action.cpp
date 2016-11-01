@@ -2,13 +2,13 @@
 
 #include <stdexcept>
 #include <stdio.h>
-#include <cstdlib>  // exit
-#include <iostream> // echo
+#include <cstdlib>    // exit
+#include <iostream>   // echo
 #include <cstring>
 #include <sys/wait.h>
-#include <unistd.h> // getcwd()
+#include <unistd.h>   // getcwd()
 #include "sys/stat.h" // chdir()
-#include "dirent.h" // closedir(), opendir()
+#include "dirent.h"   // closedir(), opendir()
 
 void Action::exec(std::vector<Object*> o)
 {        
@@ -16,7 +16,7 @@ void Action::exec(std::vector<Object*> o)
     
     for(unsigned i = 0; i < o.size(); i++)
     {
-        if(o.at(i)->type() == "Command") //if its a command execute it
+        if(o.at(i)->type() == "Command")      //if its a command execute it
         {            
             std::string com = o.at(i)->get(); //gets string literal
     
@@ -24,15 +24,15 @@ void Action::exec(std::vector<Object*> o)
             {
                 exitr(); 
             }
-            // else if(com == "cd")
+            // else if(com1 == "cd ") // NOT USED
             // {
             //     b = cd(args);
             // }
-            // else if(com == "pwd")
+            // else if(com == "pwd") // NOT USED
             // {
             //     b = pwd(args);
             // }
-            // else if(com == "echo")
+            // else if(com == "echo") // NOT USED
             // {
             //     b = echo(args);
             // }

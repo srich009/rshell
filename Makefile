@@ -4,13 +4,9 @@ FLAGS = -Wall -Werror -ansi -pedantic
 DEBUG = -g
 OFILES = src/action.o src/and.o src/command.o src/connector.o src/interpreter.o src/line.o src/object.o src/or.o src/pattern.o src/semiColon.o
 
-# should probably rename a.out -> rshell  create /bin && move rshell there ?? ********************************************************************************************************************************************
-# ***************************************************************************************************************************************************************************
-
 # Targets
-# every dependency should be listed
-all: main.cpp $(OFILES) 
-	$(COMP) $(FLAGS) main.cpp $(OFILES)
+all: main.cpp $(OFILES) | bin
+	$(COMP) $(FLAGS) main.cpp $(OFILES) -o rshell && mv rshell bin/
 	
 debug: main.cpp $(OFILES)
 	$(COMP) $(FLAGS) $(DEBUG) main.cpp $(OFILES)
@@ -45,5 +41,8 @@ pattern.o: src/line.cpp header/line.h src/action.cpp header/action.h src/interpr
 semiColon.o: src/connector.cpp header/connector.h src/semiColon.cpp header/semiColon.h
 	$(COMP) $(FLAGS) -c src/semiColon.cpp
 
+bin:
+	mkdir bin
+
 clean:
-	rm -rf *~ src/*.o a.out
+	rm -rf *~ src/*.o && rm -rf bin
