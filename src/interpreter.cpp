@@ -125,13 +125,13 @@ std::vector<Object*> Interpreter::parse(std::string s)
             }
         }
     }
-    // ** handles some cases with semiColon abd adds an extra space at end
+    // ** handles some cases with semiColon abd adds an extra space at end **FIXED**
     // ex1: ["A; B"]  -> ["A "] ["; "] ["B "]
     // ex2: ["A ; B"] -> ["A  "] ["; "] ["B "]
     
     //==================================================================
     
-     /*   
+     /* 
     // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
     // check to see if rejoined correctly
     for(unsigned i = 0; i < final_form.size(); i++)
