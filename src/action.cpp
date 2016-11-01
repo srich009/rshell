@@ -24,13 +24,14 @@ void Action::exec(std::vector<Object*> o)
     
     for(unsigned i = 0; i < o.size(); i++)
     {
-        
+        std::cout << "FOR_LOOP" << std::endl; // STOPS HERE
         
         if(o.at(i)->type() == "Command") //if its a command execute it
         {
             
-            if(o.at(i)->type() == "Command") //if its a command execute it
-            {
+                std::cout << "IF_COMMAND" << std::endl;
+
+                
                 std::string com = o.at(i)->get(); //gets string literal
     
                 //std::string args = com.substr(com.find(" ") + 1, com.size()); //retrieves only the arguments(might not have anything)
@@ -68,10 +69,11 @@ void Action::exec(std::vector<Object*> o)
                         b = false;
                     }
                 }
-            }
         }
         else //if it is a connector
         {
+            std::cout << "ELSE_CONNECT" << std::endl;
+            
             if(o.at(i)->type() == "And" && b == false)
             {
                 i++;
