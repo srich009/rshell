@@ -10,8 +10,3 @@ Connector::Connector(std::string vs)
 {
     v = vs;
 }
-
-std::string Connector::type()
-{
-    return "Connector";
-}

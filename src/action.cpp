@@ -20,6 +20,8 @@ void Action::exec(std::vector<Object*> o)
     // }
     // std::cout << std::endl;
     
+    std::cout << o.at(0)->type() << std::endl;
+    
     bool b = true;
     
     for(unsigned i = 0; i < o.size(); i++)
