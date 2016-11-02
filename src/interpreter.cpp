@@ -1,9 +1,7 @@
 #include "../header/interpreter.h"
 
 #include <cstring> //library for strtok
-
-// THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
-#include <iostream> // *****************************************************
+#include <iostream> 
 
 std::vector<Object*> Interpreter::parse(std::string s)
 {
@@ -16,6 +14,7 @@ std::vector<Object*> Interpreter::parse(std::string s)
         s = s.substr(0, pos);       // set it equal to a substring of itself to the position
     }
     //=================================================================
+    
     
     // REMOVE_SPACES
     //=================================================================
@@ -37,16 +36,6 @@ std::vector<Object*> Interpreter::parse(std::string s)
     }
     //======================================================================
     
-    /*
-    // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
-    // check to see if parsed out spaces correctly
-    for(unsigned i = 0; i < sholder.size(); i++)
-    {
-        std::cout << "\""<< sholder.at(i) << "\" ";
-    }    
-    std::cout << std::endl;
-    */
-    
     
     // HANDLE_SEMICOLON
     //==================================================================
@@ -64,17 +53,8 @@ std::vector<Object*> Interpreter::parse(std::string s)
     }    
     //==================================================================
     
-    /*
-    // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
-    // check to see if parsed ';' correctly
-    for(unsigned i = 0; i < sholder.size(); i++)
-    {
-        std::cout << "\""<< sholder.at(i) << "\" ";
-    }    
-    std::cout << std::endl;
-    */
     
-    // REJOIN COMMANDS TO THEIR ARGS && SEPARATE WITH CONNECTORS (INFIX)
+    // REJOIN COMMANDS TO THEIR ARGS && SEPARATE WITH CONNECTORS
     //==================================================================
     // vector of Object pointers, represents commands joined with their arguments separated by connectors
     std::vector<Object*> final_form;
@@ -110,7 +90,7 @@ std::vector<Object*> Interpreter::parse(std::string s)
         {
             tempString += sholder.at(i);
             
-            if(tempString.at(tempString.size() - 1) != ' ') // prevent double space error discussed below?
+            if(tempString.at(tempString.size() - 1) != ' ') // prevent double space error
             {
                 tempString += " ";
             }
@@ -125,21 +105,6 @@ std::vector<Object*> Interpreter::parse(std::string s)
             }
         }
     }
-    // ** handles some cases with semiColon abd adds an extra space at end **FIXED**
-    // ex1: ["A; B"]  -> ["A "] ["; "] ["B "]
-    // ex2: ["A ; B"] -> ["A  "] ["; "] ["B "]
     
-    //==================================================================
-    
-     /* 
-    // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
-    // check to see if rejoined correctly
-    for(unsigned i = 0; i < final_form.size(); i++)
-    {
-        std::cout << "\""<< final_form.at(i)->get() << "\" ";
-    }    
-    std::cout << std::endl;
-    */
-    
-    return final_form;   // final ordering of the parsed text. Postfix order 
+    return final_form;   // final ordering of the parsed text. 
 }
