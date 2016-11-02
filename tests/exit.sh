@@ -22,3 +22,5 @@ exit
 DOC
 
 echo
+
+make clean
