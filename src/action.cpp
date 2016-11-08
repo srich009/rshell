@@ -22,19 +22,11 @@ void Action::exec(std::vector<Object*> o)
     
             if(com == "exit ")
             {
-                exitr(); 
+                exit(0); 
             }
-            // else if(com1 == "cd ") // NOT USED
+            // else if(com == "cd ") // NOT USED
             // {
             //     b = cd(args);
-            // }
-            // else if(com == "pwd") // NOT USED
-            // {
-            //     b = pwd(args);
-            // }
-            // else if(com == "echo") // NOT USED
-            // {
-            //     b = echo(args);
             // }
             else
             {
@@ -130,11 +122,6 @@ int Action::executr(char* cmd)
 }
 //-----------------------------------------------
 
-void Action::exitr()
-{
-    exit(0); // ?? seems too simple...
-}
-//------------------------------------------------
 
 // bool Action::cd(std::string str)  // need to use: chdir(), opendir(), closedir()
 // {

@@ -15,8 +15,6 @@ class Action
         
         // Homemade Builtin Commands
         
-        void exitr();           // exit
-        
         // bool cd(std::string);   // change directory -> NOT USED
       
 };
