@@ -44,14 +44,16 @@ int main()
         strcpy(hostName, "UNKNOWN_HOST");
     }
     
+    //??
+    std::string uName = std::string(userName);
+    std::string hName = std::string(hostName);
+    
     std::string userInput = ""; 
     
     do
     {
-        std::cout << std::string(userName) << "@";
-        std::cout << std::string(hostName);
+        std::cout << uName << "@" << hName << "$ ";
         
-        std::cout << "$ ";
         std::getline(std::cin, userInput);    
         
         Pattern* P = new Pattern(userInput); // construct pattern
@@ -80,7 +82,6 @@ int main()
         
     }
     while(1); // terminate with special exit command
-    
     
     return 0;
 }
