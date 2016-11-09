@@ -33,7 +33,7 @@ std::vector<Object*> Interpreter::parse(std::string s)
         sholder.push_back(std::string(tempC));
         
         tempC = strtok(NULL, " "); // extract next token
-    }
+    }    
     //======================================================================
     
     
@@ -60,7 +60,8 @@ std::vector<Object*> Interpreter::parse(std::string s)
     std::vector<Object*> final_form;
     
     std::string tempString; //for each iteration, puts together command and args and pushes
-        
+    
+    // WW 
     for(unsigned i = 0; i < sholder.size(); i++)
     {
         
@@ -68,7 +69,8 @@ std::vector<Object*> Interpreter::parse(std::string s)
         bool andBool = (sholder.at(i) == "&&");
         bool orBool = (sholder.at(i) == "||");
         
-        if(semiBool || andBool || orBool)
+        // XX
+        if(semiBool || andBool || orBool) 
         {
             final_form.push_back(new Command(tempString)); // push command to vector
             
@@ -94,17 +96,20 @@ std::vector<Object*> Interpreter::parse(std::string s)
             {
                 tempString += " ";
             }
-        }
+        } 
+        // XX
         
+        // YY
         if(i + 1 == sholder.size()) 
         {
             if(tempString != "")
             {
                 final_form.push_back(new Command(tempString)); // get the last part
-                
             }
-        }
-    }
+        } 
+        // YY
+        
+    }// WW
     
     return final_form;   // final ordering of the parsed text. 
 }

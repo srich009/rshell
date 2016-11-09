@@ -8,8 +8,8 @@ OFILES = src/action.o src/and.o src/command.o src/connector.o src/interpreter.o 
 all: main.cpp $(OFILES) | bin
 	$(COMP) $(FLAGS) main.cpp $(OFILES) -o rshell && mv rshell bin/
 	
-debug: main.cpp $(OFILES)
-	$(COMP) $(FLAGS) $(DEBUG) main.cpp $(OFILES)
+debug: main.cpp $(OFILES) | bin
+	$(COMP) $(FLAGS) $(DEBUG) main.cpp $(OFILES) -o rshell && mv rshell bin/
 	
 action.o: src/object.cpp header/object.h src/action.cpp header/action.h
 	$(COMP) $(FLAGS) -c src/action.cpp

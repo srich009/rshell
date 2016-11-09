@@ -13,6 +13,8 @@ class Command : public Object
         
         Command(std::string vs);
         
+        ~Command(); // ?? add destructor ??
+        
         std::string get();
         
         std::string type();

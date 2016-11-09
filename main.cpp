@@ -44,30 +44,44 @@ int main()
         strcpy(hostName, "UNKNOWN_HOST");
     }
     
+    //??
+    std::string uName = std::string(userName);
+    std::string hName = std::string(hostName);
+    
     std::string userInput = ""; 
     
     do
     {
-        std::cout << std::string(userName) << "@";
-        std::cout << std::string(hostName);
+        std::cout << uName << "@" << hName << "$ ";
         
-        std::cout << "$ ";
         std::getline(std::cin, userInput);    
         
-        Pattern* P = new Pattern(userInput);
-        P->getL()->getVec() = P -> getI() -> parse( P -> getL() -> getString() ); // PARSE
+        Pattern* P = new Pattern(userInput); // construct pattern
         
+        // PARSE
         try
         {
-            P -> getA() -> exec( P -> getL() -> getVec() ); // EXECUTE
+            P->getL()->getVec() = P -> getI() -> parse( P -> getL() -> getString() ); 
         }
         catch(std::exception& e)
         {
-            perror( e.what() ); // MAYBE CAHNGE ???
+            std::cout << "ERROR::PARSE" << std::endl;
+            perror( e.what() );
+        }            
+        
+        // EXECUTE
+        try
+        {
+            P -> getA() -> exec( P -> getL() -> getVec() ); 
         }
+        catch(std::exception& e)
+        {
+            std::cout << "ERROR::EXECUTE" << std::endl;
+            perror( e.what() );
+        }
+        
     }
     while(1); // terminate with special exit command
-    
     
     return 0;
 }

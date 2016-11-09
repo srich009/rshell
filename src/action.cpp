@@ -22,19 +22,11 @@ void Action::exec(std::vector<Object*> o)
     
             if(com == "exit ")
             {
-                exitr(); 
+                exit(0); 
             }
-            // else if(com1 == "cd ") // NOT USED
+            // else if(com == "cd ") // NOT USED
             // {
             //     b = cd(args);
-            // }
-            // else if(com == "pwd") // NOT USED
-            // {
-            //     b = pwd(args);
-            // }
-            // else if(com == "echo") // NOT USED
-            // {
-            //     b = echo(args);
             // }
             else
             {
@@ -130,31 +122,6 @@ int Action::executr(char* cmd)
 }
 //-----------------------------------------------
 
-void Action::exitr()
-{
-    exit(0); // ?? seems too simple...
-}
-//------------------------------------------------
-
-// bool Action::echo(std::string str)
-// {
-//     if(str.empty()) // if no str, then echo "\n"
-//     {
-//         std::cout << std::endl;
-//         return true;
-//     }
-//     else if(!str.empty()) // NO HANDLE FLAGS HERE***
-//     {
-//         std::cout << str << std::endl;    
-//         return true;
-//     }
-//     else
-//     {        
-//         std::cout << "ERROR UNKNOWN echo(std::string) FAIL" << std::endl;
-//     }
-//     return false; // catch
-// }
-// //------------------------------------------------
 
 // bool Action::cd(std::string str)  // need to use: chdir(), opendir(), closedir()
 // {
@@ -197,27 +164,4 @@ void Action::exitr()
 // }
 // //------------------------------------------------
 
-// bool Action::pwd(std::string str)
-// {
-//     if(!str.empty())  // NO HANDLE FLAGS HERE***
-//     {
-//         std::cout << "ERROR UNKNOWN FLAG" << std::endl;
-//         return false;
-//     }
-    
-//     char curDir[64]; // not sure about what size
-//     getcwd(curDir, sizeof(curDir)); // should return pointer to current working directory
-    
-//     if(!curDir)
-//     {
-//         std::cout << "ERROR UNKNOWN PWD FAIL" << std::endl;
-//     }
-//     else
-//     {
-//         std::cout << std::string(curDir) << std::endl;
-//         return true;
-//     }
-//     return false; // catch
-// }
-// //------------------------------------------------
 
