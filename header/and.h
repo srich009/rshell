@@ -13,6 +13,8 @@ class And : public Connector
     
         And(std::string vs);
         
+        ~And(); // ?? add destructor ??
+        
         std::string get();
         
         std::string type();

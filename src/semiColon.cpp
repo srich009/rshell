@@ -5,6 +5,11 @@ Semicolon::Semicolon(std::string vs)
     v = vs;
 }
 
+Semicolon::~Semicolon() // ?? add destructor ??
+{
+    ;
+}
+
 std::string Semicolon::get()
 {
     return v;

@@ -11,6 +11,8 @@ class Or : public Connector
     public:
     
         Or(std::string vs);
+        
+        ~Or(); // ?? add destructor ??
     
         std::string get();
         
