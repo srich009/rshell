@@ -2,6 +2,8 @@
 
 #include <cstring> //library for strtok
 #include <iostream> 
+#include <cstdlib>
+#include <stack>
 
 std::vector<Object*> Interpreter::parse(std::string s)
 {
@@ -14,6 +16,13 @@ std::vector<Object*> Interpreter::parse(std::string s)
         s = s.substr(0, pos);       // set it equal to a substring of itself to the position
     }
     //=================================================================
+    
+    // check if ballanced [] && ()
+    if(!isBalanced(s))
+    {
+        std::cout << "ERROR: not ballanced () OR []" << std::endl;
+        exit(1);
+    }
     
     
     // REMOVE_SPACES
@@ -113,3 +122,46 @@ std::vector<Object*> Interpreter::parse(std::string s)
     
     return final_form;   // final ordering of the parsed text. 
 }
+//-------------------------------------------------------------------------------------------
+
+bool Interpreter::isBalanced(std::string s) // check for ballanced number of separators (, {, [
+{
+    std::stack<char> ppp;
+    
+    for(std::string::iterator it = s.begin(); it != s.end(); it++)
+    {
+        if(*it == '(' || *it == '[' || *it == '{')
+        {
+            ppp.push(*it);
+        }
+        else if(*it == ')' || *it == ']' || *it == '}')
+        {
+            if(ppp.empty())
+            {
+                return false;
+            }
+            else
+            {
+                if(*it == ')' && ppp.top() != '(' )
+                {
+                    return false;
+                }
+                else if(*it == ']' && ppp.top() != '[' )
+                {
+                    return false;
+                }
+                else if(*it == '}' && ppp.top() != '{' )
+                {
+                    return false;
+                }
+                else
+                {
+                    ppp.pop();
+                }
+            } 
+        }
+    }
+    
+    return ppp.empty();
+}
+//-------------------------------------------------------------------------------------------

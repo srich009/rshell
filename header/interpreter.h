@@ -18,6 +18,7 @@ class Interpreter
         
         std::vector<Object*> parse(std::string s);
         
+        bool isBalanced(std::string s); // refers to brackets, braces, parentheses...
 };
 
 #endif
