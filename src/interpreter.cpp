@@ -1,5 +1,5 @@
 #include "../header/interpreter.h"
-
+#include <sstream>
 #include <cstring> //library for strtok
 #include <iostream> 
 #include <cstdlib>
@@ -29,7 +29,62 @@ Node* Interpreter::parse(std::string s)
     
     ///****************** HEY HEY HEY *****************************************************
     
-    std::vector<std::string> str_vec; 
+    std::vector<std::string> str_vec;
+    std::istringstream iss(s);
+    std::string temp;
+    int lefnum = 0;
+    int rightnum = 0;
+    std::string holder;
+    
+    while(iss >> temp)
+    {
+        if(temp.find("(") != std::string::npos)
+        {
+            for(unsigned i = 0; i < temp.size(); i++)
+            {
+                if(temp.at(i) == '(')
+                {
+                    lefnum++;
+                }
+                else if(temp.at(i) == ')')
+                {
+                    rightnum++;
+                }
+            }
+            std::string ntemp;
+            temp += " ";
+            while(iss >> ntemp)
+            {
+                for(unsigned i = 0; i < ntemp.size(); i++)
+                {
+                    if(ntemp.at(i) == '(')
+                    {
+                        lefnum++;
+                    }
+                    else if(ntemp.at(i) == ')')
+                    {
+                        rightnum++;
+                    }
+                }
+                temp += ntemp;
+                if(lefnum != rightnum)
+                {
+                    temp = temp + " ";
+                }
+                else
+                {
+                    break;
+                }
+            }
+            temp.erase(temp.begin() + temp.find('('));
+            temp.erase(temp.begin() + temp.find_last_of(')'));
+            lefnum = 0;
+            rightnum = 0;
+        }
+        
+        str_vec.push_back(temp);
+    }
+
     // str_vec = to the return val from new parse function
     // parse each string in the vector individually
     
