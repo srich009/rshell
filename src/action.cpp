@@ -2,16 +2,15 @@
 
 #include <stdexcept>
 #include <stdio.h>
-#include <cstdlib>    // exit
-#include <iostream>   // echo
+#include <cstdlib>    
+#include <iostream>   
 #include <cstring>
 #include <sys/wait.h>
-#include <unistd.h>   // getcwd()
-#include "sys/stat.h" // chdir()
-#include "dirent.h"   // closedir(), opendir()
+#include <unistd.h>
 
 void Action::exec(Node* n)
 {
+    // NOW a PREFIX tree traversal algorithm
     
     // bool b = true;
     
@@ -124,47 +123,3 @@ int Action::executr(char* cmd)
     return 1;
 }
 //-----------------------------------------------
-
-
-// bool Action::cd(std::string str)  // need to use: chdir(), opendir(), closedir()
-// {
-//     int flag = -1;
-//     char curDir[64]; // not sure about what size
-//     getcwd(curDir, sizeof(curDir)); // should return pointer to current working directory
-    
-//     if(str.empty()) 
-//     {
-//         // if no str, then cd ~/
-//         std::string q = "~";
-//         flag = chdir(q.c_str());
-//         if(flag != 0)
-//         {
-//             perror("chdir()");
-//             return false;
-//         }
-//         return true;
-//     }
-//     else
-//     {
-//         if(str == std::string(curDir)) // fail if try to change to the directory already in
-//         {
-//             std::cout << "rshell: cd: " << str << ": No such file or directory" << std::endl;
-//             return false;
-//         }
-        
-//         flag = chdir(str.c_str());
-        
-//         if(flag != 0)
-//         {
-//             std::cout << "rshell: cd: " << str << ": No such file or directory" << std::endl;
-//             perror("chdir()");
-//             return false;
-//         }
-//         return true;
-//     }
-    
-//     return false;
-// }
-// //------------------------------------------------
-
-

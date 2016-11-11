@@ -18,45 +18,34 @@ Node* Interpreter::parse(std::string s)
     //=================================================================
     
     // check if ballanced [] && ()
+    //================================================================
     if(!isBalanced(s))
     {
         std::cout << "ERROR: not ballanced () OR []" << std::endl;
         exit(1);
     }
+    //================================================================
     
     
-    // REMOVE_SPACES
-    //=================================================================
-    // convert string, .c_str() returns const* char
-    const char* s_char_ = s.c_str();
-
-    // VERY BAD
-    // use C-style cast from const char* to char*
-    char* tempC = strtok((char*)(s_char_), " "); //temp char array to store tokens
+    ///****************** HEY HEY HEY *****************************************************
     
-    std::vector<std::string> sholder; // vector for tokens
+    std::vector<std::string> str_vec; 
+    // str_vec = to the return val from new parse function
+    // parse each string in the vector individually
     
-    while(tempC != NULL) // while loop to extract tokens until none left
-    {
-        //use string constructor to package char array, push_back in vector
-        sholder.push_back(std::string(tempC));
-        
-        tempC = strtok(NULL, " "); // extract next token
-    }    
-    //======================================================================
     
     
     // HANDLE_SEMICOLON
     //==================================================================
-    for(unsigned i = 0; i < sholder.size(); i++)
+    for(unsigned i = 0; i < str_vec.size(); i++)
     {
         // last is semicolon
-        if( (sholder.at(i)).at(sholder.at(i).size() -1) == ';' )
+        if( (str_vec.at(i)).at(str_vec.at(i).size() -1) == ';' )
         {
             std::string temp = ";";
-            std::vector<std::string>::iterator it = sholder.begin() + (i + 1); // iterator to next past "x;"
-            sholder.at(i) = sholder.at(i).substr(0, sholder.at(i).size() - 1); // remove ';' from string
-            sholder.insert( it , temp ); // insert new ';' string
+            std::vector<std::string>::iterator it = str_vec.begin() + (i + 1); // iterator to next past "x;"
+            str_vec.at(i) = str_vec.at(i).substr(0, str_vec.at(i).size() - 1); // remove ';' from string
+            str_vec.insert( it , temp ); // insert new ';' string
             i++; // prevent infinte loop
         }
     }    
@@ -71,12 +60,12 @@ Node* Interpreter::parse(std::string s)
     std::string tempString; //for each iteration, puts together command and args and pushes
     
     // WW 
-    for(unsigned i = 0; i < sholder.size(); i++)
+    for(unsigned i = 0; i < str_vec.size(); i++)
     {
         
-        bool semiBool = (sholder.at(i) == ";"); //checks if the current string is a connector
-        bool andBool = (sholder.at(i) == "&&");
-        bool orBool = (sholder.at(i) == "||");
+        bool semiBool = (str_vec.at(i) == ";"); //checks if the current string is a connector
+        bool andBool = (str_vec.at(i) == "&&");
+        bool orBool = (str_vec.at(i) == "||");
         
         // XX
         if(semiBool || andBool || orBool) 
@@ -99,7 +88,7 @@ Node* Interpreter::parse(std::string s)
         }
         else
         {
-            tempString += sholder.at(i);
+            tempString += str_vec.at(i);
             
             if(tempString.at(tempString.size() - 1) != ' ') // prevent double space error
             {
@@ -109,7 +98,7 @@ Node* Interpreter::parse(std::string s)
         // XX
         
         // YY
-        if(i + 1 == sholder.size()) 
+        if(i + 1 == str_vec.size()) 
         {
             if(tempString != "")
             {
@@ -129,17 +118,19 @@ Node* Interpreter::parse(std::string s)
 }
 //-------------------------------------------------------------------------------------------
 
-bool Interpreter::isBalanced(std::string s) // check for ballanced number of separators (, {, [
+
+
+bool Interpreter::isBalanced(std::string s) // check for ballanced number of separators (, [
 {
     std::stack<char> ppp;
     
     for(std::string::iterator it = s.begin(); it != s.end(); it++)
     {
-        if(*it == '(' || *it == '[' || *it == '{')
+        if(*it == '(' || *it == '[')
         {
             ppp.push(*it);
         }
-        else if(*it == ')' || *it == ']' || *it == '}')
+        else if(*it == ')' || *it == ']' )
         {
             if(ppp.empty())
             {
@@ -152,10 +143,6 @@ bool Interpreter::isBalanced(std::string s) // check for ballanced number of sep
                     return false;
                 }
                 else if(*it == ']' && ppp.top() != '[' )
-                {
-                    return false;
-                }
-                else if(*it == '}' && ppp.top() != '{' )
                 {
                     return false;
                 }
