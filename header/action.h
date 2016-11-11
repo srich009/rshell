@@ -3,19 +3,15 @@
 
 #include <string>
 
-#include "object.h"
+#include "node.h"
 
 class Action
 {
     public:
     
-        void exec(std::vector<Object*>);
+        void exec(Node*);
         
         int executr(char* cmd);
-        
-        // Homemade Builtin Commands
-        
-        // bool cd(std::string);   // change directory -> NOT USED
       
 };
 

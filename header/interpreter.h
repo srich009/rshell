@@ -10,14 +10,16 @@
 #include "or.h"
 #include "and.h"
 #include "semiColon.h"
+#include "node.h"
 
 class Interpreter
 {
     
     public:
         
-        std::vector<Object*> parse(std::string s);
+        Node* parse(std::string s);
         
+        bool isBalanced(std::string s); // refers to brackets, braces, parentheses...
 };
 
 #endif

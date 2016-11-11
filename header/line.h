@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-#include "object.h"
+#include "node.h"
 
 class Line
 {
@@ -14,8 +14,8 @@ class Line
         // unformatted user input
         std::string input;
         
-        // tokenized vector 
-        std::vector<Object*> v;
+        // root node of the abstract syntax tree
+        Node* root;
 
     public:
 
@@ -26,7 +26,9 @@ class Line
     	
     	std::string getString();
     	
-    	std::vector<Object*>& getVec();
+    	Node* getRoot();
+    	
+    	void setRoot(Node*);
 
 };
 

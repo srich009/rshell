@@ -22,8 +22,8 @@ class Node
     	Node(std::string);
     	
     	~Node();
-    
-        void clear(Node* n);
+    	
+    	std::string getKey();
 
     	void setPar(Node* n);
     	
@@ -36,8 +36,6 @@ class Node
     	Node* getLeft();
     	
     	Node* getRight();
-    	
-    	std::string getKey();
 
 };
 

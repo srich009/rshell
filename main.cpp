@@ -61,22 +61,22 @@ int main()
         // PARSE
         try
         {
-            P->getL()->getVec() = P -> getI() -> parse( P -> getL() -> getString() ); 
+            P -> getL() -> setRoot( P -> getI() -> parse( P -> getL() -> getString() ) ); // set root to parse return
         }
         catch(std::exception& e)
         {
-            std::cout << "ERROR::PARSE" << std::endl;
+            std::cout << "ERROR: PARSE" << std::endl;
             perror( e.what() );
         }            
         
         // EXECUTE
         try
         {
-            P -> getA() -> exec( P -> getL() -> getVec() ); 
+            P -> getA() -> exec( P -> getL() -> getRoot() ); // call exec function on root of tree
         }
         catch(std::exception& e)
         {
-            std::cout << "ERROR::EXECUTE" << std::endl;
+            std::cout << "ERROR: EXECUTE" << std::endl;
             perror( e.what() );
         }
         

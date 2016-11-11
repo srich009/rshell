@@ -2,64 +2,66 @@
 
 #include <stdexcept>
 #include <stdio.h>
-#include <cstdlib>    // exit
-#include <iostream>   // echo
+#include <cstdlib>    
+#include <iostream>   
 #include <cstring>
 #include <sys/wait.h>
-#include <unistd.h>   // getcwd()
-#include "sys/stat.h" // chdir()
-#include "dirent.h"   // closedir(), opendir()
+#include <unistd.h>
 
-void Action::exec(std::vector<Object*> o)
-{        
-    bool b = true;
+void Action::exec(Node* n)
+{
+    // NOW a PREFIX tree traversal algorithm
     
-    for(unsigned i = 0; i < o.size(); i++)
-    {
-        if(o.at(i)->type() == "Command")      //if its a command execute it
-        {            
-            std::string com = o.at(i)->get(); //gets string literal
+    // bool b = true;
     
-            if(com == "exit ")
-            {
-                exit(0); 
-            }
-            // else if(com == "cd ") // NOT USED
-            // {
-            //     b = cd(args);
-            // }
-            else
-            {
-                //bin
-                std::string in = o.at(i)->get();
-                const char* in1 = in.c_str();
-                int flag = executr((char*)(in1));
-                if(flag == 1)
-                {
-                    b = true;
-                }
-                else
-                {
-                    b = false;
-                }
-            }
-        }
-        else //if it is a connector
-        {            
-            if(o.at(i)->type() == "And" && b == false)
-            {
-                i++;
-            }
-            else if(o.at(i)->type() == "Or" && b == true)
-            {
-                i++;
-            }
-            else
-            {
-                //do nothing if semicolon
-            }
-        }
-    }
+    // for(unsigned i = 0; i < o.size(); i++)
+    // {
+    //     if(o.at(i)->type() == "Command")      //if its a command execute it
+    //     {            
+    //         std::string com = o.at(i)->get(); //gets string literal
+    
+    //         if(com == "exit ")
+    //         {
+    //             exit(0); 
+    //         }
+    //         // else if(com == "cd ") // NOT USED
+    //         // {
+    //         //     b = cd(args);
+    //         // }
+    //         else
+    //         {
+    //             //bin
+    //             std::string in = o.at(i)->get();
+    //             const char* in1 = in.c_str();
+    //             int flag = executr((char*)(in1));
+    //             if(flag == 1)
+    //             {
+    //                 b = true;
+    //             }
+    //             else
+    //             {
+    //                 b = false;
+    //             }
+    //         }
+    //     }
+    //     else //if it is a connector
+    //     {            
+    //         if(o.at(i)->type() == "And" && b == false)
+    //         {
+    //             i++;
+    //         }
+    //         else if(o.at(i)->type() == "Or" && b == true)
+    //         {
+    //             i++;
+    //         }
+    //         else
+    //         {
+    //             //do nothing if semicolon
+    //         }
+    //     }
+    // }
+
+
 }
 //---------------------------------------------------------------
 
@@ -121,47 +123,3 @@ int Action::executr(char* cmd)
     return 1;
 }
 //-----------------------------------------------
-
-
-// bool Action::cd(std::string str)  // need to use: chdir(), opendir(), closedir()
-// {
-//     int flag = -1;
-//     char curDir[64]; // not sure about what size
-//     getcwd(curDir, sizeof(curDir)); // should return pointer to current working directory
-    
-//     if(str.empty()) 
-//     {
-//         // if no str, then cd ~/
-//         std::string q = "~";
-//         flag = chdir(q.c_str());
-//         if(flag != 0)
-//         {
-//             perror("chdir()");
-//             return false;
-//         }
-//         return true;
-//     }
-//     else
-//     {
-//         if(str == std::string(curDir)) // fail if try to change to the directory already in
-//         {
-//             std::cout << "rshell: cd: " << str << ": No such file or directory" << std::endl;
-//             return false;
-//         }
-        
-//         flag = chdir(str.c_str());
-        
-//         if(flag != 0)
-//         {
-//             std::cout << "rshell: cd: " << str << ": No such file or directory" << std::endl;
-//             perror("chdir()");
-//             return false;
-//         }
-//         return true;
-//     }
-    
-//     return false;
-// }
-// //------------------------------------------------
-
-
