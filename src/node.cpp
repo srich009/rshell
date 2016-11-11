@@ -8,25 +8,37 @@ Node::Node(std::string s)
 {}
 //-----------------------------------------------   
 
-Node::~Node() // called on root
+Node::~Node() 
 {
-    Node::clear(this);
-}
-//------------------------------------------------
-
-void Node::clear(Node* n)
-{
-    if(n != 0)
+    Node* current = this;
+    Node* parent = 0;
+    while (current != 0)
     {
-        clear(this->left);
-        clear(this->right);
-        delete this;
-        this->parent = 0;
-        this->left = 0;
-        this->right = 0;
+        parent = current->getPar();
+        if (current->getLeft() == 0)
+        {
+            current = current->getLeft();
+        }
+        else if (current->getRight() == 0)
+        {
+            current = current->getRight();
+        }
+        else
+        {
+            if (parent->getRight() == current)
+            {
+                parent->setRight(0); // ??
+            }
+            else
+            {
+                parent->setLeft(0);
+            }
+            current = 0; // this line (among others) is very suspicious
+        }
+        current = parent;
     }
 }
-//-----------------------------------------------
+//------------------------------------------------
 
 void Node::setPar(Node* n)
 {

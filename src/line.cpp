@@ -8,12 +8,9 @@ Line::Line(std::string str)
 
 Line::~Line()
 {
-    //delete objects
-    for(unsigned i = 0; i < v.size(); i++)
-    {
-        delete v.at(i);
-        v.at(i) = 0;
-    }
+    //delete root && node destructor is recursive
+    delete root;
+    root = 0;
 }
 //-------------------------------------
 
@@ -23,9 +20,13 @@ std::string Line::getString()
 }
 //-------------------------------------
 
-std::vector<Object*>& Line::getVec()
+Node* Line::getRoot()
 {
-    return v;
+    return root;
 }
 //-------------------------------------
 
+void Line::setRoot(Node* n)
+{
+    this->root = n;
+}

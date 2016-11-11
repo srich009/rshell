@@ -5,7 +5,7 @@
 #include <cstdlib>
 #include <stack>
 
-std::vector<Object*> Interpreter::parse(std::string s)
+Node* Interpreter::parse(std::string s)
 {
     // REMOVE_COMMENTS
     //================================================================
@@ -120,7 +120,12 @@ std::vector<Object*> Interpreter::parse(std::string s)
         
     }// WW
     
-    return final_form;   // final ordering of the parsed text. 
+    
+    
+    //build the root of the tree
+    
+    
+    return 0; // NULL Node* for now
 }
 //-------------------------------------------------------------------------------------------
 

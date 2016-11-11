@@ -61,7 +61,7 @@ int main()
         // PARSE
         try
         {
-            P->getL()->getVec() = P -> getI() -> parse( P -> getL() -> getString() ); 
+            P -> getL() -> setRoot( P -> getI() -> parse(P -> getL() -> getString()) ); 
         }
         catch(std::exception& e)
         {
@@ -72,7 +72,7 @@ int main()
         // EXECUTE
         try
         {
-            P -> getA() -> exec( P -> getL() -> getVec() ); 
+            P -> getA() -> exec( P -> getL() -> getRoot() ); 
         }
         catch(std::exception& e)
         {
