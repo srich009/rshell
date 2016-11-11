@@ -70,7 +70,7 @@ Node* Interpreter::parse(std::string s)
         // XX
         if(semiBool || andBool || orBool) 
         {
-            final_form.push_back(new Command(tempString)); // push command to vector
+            //final_form.push_back(new Command(tempString)); // push command to vector
             
             if(semiBool)
             {                
@@ -102,7 +102,7 @@ Node* Interpreter::parse(std::string s)
         {
             if(tempString != "")
             {
-                final_form.push_back(new Command(tempString)); // get the last part
+                //final_form.push_back(new Command(tempString)); // get the last part
             }
         } 
         // YY

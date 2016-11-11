@@ -6,18 +6,18 @@
 
 #include "object.h"
 
-class Command : public Object
+class Command : public Object // now an Abstract base
 {
     
     public:
         
         Command(std::string vs);
         
-        ~Command(); // ?? add destructor ??
+        virtual ~Command(); // ?? add destructor ??
         
-        std::string get();
+        virtual std::string get() = 0;
         
-        std::string type();
+        virtual std::string type() = 0;
         
 };
 
