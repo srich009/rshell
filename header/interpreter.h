@@ -11,6 +11,8 @@
 #include "and.h"
 #include "semiColon.h"
 #include "node.h"
+#include "leaf_cmd.h"
+#include "block_cmd.h"
 
 class Interpreter
 {
