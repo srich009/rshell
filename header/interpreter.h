@@ -23,7 +23,7 @@ class Interpreter
         
         bool isBalanced(std::string s); // refers to brackets, braces, parentheses...
         
-        void buildTree(Node*n, Object* o);
+        void buildTree(Node*n, std::vector<Object*>);
 };
 
 #endif

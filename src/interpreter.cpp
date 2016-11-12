@@ -91,7 +91,6 @@ Node* Interpreter::parse(std::string s)
     ///***********************************************************************
     
     
-    
     // HANDLE_SEMICOLON
     //==================================================================
     for(unsigned i = 0; i < str_vec.size(); i++)
@@ -177,7 +176,7 @@ Node* Interpreter::parse(std::string s)
     
     //build the root of the tree
     Node* n;
-    buildTree(n, final_form.at(0));
+    buildTree(n, final_form);
     
     
     
@@ -226,7 +225,7 @@ bool Interpreter::isBalanced(std::string s) // check for ballanced number of sep
 }
 //-------------------------------------------------------------------------------------------
 
-void Interpreter::buildTree(Node*n, Object* o)
+void Interpreter::buildTree(Node* n, std::vector<Object*>)
 {
 }
 //-------------------------------------------------------------------------------------------
