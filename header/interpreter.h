@@ -22,6 +22,8 @@ class Interpreter
         Node* parse(std::string s);
         
         bool isBalanced(std::string s); // refers to brackets, braces, parentheses...
+        
+        void buildTree(Node*n, Object* o);
 };
 
 #endif

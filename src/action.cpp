@@ -18,7 +18,36 @@ void Action::exec(Node* n)
         exit(1);
     }
     
+    // psuedo code ... 
+    /*
+    
+        let T be root node tree;
         
+        if(T != NULL)
+        {
+            return t.value;
+        }
+        
+        // recursive solve   // solve is executr function
+        A = solve.(t->left);
+        B = solve(t->right);
+        
+        // calculate and apply the operator "T.value" to A and B, return result/error
+        try
+        {
+            calculate(A, B, T.value); // calculate handles logic control flow {"&&", "||", ";"}
+            return;
+        }
+        catch(std::exception &e)
+        {
+            cout << e.what() << endl;
+            exit(1);
+        }
+        
+        
+    */
+    
+      
     
 }
 //---------------------------------------------------------------
@@ -26,9 +55,9 @@ void Action::exec(Node* n)
 int Action::executr(char* cmd)
 {
     char* argv[64];
-    int flag = 0;
     char* tempC;
     unsigned c = 1;
+    
     tempC = strtok(cmd, " ");
     argv[0] = tempC;
     
@@ -47,9 +76,8 @@ int Action::executr(char* cmd)
     pid = fork(); // create child process
     
     if(pid == 0) //if child
-    {
-        flag = execvp(argv[0], argv);
-        if(flag == -1) //attempt to execute but if -1 calls perror
+    { 
+        if(-1 == execvp(argv[0], argv)) //attempt to execute but if -1 calls perror
         {
             std::string restring(argv[0]);
             perror(restring.c_str());
