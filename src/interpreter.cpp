@@ -123,12 +123,12 @@ Node* Interpreter::parse(std::string s)
         bool semiBool = (str_vec.at(i) == ";"); //checks if the current string is a connector
         bool andBool = (str_vec.at(i) == "&&");
         bool orBool = (str_vec.at(i) == "||");
-        bool blockBool = (str_vec.at(i).find("(") != string::npos);
+        bool blockBool = (str_vec.at(i).find("(") != std::string::npos);
         
         // XX
         if(semiBool || andBool || orBool || blockBool) 
         {
-            final_form.push_back(new Leaf_cmd(tempString)); // push command to vector
+            final_form.push_back(new Leaf(tempString)); // push command to vector
             
             if(semiBool)
             {                
@@ -146,7 +146,7 @@ Node* Interpreter::parse(std::string s)
             {
                 temp.erase(temp.begin() + temp.find('('));
                 temp.erase(temp.begin() + temp.find_last_of(')'));
-                final_form.push_back(new Block_cmd(str_vec.at(i)));
+                final_form.push_back(new Block(str_vec.at(i)));
             }
             tempString.clear();
         }
@@ -166,7 +166,7 @@ Node* Interpreter::parse(std::string s)
         {
             if(tempString != "")
             {
-                final_form.push_back(new Leaf_cmd(tempString)); // get the last part
+                final_form.push_back(new Leaf(tempString)); // get the last part
             }
         } 
         // YY
