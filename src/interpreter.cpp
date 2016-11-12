@@ -76,8 +76,8 @@ Node* Interpreter::parse(std::string s)
                     break;
                 }
             }
-            temp.erase(temp.begin() + temp.find('('));
-            temp.erase(temp.begin() + temp.find_last_of(')'));
+            //temp.erase(temp.begin() + temp.find('(')); COME BACK HERE IF YOU FUCK UP
+            //temp.erase(temp.begin() + temp.find_last_of(')'));
             lefnum = 0;
             rightnum = 0;
         }
@@ -121,11 +121,12 @@ Node* Interpreter::parse(std::string s)
         bool semiBool = (str_vec.at(i) == ";"); //checks if the current string is a connector
         bool andBool = (str_vec.at(i) == "&&");
         bool orBool = (str_vec.at(i) == "||");
+        bool blockBool = (str_vec.at(i).find("(") != string::npos);
         
         // XX
-        if(semiBool || andBool || orBool) 
+        if(semiBool || andBool || orBool || blockBool) 
         {
-            //final_form.push_back(new Command(tempString)); // push command to vector
+            final_form.push_back(new Leaf_cmd(tempString)); // push command to vector
             
             if(semiBool)
             {                
@@ -135,9 +136,15 @@ Node* Interpreter::parse(std::string s)
             {
                 final_form.push_back(new And("&& "));
             }
-            else
+            else if(orBool)
             {
                 final_form.push_back(new Or("|| "));
+            }
+            else
+            {
+                temp.erase(temp.begin() + temp.find('('));
+                temp.erase(temp.begin() + temp.find_last_of(')'));
+                final_form.push_back(new Block_cmd(str_vec.at(i)));
             }
             tempString.clear();
         }
@@ -157,7 +164,7 @@ Node* Interpreter::parse(std::string s)
         {
             if(tempString != "")
             {
-                //final_form.push_back(new Command(tempString)); // get the last part
+                final_form.push_back(new Leaf_cmd(tempString)); // get the last part
             }
         } 
         // YY
