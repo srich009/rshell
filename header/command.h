@@ -11,7 +11,9 @@ class Command : public Object // now an Abstract base
     
     public:
         
-        Command(std::string vs);
+        Command();
+        
+        Command(std::string);
         
         virtual ~Command(); // ?? add destructor ??
         

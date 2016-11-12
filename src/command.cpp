@@ -1,8 +1,11 @@
 #include "../header/command.h"
 
-Command::Command(std::string vs)
+Command::Command()
+{}
+
+Command::Command(std::string instr)
 {
-    v = vs;
+    str = instr;
 }
 
 Command::~Command() // ?? add destructor ??

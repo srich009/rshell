@@ -9,7 +9,7 @@ class Object
     
     protected:
     
-        std::string v;
+        std::string str;
     
     public:
     
@@ -17,7 +17,7 @@ class Object
         
         Object();
     
-        Object(std::string vs);
+        Object(std::string);
         
         virtual std::string get() = 0;
         

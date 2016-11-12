@@ -11,7 +11,7 @@ class Semicolon : public Connector
     
     public:
     
-        Semicolon(std::string vs);
+        Semicolon(std::string);
         
         ~Semicolon(); // ?? add destructor ??
     

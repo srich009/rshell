@@ -1,8 +1,8 @@
 #include "../header/or.h"
 
-Or::Or(std::string vs)
+Or::Or(std::string instr)
 {
-    v = vs;
+    str = instr;
 }
 
 Or::~Or() // ?? add destructor ??
@@ -12,7 +12,7 @@ Or::~Or() // ?? add destructor ??
 
 std::string Or::get()
 {
-    return v;
+    return str;
 }
 
 std::string Or::type()

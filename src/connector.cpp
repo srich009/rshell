@@ -6,7 +6,7 @@ Connector::Connector()
 Connector::~Connector()
 {}
 
-Connector::Connector(std::string vs)
+Connector::Connector(std::string instr)
 {
-    v = vs;
+    str = instr;
 }
