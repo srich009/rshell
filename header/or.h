@@ -10,7 +10,7 @@ class Or : public Connector
 {
     public:
     
-        Or(std::string vs);
+        Or(std::string);
         
         ~Or(); // ?? add destructor ??
     

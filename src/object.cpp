@@ -6,7 +6,7 @@ Object::Object()
 Object::~Object()
 {}
 
-Object::Object(std::string vs)
+Object::Object(std::string instr)
 {
-    v = vs;
+    str = instr;
 }

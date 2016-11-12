@@ -88,6 +88,8 @@ Node* Interpreter::parse(std::string s)
     // str_vec = to the return val from new parse function
     // parse each string in the vector individually
     
+    ///***********************************************************************
+    
     
     
     // HANDLE_SEMICOLON
@@ -167,6 +169,8 @@ Node* Interpreter::parse(std::string s)
     
     
     //build the root of the tree
+    
+    
     
     
     return 0; // NULL Node* for now

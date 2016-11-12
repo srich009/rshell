@@ -1,8 +1,8 @@
 #include "../header/semiColon.h"
 
-Semicolon::Semicolon(std::string vs)
+Semicolon::Semicolon(std::string instr)
 {
-    v = vs;
+    str = instr;
 }
 
 Semicolon::~Semicolon() // ?? add destructor ??
@@ -12,7 +12,7 @@ Semicolon::~Semicolon() // ?? add destructor ??
 
 std::string Semicolon::get()
 {
-    return v;
+    return str;
 }
 
 std::string Semicolon::type()
