@@ -128,7 +128,7 @@ Node* Interpreter::parse(std::string s)
         // XX
         if(semiBool || andBool || orBool || blockBool) 
         {
-            final_form.push_back(new Leaf_cmd(tempString)); // push command to vector
+            final_form.push_back(new Leaf(tempString)); // push command to vector
             
             if(semiBool)
             {                
@@ -146,7 +146,7 @@ Node* Interpreter::parse(std::string s)
             {
                 temp.erase(temp.begin() + temp.find('('));
                 temp.erase(temp.begin() + temp.find_last_of(')'));
-                final_form.push_back(new Block_cmd(str_vec.at(i)));
+                final_form.push_back(new Block(str_vec.at(i)));
             }
             tempString.clear();
         }
@@ -166,7 +166,7 @@ Node* Interpreter::parse(std::string s)
         {
             if(tempString != "")
             {
-                final_form.push_back(new Leaf_cmd(tempString)); // get the last part
+                final_form.push_back(new Leaf(tempString)); // get the last part
             }
         } 
         // YY
@@ -176,11 +176,13 @@ Node* Interpreter::parse(std::string s)
     
     
     //build the root of the tree
+    Node* n;
+    buildTree(n, final_form.at(0));
     
     
     
     
-    return 0; // NULL Node* for now
+    return n; // NULL Node* for now
 }
 //-------------------------------------------------------------------------------------------
 
@@ -223,3 +225,5 @@ bool Interpreter::isBalanced(std::string s) // check for ballanced number of sep
     return ppp.empty();
 }
 //-------------------------------------------------------------------------------------------
+
+void Interpreter::buildTree(Node*n, Object* o)
