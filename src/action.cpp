@@ -13,10 +13,19 @@ void Action::exec(Node* n)
     // PREFIX tree traversal algorithm
     
     if(n == 0) // error check
-    {
-        std::cout << "ERROR: Exec, NULL Root Node" << std::endl;
-        exit(1);
+    {        
+        try
+        {
+            std::exception e;
+            throw e;
+        }
+        catch(std::exception &e)
+        {
+            std::cout << e.what() << " NULL Node* passed to exec" << std::endl;
+            return;
+        }        
     }
+
     
     // psuedo code ... 
     /*
