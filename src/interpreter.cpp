@@ -123,7 +123,7 @@ Node* Interpreter::parse(std::string s)
         bool semiBool = (str_vec.at(i) == ";"); //checks if the current string is a connector
         bool andBool = (str_vec.at(i) == "&&");
         bool orBool = (str_vec.at(i) == "||");
-        bool blockBool = (str_vec.at(i).find("(") != string::npos);
+        bool blockBool = (str_vec.at(i).find("(") != std::string::npos);
         
         // XX
         if(semiBool || andBool || orBool || blockBool) 

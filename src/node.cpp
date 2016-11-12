@@ -8,34 +8,40 @@ Node::Node(std::string s)
 {}
 //-----------------------------------------------   
 
-Node::~Node() 
+Node::~Node() // Probably Broken
 {
     Node* current = this;
     Node* parent = 0;
+    
     while (current != 0)
     {
-        parent = current->getPar();
-        if (current->getLeft() == 0)
+        parent = current -> getPar(); // ..
+        
+        if (current -> getLeft() != 0)
         {
-            current = current->getLeft();
+            current = current -> getLeft();
         }
-        else if (current->getRight() == 0)
+        else if (current->getRight() != 0)
         {
-            current = current->getRight();
+            current = current -> getRight();
         }
-        else
+        else // delete node
         {
-            if (parent->getRight() == current)
+            if (parent -> getRight() == current)
             {
-                parent->setRight(0); // ??
+                delete current;
+                parent -> setRight(0); // ??
             }
             else
             {
-                parent->setLeft(0);
+                delete current;
+                parent -> setLeft(0); // ??
             }
-            current = 0; // this line (among others) is very suspicious
+            
+            current = 0; 
         }
-        current = parent;
+        
+        current = parent; // ..
     }
 }
 //------------------------------------------------

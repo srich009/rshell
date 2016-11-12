@@ -10,58 +10,16 @@
 
 void Action::exec(Node* n)
 {
-    // NOW a PREFIX tree traversal algorithm
+    // PREFIX tree traversal algorithm
     
-    // bool b = true;
+    if(n == 0) // error check
+    {
+        std::cout << "ERROR: Exec, NULL Root Node" << std::endl;
+        exit(1);
+    }
     
-    // for(unsigned i = 0; i < o.size(); i++)
-    // {
-    //     if(o.at(i)->type() == "Command")      //if its a command execute it
-    //     {            
-    //         std::string com = o.at(i)->get(); //gets string literal
+        
     
-    //         if(com == "exit ")
-    //         {
-    //             exit(0); 
-    //         }
-    //         // else if(com == "cd ") // NOT USED
-    //         // {
-    //         //     b = cd(args);
-    //         // }
-    //         else
-    //         {
-    //             //bin
-    //             std::string in = o.at(i)->get();
-    //             const char* in1 = in.c_str();
-    //             int flag = executr((char*)(in1));
-    //             if(flag == 1)
-    //             {
-    //                 b = true;
-    //             }
-    //             else
-    //             {
-    //                 b = false;
-    //             }
-    //         }
-    //     }
-    //     else //if it is a connector
-    //     {            
-    //         if(o.at(i)->type() == "And" && b == false)
-    //         {
-    //             i++;
-    //         }
-    //         else if(o.at(i)->type() == "Or" && b == true)
-    //         {
-    //             i++;
-    //         }
-    //         else
-    //         {
-    //             //do nothing if semicolon
-    //         }
-    //     }
-    // }
-
-
 }
 //---------------------------------------------------------------
 
@@ -123,3 +81,54 @@ int Action::executr(char* cmd)
     return 1;
 }
 //-----------------------------------------------
+
+/// OLD VERSION OF EXEC
+
+    // bool b = true;
+    
+    // for(unsigned i = 0; i < o.size(); i++)
+    // {
+    //     if(o.at(i)->type() == "Command")      //if its a command execute it
+    //     {            
+    //         std::string com = o.at(i)->get(); //gets string literal
+    
+    //         if(com == "exit ")
+    //         {
+    //             exit(0); 
+    //         }
+    //         // else if(com == "cd ") // NOT USED
+    //         // {
+    //         //     b = cd(args);
+    //         // }
+    //         else
+    //         {
+    //             //bin
+    //             std::string in = o.at(i)->get();
+    //             const char* in1 = in.c_str();
+    //             int flag = executr((char*)(in1));
+    //             if(flag == 1)
+    //             {
+    //                 b = true;
+    //             }
+    //             else
+    //             {
+    //                 b = false;
+    //             }
+    //         }
+    //     }
+    //     else //if it is a connector
+    //     {            
+    //         if(o.at(i)->type() == "And" && b == false)
+    //         {
+    //             i++;
+    //         }
+    //         else if(o.at(i)->type() == "Or" && b == true)
+    //         {
+    //             i++;
+    //         }
+    //         else
+    //         {
+    //             //do nothing if semicolon
+    //         }
+    //     }
+    // }
