@@ -183,44 +183,44 @@ Node* Interpreter::parse(std::string s)
 
 bool Interpreter::isBalanced(std::string s) // check for ballanced number of separators (, [
 {
-    std::stack<char> ppp;
+    std::stack<char> stk;
     
     for(std::string::iterator it = s.begin(); it != s.end(); it++)
     {
         if(*it == '(' || *it == '[')
         {
-            ppp.push(*it);
+            stk.push(*it);
         }
         else if(*it == ')' || *it == ']' )
         {
-            if(ppp.empty())
+            if(stk.empty())
             {
                 return false;
             }
             else
             {
-                if(*it == ')' && ppp.top() != '(' )
+                if(*it == ')' && stk.top() != '(' )
                 {
                     return false;
                 }
-                else if(*it == ']' && ppp.top() != '[' )
+                else if(*it == ']' && stk.top() != '[' )
                 {
                     return false;
                 }
                 else
                 {
-                    ppp.pop();
+                    stk.pop();
                 }
             } 
         }
     }
     
-    return ppp.empty();
+    return stk.empty();
 }
 //-------------------------------------------------------------------------------------------
 
 
-void Interpreter::buildTree(Node* n, std::vector<Object*> v)
+void Interpreter::buildTree(Node*& n, std::vector<Object*> v)
 {
     std::cout << "inside Build_tree" << std::endl;
     
@@ -233,6 +233,13 @@ void Interpreter::buildTree(Node* n, std::vector<Object*> v)
     }    
     std::cout << std::endl;    
     // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
+
+    
+    if(v.size() == 1) // single leaf is root
+    {
+        n = new Node(v.at(0)->get()); 
+    }
+    
     
 }
 //-------------------------------------------------------------------------------------------

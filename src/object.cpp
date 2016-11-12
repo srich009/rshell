@@ -10,3 +10,8 @@ Object::Object(std::string instr)
 {
     str = instr;
 }
+
+std::string Object::get()
+{
+    return str;
+}

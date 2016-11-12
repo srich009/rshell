@@ -12,3 +12,7 @@ Command::~Command() // ?? add destructor ??
 {
 }
 
+std::string Command::get()
+{
+    return str;
+}

@@ -10,3 +10,8 @@ Connector::Connector(std::string instr)
 {
     str = instr;
 }
+
+std::string Connector::get()
+{
+    return str;
+}
