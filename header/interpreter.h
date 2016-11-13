@@ -27,6 +27,8 @@ class Interpreter
         void postfix(std::vector<Object*> &v); // node reference so it works
         
         Node* buildTree(std::vector<Object*> v);
+        
+        void printTree(Node* n);
 };
 
 #endif // __INTERPRETER_H__

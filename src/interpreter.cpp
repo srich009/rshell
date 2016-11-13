@@ -138,10 +138,10 @@ Node* Interpreter::parse(std::string s)
             {
                 final_form.push_back(new Or("||"));
             }
-            else
+            else if(blockBool)
             {
-                temp.erase(temp.begin() + temp.find('('));
-                temp.erase(temp.begin() + temp.find_last_of(')'));
+                str_vec.at(i).erase(str_vec.at(i).begin() + str_vec.at(i).find('('));
+                str_vec.at(i).erase(str_vec.at(i).begin() + str_vec.at(i).find_last_of(')'));
                 final_form.push_back(new Block(str_vec.at(i)));
             }
             tempString.clear();
@@ -175,6 +175,7 @@ Node* Interpreter::parse(std::string s)
     Node* n = 0; // init as NULL
     postfix(final_form);
     n = buildTree(final_form);
+    printTree(n);
     //==========================================================================
     
     return n; // root of tree
@@ -303,22 +304,42 @@ Node* Interpreter::buildTree(std::vector<Object*> v)
         }
         else
         {
-            o = new Node(v.at(i)->get());
+            if(s.empty())
+            {
+                
+            }
+            else{
+                
+
+                o = new Node(v.at(i)->get());
             
-            o1 = s.top();
-            s.pop();
-            o2 = s.top();
-            s.pop();
+                o1 = s.top();
+                s.pop();
+                o2 = s.top();
+                s.pop();
             
-            o->setRight(o1);
-            o->setLeft(o2);
-            
-            s.push(o);
+                o->setRight(o1);
+                o->setLeft(o2);
+                
+                s.push(o);
+            }
         }
     }
     
     o = s.top();
     s.pop();
     
+    
     return o;
+}
+
+void Interpreter::printTree(Node* n)
+{
+    if(n != 0)
+    {
+        printTree(n->getLeft());
+        std::cout << n->getKey() << std::endl; 
+        printTree(n->getRight());
+    }
+
 }
