@@ -58,22 +58,24 @@ bool Action::exec(Node* n) // tree traversal algorithm
         }
         else // recursive solve  executr function part B
         {            
-            if(str == "&&" && c == false) // &&
-            {
+            if(str == "&&" && c == true) // &&
+            {                std::cout << "str: " << str << std::endl;
                 b = exec(n->getRight());
             }
-            else if(str == "||" && c == true) // ||
-            {
+            else if(str == "||" && c == false) // ||
+            {                std::cout << "str: " << str << std::endl;
                 b = exec(n->getRight());
             }
             else if(str == ";") // ;
             {  
+                std::cout << "str: " << str << std::endl;
                 b = exec(n->getRight());
             }
             else
             {
-                perror("ERROR: Unknown connector");
-                exit(1);
+                // std::cout << "str: " << str << std::endl;
+                // perror("ERROR: Unknown connector");
+                // exit(1);
             }
         }
 
