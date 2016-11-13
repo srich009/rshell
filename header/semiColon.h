@@ -1,5 +1,5 @@
-#ifndef SEMICOLON_H
-#define SEMICOLON_H
+#ifndef __SEMICOLON_H__
+#define __SEMICOLON_H__
 
 #include <vector>
 #include <string>
@@ -8,7 +8,6 @@
 
 class Semicolon : public Connector
 {
-    
     public:
     
         Semicolon(std::string);
@@ -17,7 +16,7 @@ class Semicolon : public Connector
     
         std::string get();
         
-        std::string type();
-        
+        std::string type();   
 };
-#endif
+
+#endif // __SEMICOLON_H__

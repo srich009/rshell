@@ -1,5 +1,5 @@
-#ifndef INTERPRETER_H
-#define INTERPRETER_H
+#ifndef __INTERPRETER_H__
+#define __INTERPRETER_H__
 
 #include <vector>
 #include <string>
@@ -16,7 +16,6 @@
 
 class Interpreter
 {
-    
     public:
         
         Node* parse(std::string s);
@@ -26,4 +25,4 @@ class Interpreter
         void buildTree(Node*& n, std::vector<Object*> v); // node reference so it works
 };
 
-#endif
+#endif // __INTERPRETER_H__

@@ -47,7 +47,6 @@ int main()
     //??
     std::string uName = std::string(userName);
     std::string hName = std::string(hostName);
-    
     std::string userInput = ""; 
     
     do
@@ -78,8 +77,7 @@ int main()
         {
             std::cout << "ERROR: EXECUTE" << std::endl;
             perror( e.what() );
-        }
-        
+        }  
     }
     while(1); // terminate with special exit command
     
