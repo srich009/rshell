@@ -19,6 +19,8 @@ class Interpreter
     public:
         
         Node* parse(std::string s);
+        
+        void printTree(Node* n);
     
     private:
         
@@ -28,7 +30,6 @@ class Interpreter
         
         Node* buildTree(std::vector<Object*> v);
         
-        void printTree(Node* n);
 };
 
 #endif // __INTERPRETER_H__

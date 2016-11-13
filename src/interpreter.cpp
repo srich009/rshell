@@ -84,6 +84,11 @@ Node* Interpreter::parse(std::string s)
         
         str_vec.push_back(temp);
     }
+    
+    /*for(unsigned j = 0; j < str_vec.size(); j++)
+    {
+        std::cout << str_vec.at(j) << std::endl;
+    }*/
 
     // str_vec = to the return val from new parse function
     // parse each string in the vector individually
@@ -106,7 +111,11 @@ Node* Interpreter::parse(std::string s)
         }
     }    
     //==================================================================
-    
+    /*std::cout << "round 2" << std::endl;
+    for(unsigned j = 0; j < str_vec.size(); j++)
+    {
+        std::cout << str_vec.at(j) << std::endl;
+    }*/
     
     // REJOIN COMMANDS TO THEIR ARGS && SEPARATE WITH CONNECTORS
     //==================================================================
@@ -169,6 +178,35 @@ Node* Interpreter::parse(std::string s)
         
     }// WW
     
+    //std::cout << "inside parse (before remove space)" << std::endl;
+    
+        
+    // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
+    // check to see if rejoined correctly
+    /*for(unsigned i = 0; i < final_form.size(); i++)
+    {
+        std::cout << "\""<< final_form.at(i)->get() << "\" ";
+    }    
+    std::cout << std::endl;  */  
+    
+    for(unsigned i = 0; i < final_form.size(); i++)
+    {
+        if(final_form.at(i)->get() == "")
+        {
+            final_form.erase(final_form.begin() + i);
+        }
+    }
+    
+    //std::cout << "inside parse (after remove space)" << std::endl;
+    
+        
+    // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
+    // check to see if rejoined correctly
+    /*for(unsigned i = 0; i < final_form.size(); i++)
+    {
+        std::cout << "\""<< final_form.at(i)->get() << "\" ";
+    }    
+    std::cout << std::endl;  */
     
     //build root of the tree
     //==========================================================================
@@ -224,7 +262,7 @@ bool Interpreter::isBalanced(std::string s) // check for ballanced number of sep
 
 void Interpreter::postfix(std::vector<Object*> &v)
 {
-    /*std::cout << "inside Build_tree" << std::endl;
+   /* std::cout << "inside postfix (beginning)" << std::endl;
     
         
     // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
@@ -233,15 +271,9 @@ void Interpreter::postfix(std::vector<Object*> &v)
     {
         std::cout << "\""<< v.at(i)->get() << "\" ";
     }    
-    std::cout << std::endl;    
+    std::cout << std::endl;    */
     // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
 
-    
-    if(v.size() == 1) // single leaf is root
-    {
-        n = new Node(v.at(0)->get());
-        return;
-    }*/
     
     std::stack<Object*> s;
     unsigned i = 0;
@@ -280,6 +312,15 @@ void Interpreter::postfix(std::vector<Object*> &v)
     }
     
     v = pfix;
+    
+        // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
+    // check to see if rejoined correctly
+    /*for(unsigned i = 0; i < v.size(); i++)
+    {
+        std::cout << "\""<< v.at(i)->get() << "\" ";
+    }    
+    std::cout << std::endl;    */
+    // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
 }
 //-------------------------------------------------------------------------------------------
 
@@ -340,15 +381,16 @@ void Interpreter::printTree(Node* n)
     if(n != 0)
     {
         printTree(n->getLeft());
-        if(n->getLeft() == 0 && n->getRight() == 0)
+        /*if(n->getLeft() == 0 && n->getRight() == 0)
         {
             std::cout << "leaf: ";
-        }
-        if(n->getPar() == 0)
+        }*/
+        std::cout << "current node: " <<n->getKey(); 
+                if(n->getPar() > 0)
         {
-            std::cout << "root: ";
+            std::cout << " parent: " << n->getPar()->getKey();
         }
-        std::cout << n->getKey() << std::endl; 
+        std::cout << std::endl;
         printTree(n->getRight());
     }
 

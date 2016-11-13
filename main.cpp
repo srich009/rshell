@@ -71,6 +71,7 @@ int main()
         // EXECUTE
         try
         {
+            //P->getI()->printTree(P->getL()->getRoot()); //prints tree
             P -> getA() -> exec( P -> getL() -> getRoot() ); // call exec function on root of tree
         }
         catch(std::exception& e)
