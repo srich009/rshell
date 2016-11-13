@@ -91,7 +91,6 @@ Node* Interpreter::parse(std::string s)
     ///***********************************************************************
     
     
-    
     // HANDLE_SEMICOLON
     //==================================================================
     for(unsigned i = 0; i < str_vec.size(); i++)
@@ -111,15 +110,12 @@ Node* Interpreter::parse(std::string s)
     
     // REJOIN COMMANDS TO THEIR ARGS && SEPARATE WITH CONNECTORS
     //==================================================================
-    // vector of Object pointers, represents commands joined with their arguments separated by connectors
-    std::vector<Object*> final_form;
-    
-    std::string tempString; //for each iteration, puts together command and args and pushes
+    std::vector<Object*> final_form; // vector of Object pointers, commands joined with their arguments separated by connectors
+    std::string tempString;          // for each iteration, puts together command and args and pushes
     
     // WW 
     for(unsigned i = 0; i < str_vec.size(); i++)
     {
-        
         bool semiBool = (str_vec.at(i) == ";"); //checks if the current string is a connector
         bool andBool = (str_vec.at(i) == "&&");
         bool orBool = (str_vec.at(i) == "||");
@@ -132,15 +128,15 @@ Node* Interpreter::parse(std::string s)
             
             if(semiBool)
             {                
-                final_form.push_back(new Semicolon("; "));
+                final_form.push_back(new Semicolon(";"));
             }
             else if(andBool)
             {
-                final_form.push_back(new And("&& "));
+                final_form.push_back(new And("&&"));
             }
             else if(orBool)
             {
-                final_form.push_back(new Or("|| "));
+                final_form.push_back(new Or("||"));
             }
             else
             {
@@ -174,60 +170,74 @@ Node* Interpreter::parse(std::string s)
     }// WW
     
     
-    
-    //build the root of the tree
-    Node* n;
-    buildTree(n, final_form.at(0));
-    
-    
-    
+    //build root of the tree
+    //==========================================================================
+    Node* n = 0; // init as NULL
+    buildTree(n, final_form);
+    //==========================================================================
     
     return n; // NULL Node* for now
 }
 //-------------------------------------------------------------------------------------------
 
 
-
 bool Interpreter::isBalanced(std::string s) // check for ballanced number of separators (, [
 {
-    std::stack<char> ppp;
+    std::stack<char> stk;
     
     for(std::string::iterator it = s.begin(); it != s.end(); it++)
     {
         if(*it == '(' || *it == '[')
         {
-            ppp.push(*it);
+            stk.push(*it);
         }
         else if(*it == ')' || *it == ']' )
         {
-            if(ppp.empty())
+            if(stk.empty())
             {
                 return false;
             }
             else
             {
-                if(*it == ')' && ppp.top() != '(' )
+                if(*it == ')' && stk.top() != '(' )
                 {
                     return false;
                 }
-                else if(*it == ']' && ppp.top() != '[' )
+                else if(*it == ']' && stk.top() != '[' )
                 {
                     return false;
                 }
                 else
                 {
-                    ppp.pop();
+                    stk.pop();
                 }
             } 
         }
     }
     
-    return ppp.empty();
+    return stk.empty();
 }
 //-------------------------------------------------------------------------------------------
 
-void Interpreter::buildTree(Object* o)
-{
 
+void Interpreter::buildTree(Node*& n, std::vector<Object*> v)
+{
+    std::cout << "inside Build_tree" << std::endl;
+    
+        
+    // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
+    // check to see if rejoined correctly
+    for(unsigned i = 0; i < v.size(); i++)
+    {
+        std::cout << "\""<< v.at(i)->get() << "\" ";
+    }    
+    std::cout << std::endl;    
+    // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
+
+    
+    if(v.size() == 1) // single leaf is root
+    {
+        n = new Node(v.at(0)->get()); 
+    }
 }
 //-------------------------------------------------------------------------------------------
