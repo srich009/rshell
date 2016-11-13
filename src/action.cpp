@@ -14,7 +14,7 @@ void Action::exec(Node* n)
     
     if(n == 0) // error check
     {        
-        std::cout << "ERROR: NULL Node* passed to exec" << std::endl;
+        std::cout << " NULL Node* passed to exec" << std::endl;
         return;       
     }
 
@@ -29,7 +29,7 @@ void Action::exec(Node* n)
             return t.value;
         }
         
-        // recursive solve   // solve is executr function ?
+        // recursive solve   // solve is executr function
         A = solve.(t->left);
         B = solve(t->right);
         
@@ -48,7 +48,6 @@ void Action::exec(Node* n)
         
     */
     
-      
     
 }
 //---------------------------------------------------------------

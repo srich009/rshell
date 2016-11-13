@@ -176,7 +176,7 @@ Node* Interpreter::parse(std::string s)
     buildTree(n, final_form);
     //==========================================================================
     
-    return n; // NULL Node* for now
+    return n; // root of tree
 }
 //-------------------------------------------------------------------------------------------
 
@@ -237,9 +237,9 @@ void Interpreter::buildTree(Node*& n, std::vector<Object*> v)
     
     if(v.size() == 1) // single leaf is root
     {
-        n = new Node(v.at(0)->get()); 
+        n = new Node(v.at(0)->get());
+        return;
     }
-    
     
 }
 //-------------------------------------------------------------------------------------------
