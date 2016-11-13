@@ -8,51 +8,84 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-void Action::exec(Node* n)
+bool Action::exec(Node* n) // tree traversal algorithm
 {
-    // PREFIX tree traversal algorithm
-    
-    if(n == 0) // error check
+    if(n == 0) // error check NULL
     {        
-        std::cout << " NULL Node* passed to exec" << std::endl;
-        return;       
+        std::cout << "NULL Node* passed to exec" << std::endl;
+        return false;       
+    } 
+    
+    bool a = false; // A
+    bool b = false; // B
+    bool c = false; // 
+    
+    if(n != 0 && ( (n->getKey() != "&&") && (n->getKey() != "||") && ( n->getKey() != ";") ) ) // single
+    {
+        std::string in = n->getKey(); 
+        
+        if(in == "exit ") // builtin
+        {
+            exit(0); 
+        }
+        else  // bin
+        {
+            const char* in1 = in.c_str();
+            if(executr((char*)(in1)) == 1)
+            {
+                a = true;
+            }
+            else
+            {
+                a = false;
+            }  
+            
+            return a;
+        }
     }
-
+    else // multi with connects
+    {        
+        std::string str = n->getKey(); // fill with connector for eval
     
-    // psuedo code ... 
-    /*
+        // recursive solve  executr function part A
+        c = exec(n->getLeft());
     
-        let T be root node tree;
-        
-        if(T != NULL)
+        // logic control flow for the  {"&&", "||", ";"}
+        if(str.empty())
         {
-            return t.value;
-        }
-        
-        // recursive solve   // solve is executr function
-        A = solve.(t->left);
-        B = solve(t->right);
-        
-        // calculate and apply the operator "T.value" to A and B, return result/error
-        try
-        {
-            calculate(A, B, T.value); // calculate handles logic control flow {"&&", "||", ";"}
-            return;
-        }
-        catch(std::exception &e)
-        {
-            cout << e.what() << endl;
+            perror("ERROR: Missing connector");
             exit(1);
         }
-        
-        
-    */
+        else // recursive solve  executr function part B
+        {            
+            if(str == "&&" && c == false) // &&
+            {
+                b = exec(n->getRight());
+            }
+            else if(str == "||" && c == true) // ||
+            {
+                b = exec(n->getRight());
+            }
+            else if(str == ";") // ;
+            {  
+                b = exec(n->getRight());
+            }
+            else
+            {
+                perror("ERROR: Unknown connector");
+                exit(1);
+            }
+        }
+
+    }
     
-    
+    return false; // catch
 }
 //---------------------------------------------------------------
 
-int Action::executr(char* cmd)
+
+
+int Action::executr(char* cmd) // execute char[] with execvp syscalls
 {
     char* argv[64];
     char* tempC;
@@ -110,6 +143,11 @@ int Action::executr(char* cmd)
 }
 //-----------------------------------------------
 
+
+
+
+
+
 /// OLD VERSION OF EXEC
 
     // bool b = true;
@@ -160,3 +198,33 @@ int Action::executr(char* cmd)
     //         }
     //     }
     // }
+//------------------------------------------------------------------
+    
+    // psuedo code ... 
+    /*
+    
+        let T be root node tree;
+        
+        if(T != NULL)
+        {
+            return t.value;
+        }
+        
+        // recursive solve   // solve is executr function
+        A = solve.(t->left);
+        B = solve(t->right);
+        
+        // calculate and apply the operator "T.value" to A and B, return result/error
+        try
+        {
+            calculate(A, B, T.value); // calculate handles logic control flow {"&&", "||", ";"}
+            return;
+        }
+        catch(std::exception &e)
+        {
+            cout << e.what() << endl;
+            exit(1);
+        }
+        
+        
+    */
