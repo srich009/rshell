@@ -12,18 +12,24 @@ bool Action::exec(Node* n) // tree traversal algorithm
 {
     if(n == 0) // error check NULL
     {        
-        std::cout << " NULL Node* passed to exec" << std::endl;
+        std::cout << "NULL Node* passed to exec" << std::endl;
         return false;       
     } 
     
     bool a = false; // A
     bool b = false; // B
-    bool c = false; // A con B
+    bool c = false; // 
     
     if(n != 0 && ( (n->getKey() != "&&") && (n->getKey() != "||") && ( n->getKey() != ";") ) ) // single
     {
-            //bin
-            std::string in = n->getKey();
+        std::string in = n->getKey(); 
+        
+        if(in == "exit ") // builtin
+        {
+            exit(0); 
+        }
+        else  // bin
+        {
             const char* in1 = in.c_str();
             if(executr((char*)(in1)) == 1)
             {
@@ -35,43 +41,48 @@ bool Action::exec(Node* n) // tree traversal algorithm
             }  
             
             return a;
+        }
     }
     else // multi with connects
     {        
-        std::string temp = "";
-        if(n != 0) // connector
+        std::string str = n->getKey(); // fill with connector for eval
+    
+        // recursive solve  executr function part A
+        c = exec(n->getLeft());
+    
+        // logic control flow for the  {"&&", "||", ";"}
+        if(str.empty())
         {
-            temp = n->getKey();
-        }
-        
-        // recursive solve   // solve is executr function
-        a = exec(n->getLeft());
-        b = exec(n->getRight());
-        
-        // calculate and apply the operator "n.value" to A and B, return result/error
-        try
-        {
-            c = eval(a, b, temp); // 
-            return c;
-        }
-        catch(std::exception &e)
-        {
-            std::cout << e.what() << std::endl;
+            perror("ERROR: Missing connector");
             exit(1);
         }
+        else // recursive solve  executr function part B
+        {            
+            if(str == "&&" && c == false) // &&
+            {
+                b = exec(n->getRight());
+            }
+            else if(str == "||" && c == true) // ||
+            {
+                b = exec(n->getRight());
+            }
+            else if(str == ";") // ;
+            {  
+                b = exec(n->getRight());
+            }
+            else
+            {
+                perror("ERROR: Unknown connector");
+                exit(1);
+            }
+        }
+
     }
     
     return false; // catch
 }
 //---------------------------------------------------------------
 
-
-bool Action::eval(bool, bool, std::string) // logic control flow for the  {"&&", "||", ";"}
-{
-    std::cout << "eval not done" << std::endl;
-    return false;
-}
-//-----------------------------------------------
 
 
 int Action::executr(char* cmd) // execute char[] with execvp syscalls

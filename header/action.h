@@ -13,7 +13,6 @@ class Action
         
         int executr(char* cmd);
 
-        bool eval(bool, bool, std::string);
 };
 
 #endif
