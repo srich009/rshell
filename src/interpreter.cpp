@@ -241,11 +241,10 @@ void Interpreter::buildTree(Node*& n, std::vector<Object*> v)
         return;
     }*/
     
-    stack<Object*> s;
+    std::stack<Object*> s;
     unsigned i = 0;
-    //int k = 0;
-    Object* o;
-    vector<Object> pfix;
+    //int k = 0
+    std::vector<Object*> pfix;
     
     while(i < v.size())
     {
@@ -261,7 +260,7 @@ void Interpreter::buildTree(Node*& n, std::vector<Object*> v)
             }
             else
             {
-                while(!s.empt())
+                while(!s.empty())
                 {
                     pfix.push_back(s.top());
                     s.pop();
