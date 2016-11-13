@@ -34,8 +34,7 @@ Node* Interpreter::parse(std::string s)
     std::string temp;
     int lefnum = 0;
     int rightnum = 0;
-    std::string holder;
-    
+
     while(iss >> temp)
     {
         if(temp.find("(") != std::string::npos)
@@ -103,10 +102,10 @@ Node* Interpreter::parse(std::string s)
         // last is semicolon
         if( (str_vec.at(i)).at(str_vec.at(i).size() -1) == ';' )
         {
-            std::string temp = ";";
+            std::string temp1 = ";";
             std::vector<std::string>::iterator it = str_vec.begin() + (i + 1); // iterator to next past "x;"
             str_vec.at(i) = str_vec.at(i).substr(0, str_vec.at(i).size() - 1); // remove ';' from string
-            str_vec.insert( it , temp ); // insert new ';' string
+            str_vec.insert( it , temp1 ); // insert new ';' string
             i++; // prevent infinte loop
         }
     }    
@@ -277,7 +276,6 @@ void Interpreter::postfix(std::vector<Object*> &v)
     
     std::stack<Object*> s;
     unsigned i = 0;
-    //int k = 0
     std::vector<Object*> pfix;
     
     while(i < v.size())
