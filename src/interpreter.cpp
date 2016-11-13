@@ -173,7 +173,8 @@ Node* Interpreter::parse(std::string s)
     //build root of the tree
     //==========================================================================
     Node* n = 0; // init as NULL
-    buildTree(n, final_form);
+    postfix(final_form);
+    n = buildTree(final_form);
     //==========================================================================
     
     return n; // root of tree
@@ -220,7 +221,7 @@ bool Interpreter::isBalanced(std::string s) // check for ballanced number of sep
 //-------------------------------------------------------------------------------------------
 
 
-void Interpreter::buildTree(Node*& n, std::vector<Object*> v)
+void Interpreter::postfix(std::vector<Object*> &v)
 {
     /*std::cout << "inside Build_tree" << std::endl;
     
@@ -277,6 +278,47 @@ void Interpreter::buildTree(Node*& n, std::vector<Object*> v)
         s.pop();
     }
     
-
+    v = pfix;
 }
 //-------------------------------------------------------------------------------------------
+
+Node* Interpreter::buildTree(std::vector<Object*> v)
+{
+    std::stack<Node*> s;
+    Node* o;
+    Node* o1;
+    Node* o2;
+    
+    for(unsigned i = 0; i < v.size(); i++)
+    {
+        if(v.at(i)->type() == "Leaf")
+        {
+            o = new Node(v.at(i)->get());
+            s.push(o);
+        }
+        else if(v.at(i)->type() == "Block")
+        {
+            o = parse(v.at(i)->get());
+            s.push(o);
+        }
+        else
+        {
+            o = new Node(v.at(i)->get());
+            
+            o1 = s.top();
+            s.pop();
+            o2 = s.top();
+            s.pop();
+            
+            o->setLeft(o1);
+            o->setRight(o2);
+            
+            s.push(o);
+        }
+    }
+    
+    o = s.top();
+    s.pop();
+    
+    return o;
+}
