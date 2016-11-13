@@ -1,5 +1,5 @@
-#ifndef ACTION_H
-#define ACTION_H
+#ifndef __ACTION_H__
+#define __ACTION_H__
 
 #include <string>
 
@@ -12,7 +12,6 @@ class Action
         bool exec(Node*);
         
         int executr(char* cmd);
-
 };
 
-#endif
+#endif // __ACTION_H__

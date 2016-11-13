@@ -1,5 +1,5 @@
-#ifndef OR_H
-#define OR_H
+#ifndef __OR_H__
+#define __OR_H__
 
 #include <vector>
 #include <string>
@@ -19,4 +19,4 @@ class Or : public Connector
         std::string type();
 };
 
-#endif
+#endif // __OR_H__

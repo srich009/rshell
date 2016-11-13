@@ -1,5 +1,5 @@
-#ifndef AND_H
-#define AND_H
+#ifndef __AND_H__
+#define __AND_H__
 
 #include <vector>
 #include <string>
@@ -8,7 +8,6 @@
 
 class And : public Connector
 {
-    
     public:
     
         And(std::string vs);
@@ -18,7 +17,6 @@ class And : public Connector
         std::string get();
         
         std::string type();
-
 };
 
-#endif
+#endif // __AND_H__

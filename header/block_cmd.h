@@ -1,5 +1,5 @@
-#ifndef BLOCK_COMMAND_H
-#define BLOCK_COMMAND_H
+#ifndef __BLOCK_COMMAND_H__
+#define __BLOCK_COMMAND_H__
 
 #include <vector>
 #include <string>
@@ -8,7 +8,6 @@
 
 class Block : public Command // structure to call recurse parse on
 {
-    
     public:
         
         Block(std::string);
@@ -18,7 +17,6 @@ class Block : public Command // structure to call recurse parse on
         std::string get();
         
         std::string type();
-        
 };
 
-#endif
+#endif // __BLOCK_COMMAND_H__
