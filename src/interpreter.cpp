@@ -310,8 +310,8 @@ Node* Interpreter::buildTree(std::vector<Object*> v)
             o2 = s.top();
             s.pop();
             
-            o->setLeft(o1);
-            o->setRight(o2);
+            o->setRight(o1);
+            o->setLeft(o2);
             
             s.push(o);
         }
