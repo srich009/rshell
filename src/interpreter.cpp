@@ -226,7 +226,8 @@ bool Interpreter::isBalanced(std::string s) // check for ballanced number of sep
 }
 //-------------------------------------------------------------------------------------------
 
-void Interpreter::buildTree(Node*n, Object* o)
+void Interpreter::buildTree(Object* o)
 {
+
 }
 //-------------------------------------------------------------------------------------------
