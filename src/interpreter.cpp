@@ -22,7 +22,7 @@ Node* Interpreter::parse(std::string s)
     if(!isBalanced(s))
     {
         std::cout << "ERROR: not ballanced () OR []" << std::endl;
-        exit(1);
+        return 0; // NULL Node*
     }
     //================================================================
     
@@ -94,6 +94,11 @@ Node* Interpreter::parse(std::string s)
     
     ///***********************************************************************
     
+    if(str_vec.at(0) == ";" || str_vec.at(0) == "&&" || str_vec.at(0) == "||")
+    {
+        std::cout << "ERROR: Leading with connector" << std::endl;
+        return 0;
+    }
     
     // HANDLE_SEMICOLON
     //==================================================================
