@@ -89,6 +89,11 @@ Node* Interpreter::parse(std::string s)
     
     ///***********************************************************************
     
+    if(str_vec.at(0) == ";" || str_vec.at(0) == "&&" || str_vec.at(0) == "||")
+    {
+        std::cout << "ERROR: Leading with connector" << std::endl;
+        return 0;
+    }
     
     // HANDLE_SEMICOLON
     //==================================================================
