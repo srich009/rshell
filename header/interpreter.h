@@ -20,10 +20,14 @@ class Interpreter
     public:
         
         Node* parse(std::string s);
+    
+    private:
         
         bool isBalanced(std::string s); // refers to brackets, braces, parentheses...
         
-        void buildTree(Node*& n, std::vector<Object*> v); // node reference so it works
+        void postfix(std::vector<Object*> &v); // node reference so it works
+        
+        Node* buildTree(std::vector<Object*> v);
 };
 
 #endif
