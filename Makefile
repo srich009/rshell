@@ -2,7 +2,7 @@
 COMP = g++
 FLAGS = -Wall -Werror -ansi -pedantic
 DEBUG = -g
-OFILES = src/action.o src/and.o src/command.o src/connector.o src/interpreter.o src/line.o src/object.o src/or.o src/pattern.o src/semiColon.o src/node.o src/leaf_cmd.o src/block_cmd.o
+OFILES = src/action.o src/and.o src/command.o src/connector.o src/interpreter.o src/line.o src/object.o src/or.o src/pattern.o src/semiColon.o src/node.o src/leaf_cmd.o src/block_cmd.o src/testing.o
 
 # Targets
 all: main.cpp $(OFILES) | bin
@@ -25,6 +25,9 @@ action.o: src/object.cpp header/object.h src/action.cpp header/action.h
 	
 object.o: src/object.cpp header/object.h
 	$(COMP) $(FLAGS) -c src/object.cpp
+	
+testing.o: src/object.cpp header/object.h src/testing.cpp header/testing.h 
+	$(COMP) $(FLAGS) -c src/testing.cpp
 
 command.o: src/object.cpp header/object.h src/command.cpp header/command.h 
 	$(COMP) $(FLAGS) -c src/command.cpp

@@ -1,5 +1,5 @@
-#ifndef COMMAND_H
-#define COMMAND_H
+#ifndef __COMMAND_H__
+#define __COMMAND_H__
 
 #include <vector>
 #include <string>
@@ -7,8 +7,7 @@
 #include "object.h"
 
 class Command : public Object // now an Abstract base
-{
-    
+{ 
     public:
         
         Command();
@@ -20,7 +19,6 @@ class Command : public Object // now an Abstract base
         virtual std::string get() = 0;
         
         virtual std::string type() = 0;
-        
 };
 
-#endif
+#endif // __COMMAND_H__

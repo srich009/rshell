@@ -1,12 +1,11 @@
-#ifndef OBJECT_H
-#define OBJECT_H
+#ifndef __OBJECT_H__
+#define __OBJECT_H__
 
 #include <vector>
 #include <string>
 
 class Object
 {
-    
     protected:
     
         std::string str;
@@ -24,4 +23,4 @@ class Object
         virtual std::string type() = 0;
 };
 
-#endif
+#endif // __OBJECT_H__

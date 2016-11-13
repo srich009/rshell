@@ -1,5 +1,5 @@
-#ifndef LEAF_COMMAND_H
-#define LEAF_COMMAND_H
+#ifndef __LEAF_COMMAND_H__
+#define __LEAF_COMMAND_H__
 
 #include <vector>
 #include <string>
@@ -8,7 +8,6 @@
 
 class Leaf : public Command // cmds && args
 {
-    
     public:
         
         Leaf(std::string);
@@ -17,8 +16,7 @@ class Leaf : public Command // cmds && args
         
         std::string get();
         
-        std::string type();
-        
+        std::string type();    
 };
 
-#endif
+#endif // __LEAF_COMMAND_H__

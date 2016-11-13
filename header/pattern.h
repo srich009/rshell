@@ -1,5 +1,5 @@
-#ifndef PATTERN_H
-#define PATTERN_H
+#ifndef __PATTERN_H__
+#define __PATTERN_H__
 
 #include "line.h"
 #include "interpreter.h"
@@ -7,7 +7,6 @@
 
 class Pattern 
 {
-    
     private:
     
         Line* l;
@@ -27,7 +26,6 @@ class Pattern
         Interpreter* getI();
     
         Action* getA();
-    
 };
 
-#endif
+#endif // __PATTERN_H__

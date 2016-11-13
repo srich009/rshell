@@ -1,5 +1,5 @@
-#ifndef CONNECTOR_H
-#define CONNECTOR_H
+#ifndef __CONNECTOR_H__
+#define __CONNECTOR_H__
 
 #include <vector>
 #include <string>
@@ -7,8 +7,7 @@
 #include "object.h"
 
 class Connector : public Object
-{
-        
+{   
     public:
     
         virtual ~Connector(); // abstract class needs virtual destructor
@@ -19,7 +18,7 @@ class Connector : public Object
         
         virtual std::string get() = 0;
         
-        virtual std::string type() = 0;
-        
+        virtual std::string type() = 0;      
 };
-#endif
+
+#endif // __CONNECTOR_H__
