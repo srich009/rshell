@@ -175,7 +175,7 @@ Node* Interpreter::parse(std::string s)
     Node* n = 0; // init as NULL
     postfix(final_form);
     n = buildTree(final_form);
-    printTree(n);
+    //printTree(n);
     //==========================================================================
     
     return n; // root of tree
@@ -319,7 +319,9 @@ Node* Interpreter::buildTree(std::vector<Object*> v)
                 s.pop();
             
                 o->setRight(o1);
+                o1->setPar(o);
                 o->setLeft(o2);
+                o2->setPar(o);
                 
                 s.push(o);
             }
@@ -338,6 +340,14 @@ void Interpreter::printTree(Node* n)
     if(n != 0)
     {
         printTree(n->getLeft());
+        if(n->getLeft() == 0 && n->getRight() == 0)
+        {
+            std::cout << "leaf: ";
+        }
+        if(n->getPar() == 0)
+        {
+            std::cout << "root: ";
+        }
         std::cout << n->getKey() << std::endl; 
         printTree(n->getRight());
     }
