@@ -222,7 +222,7 @@ bool Interpreter::isBalanced(std::string s) // check for ballanced number of sep
 
 void Interpreter::buildTree(Node*& n, std::vector<Object*> v)
 {
-    std::cout << "inside Build_tree" << std::endl;
+    /*std::cout << "inside Build_tree" << std::endl;
     
         
     // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
@@ -239,6 +239,43 @@ void Interpreter::buildTree(Node*& n, std::vector<Object*> v)
     {
         n = new Node(v.at(0)->get());
         return;
+    }*/
+    
+    stack<Object*> s;
+    unsigned i = 0;
+    //int k = 0;
+    Object* o;
+    vector<Object> pfix;
+    
+    while(i < v.size())
+    {
+        if(v.at(i)->type() == "Leaf" || v.at(i)->type() == "Block")
+        {
+            pfix.push_back(v.at(i));
+        }
+        else
+        {
+            if(s.empty())
+            {
+                s.push(v.at(i));
+            }
+            else
+            {
+                while(!s.empt())
+                {
+                    pfix.push_back(s.top());
+                    s.pop();
+                }
+                s.push(v.at(i));
+            }
+        }
+        i++;
+    }
+    
+    while(!s.empty())
+    {
+        pfix.push_back(s.top());
+        s.pop();
     }
     
 
