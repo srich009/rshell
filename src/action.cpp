@@ -16,9 +16,9 @@ bool Action::exec(Node* n) // tree traversal algorithm
         return false;       
     } 
     
-    bool a = false; // A
-    bool b = false; // B
-    bool c = false; // 
+    bool a = false; 
+    bool b = false; 
+    bool c = false; 
     
     if(n != 0 && ( (n->getKey() != "&&") && (n->getKey() != "||") && ( n->getKey() != ";") ) ) // single
     {
@@ -29,16 +29,16 @@ bool Action::exec(Node* n) // tree traversal algorithm
             exit(0); 
         }
         else  // bin
-        {
-            const char* in1 = in.c_str();
-            if(executr((char*)(in1)) == 1)
+        {        
+            // implicit: convert( string ) -> convert (const char*) -> convert (char)
+            if(executr((char*)(in.c_str())) == 1) 
             {
                 a = true;
             }
             else
             {
                 a = false;
-            }  
+            }
             
             return a;
         }
@@ -47,7 +47,7 @@ bool Action::exec(Node* n) // tree traversal algorithm
     {        
         std::string str = n->getKey(); // fill with connector for eval
     
-        // recursive solve  executr function part A
+        // recurse exec function part A
         c = exec(n->getLeft());
     
         // logic control flow for the  {"&&", "||", ";"}
@@ -56,7 +56,7 @@ bool Action::exec(Node* n) // tree traversal algorithm
             perror("ERROR: Missing connector");
             exit(1);
         }
-        else // recursive solve  executr function part B
+        else // recurse exec function part B
         {            
             if(str == "&&" && c == true) // &&
             {                
@@ -71,7 +71,7 @@ bool Action::exec(Node* n) // tree traversal algorithm
                 if(n->getRight() == 0){return c;} // ?? if is "cmd;"  where semi used as terminator
                 b = exec(n->getRight());
             }
-            else
+            else // ? maybe not...
             {
                 // std::cout << "str: " << str << std::endl;
                 // perror("ERROR: Unknown connector");
@@ -79,9 +79,10 @@ bool Action::exec(Node* n) // tree traversal algorithm
             }
             
             return b;
-        }
-
-    }
+            
+        } //END: recursive solve  executr function part B
+        
+    } // END: multi with connects
     
     return false; // catch
 }

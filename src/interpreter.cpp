@@ -22,7 +22,7 @@ Node* Interpreter::parse(std::string s)
     if(!isBalanced(s))
     {
         std::cout << "ERROR: not ballanced () OR []" << std::endl;
-        exit(1);
+        return 0; // NULL Node*
     }
     //================================================================
     
