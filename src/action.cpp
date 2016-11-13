@@ -8,51 +8,73 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-void Action::exec(Node* n)
+bool Action::exec(Node* n) // tree traversal algorithm
 {
-    // PREFIX tree traversal algorithm
-    
-    if(n == 0) // error check
+    if(n == 0) // error check NULL
     {        
         std::cout << " NULL Node* passed to exec" << std::endl;
-        return;       
+        return false;       
+    } 
+    
+    bool a = false; // A
+    bool b = false; // B
+    bool c = false; // A con B
+    
+    if(n != 0 && ( (n->getKey() != "&&") && (n->getKey() != "||") && ( n->getKey() != ";") ) ) // single
+    {
+            //bin
+            std::string in = n->getKey();
+            const char* in1 = in.c_str();
+            if(executr((char*)(in1)) == 1)
+            {
+                a = true;
+            }
+            else
+            {
+                a = false;
+            }  
+            
+            return a;
     }
-
-    
-    // psuedo code ... 
-    /*
-    
-        let T be root node tree;
-        
-        if(T != NULL)
+    else // multi with connects
+    {        
+        std::string temp = "";
+        if(n != 0) // connector
         {
-            return t.value;
+            temp = n->getKey();
         }
         
         // recursive solve   // solve is executr function
-        A = solve.(t->left);
-        B = solve(t->right);
+        a = exec(n->getLeft());
+        b = exec(n->getRight());
         
-        // calculate and apply the operator "T.value" to A and B, return result/error
+        // calculate and apply the operator "n.value" to A and B, return result/error
         try
         {
-            calculate(A, B, T.value); // calculate handles logic control flow {"&&", "||", ";"}
-            return;
+            c = eval(a, b, temp); // 
+            return c;
         }
         catch(std::exception &e)
         {
-            cout << e.what() << endl;
+            std::cout << e.what() << std::endl;
             exit(1);
         }
-        
-        
-    */
+    }
     
-    
+    return false; // catch
 }
 //---------------------------------------------------------------
 
-int Action::executr(char* cmd)
+
+bool Action::eval(bool, bool, std::string) // logic control flow for the  {"&&", "||", ";"}
+{
+    std::cout << "eval not done" << std::endl;
+    return false;
+}
+//-----------------------------------------------
+
+
+int Action::executr(char* cmd) // execute char[] with execvp syscalls
 {
     char* argv[64];
     char* tempC;
@@ -110,6 +132,11 @@ int Action::executr(char* cmd)
 }
 //-----------------------------------------------
 
+
+
+
+
+
 /// OLD VERSION OF EXEC
 
     // bool b = true;
@@ -160,3 +187,33 @@ int Action::executr(char* cmd)
     //         }
     //     }
     // }
+//------------------------------------------------------------------
+    
+    // psuedo code ... 
+    /*
+    
+        let T be root node tree;
+        
+        if(T != NULL)
+        {
+            return t.value;
+        }
+        
+        // recursive solve   // solve is executr function
+        A = solve.(t->left);
+        B = solve(t->right);
+        
+        // calculate and apply the operator "T.value" to A and B, return result/error
+        try
+        {
+            calculate(A, B, T.value); // calculate handles logic control flow {"&&", "||", ";"}
+            return;
+        }
+        catch(std::exception &e)
+        {
+            cout << e.what() << endl;
+            exit(1);
+        }
+        
+        
+    */

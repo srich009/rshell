@@ -9,10 +9,11 @@ class Action
 {
     public:
     
-        void exec(Node*);
+        bool exec(Node*);
         
         int executr(char* cmd);
-      
+
+        bool eval(bool, bool, std::string);
 };
 
 #endif
