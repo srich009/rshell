@@ -6,6 +6,8 @@
 #include <iostream>   
 #include <cstring>
 #include <sys/wait.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 #include <unistd.h>
 
 bool Action::exec(Node* n) // tree traversal algorithm
@@ -30,7 +32,16 @@ bool Action::exec(Node* n) // tree traversal algorithm
         }
         else if(in.substr(0, 5) == "test " || (in.at(0) == '[' && in.at(in.size()-2) == ']' ))
         {
-            test(in);
+            if( test(in) )
+            {
+                std::cout << "(True)" << std::endl;
+                return true;
+            }
+            else
+            {
+                std::cout << "(False)" << std::endl;
+                return false;
+            }
         }
         else  // bin
         {        
@@ -152,9 +163,75 @@ int Action::executr(char* cmd) // execute char[] with execvp syscalls
 }
 //-----------------------------------------------
 
-bool Action::test(std::string str)
+bool Action::test(std::string str) // flags: -e, -d, -f
 {
-    std::cout << "test function" << std::endl;
-    std::cout << str << std::endl;
-    return false;
+    std::string flag = "";
+    
+    if(str.substr(0, 5) == "test ")
+    {
+        str = str.substr(4, str.size()-1);
+        
+        while(str.at(0) == ' ') // trim front space for flag
+        {
+            str = str.substr(1, str.size()-1);
+        }
+    }
+    else // []
+    {
+        str = str.substr(1, str.size()-1);
+        str = str.substr(0, str.size()-2);
+        
+        while(str.at(0) == ' ') // trim front space for flag
+        {
+            str = str.substr(1, str.size()-1);
+        } 
+    }
+    
+    if(str.substr(0, 3) == "-e " || str.substr(0, 3) == "-f " || str.substr(0, 3) == "-d " )
+    {
+        flag = str.substr(0, 2);
+        str = str.substr(3, str.size()-1);
+    }
+    else if(str.at(0) == '-')
+    {
+        std::cout << "ERROR: bad flag value" << std::endl;
+        return false;
+    }
+    else
+    {
+        flag = "-e";
+    }
+    
+    struct stat buf;
+    
+    if(flag == "-e") // -e
+    {
+        if(stat(str.c_str(), &buf) == 0)
+        {
+            return true;
+        }
+    }
+    else if(flag == "-f" ) // -f 
+    {
+        if(stat(str.c_str(), &buf) == 0)
+        {
+            
+            if(S_ISREG (buf.st_mode & S_IFMT))
+            {
+                return true;
+            }
+        }
+    }
+    else if(flag == "-d" ) // -d
+    {
+        if(stat(str.c_str(), &buf) == 0 )
+        {
+            if(S_ISDIR (buf.st_mode & S_IFMT))
+            {
+                return true;
+            }
+        }
+    }
+    
+    return false; // catch
 }

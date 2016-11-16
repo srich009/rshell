@@ -12,7 +12,7 @@ This version of rshell supports ```test``` functionality in both forms: Literal 
 * ```test -e test/file/path```
 * ```[ -e test/file/path ]```
 
-The ```test``` command can be used with flags
+The ```test``` command can be used with these flags, if no flag the -e flag is assumed
 * ```-e``` checks if the file/directory exists
 * ```-f``` checks if the file/directory exists and is a regular file
 * ```-d``` checks if the file/directory exists and is a directory
