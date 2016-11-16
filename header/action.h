@@ -12,6 +12,8 @@ class Action
         bool exec(Node*);
         
         int executr(char* cmd);
+        
+        bool test(std::string);
 };
 
 #endif // __ACTION_H__

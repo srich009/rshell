@@ -266,7 +266,7 @@ bool Interpreter::isBalanced(std::string s) // check for ballanced number of sep
 
 void Interpreter::postfix(std::vector<Object*> &v)
 {
-   /* std::cout << "inside postfix (beginning)" << std::endl;
+   /*std::cout << "inside postfix (beginning)" << std::endl;
     
         
     // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
@@ -316,7 +316,7 @@ void Interpreter::postfix(std::vector<Object*> &v)
     
     v = pfix;
     
-        // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
+    // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
     // check to see if rejoined correctly
     /*for(unsigned i = 0; i < v.size(); i++)
     {
@@ -378,6 +378,7 @@ Node* Interpreter::buildTree(std::vector<Object*> v)
     
     return o;
 }
+//------------------------------------------------------------
 
 void Interpreter::printTree(Node* n)
 {

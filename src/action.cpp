@@ -28,6 +28,10 @@ bool Action::exec(Node* n) // tree traversal algorithm
         {
             exit(0); 
         }
+        else if(in.substr(0, 5) == "test " || (in.at(0) == '[' && in.at(in.size()-2) == ']' ))
+        {
+            test(in);
+        }
         else  // bin
         {        
             // implicit: convert( string ) -> convert (const char*) -> convert (char)
@@ -147,3 +151,10 @@ int Action::executr(char* cmd) // execute char[] with execvp syscalls
     return 1;
 }
 //-----------------------------------------------
+
+bool Action::test(std::string str)
+{
+    std::cout << "test function" << std::endl;
+    std::cout << str << std::endl;
+    return false;
+}
