@@ -114,7 +114,9 @@ Node* Interpreter::parse(std::string s)
         {
             std::string temp1 = ";";
             std::vector<std::string>::iterator it = str_vec.begin() + (i + 1); // iterator to next past "x;"
+            //std::cout << str_vec.at(i).substr(0, str_vec.at(i).size() - 1) << std::endl;
             str_vec.at(i) = str_vec.at(i).substr(0, str_vec.at(i).size() - 1); // remove ';' from string
+            //std::cout << temp1 << std::endl;
             str_vec.insert( it , temp1 ); // insert new ';' string
             i++; // prevent infinte loop
         }
@@ -327,11 +329,11 @@ void Interpreter::postfix(std::vector<Object*> &v)
     {
         std::cout << "\""<< v.at(i)->get() << "\" ";
     }    
-    std::cout << std::endl;    */
+    std::cout << std::endl;*/
     // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
 }
 //-------------------------------------------------------------------------------------------
-
+//"ls" ";"
 Node* Interpreter::buildTree(std::vector<Object*> v)
 {
     std::stack<Node*> s;
@@ -361,18 +363,20 @@ Node* Interpreter::buildTree(std::vector<Object*> v)
                 
 
                 o = new Node(v.at(i)->get());
-            
-                o1 = s.top();
-                s.pop();
-                o2 = s.top();
-                s.pop();
-            
+                if(s.size() >= 2)
+                {
+                    o1 = s.top();
+                    s.pop();
+                    o2 = s.top();
+                    s.pop();
+                    
                 o->setRight(o1);
                 o1->setPar(o);
                 o->setLeft(o2);
                 o2->setPar(o);
                 
                 s.push(o);
+                }
             }
         }
     }
