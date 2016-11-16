@@ -14,7 +14,7 @@ bool Action::exec(Node* n) // tree traversal algorithm
 {
     if(n == 0) // error check NULL
     {        
-        std::cout << "NULL Node* passed to exec" << std::endl;
+        //std::cout << "NULL Node* passed to exec" << std::endl;
         return false;       
     } 
     
@@ -175,6 +175,11 @@ bool Action::test(std::string str) // flags: -e, -d, -f
         {
             str = str.substr(1, str.size()-1);
         }
+        
+        while(str.at(str.size() - 1) == ' ') // trim back space for flag
+        {
+            str = str.substr(0, str.size()-1);
+        }
     }
     else // []
     {
@@ -184,7 +189,12 @@ bool Action::test(std::string str) // flags: -e, -d, -f
         while(str.at(0) == ' ') // trim front space for flag
         {
             str = str.substr(1, str.size()-1);
-        } 
+        }
+        
+        while(str.at(str.size() - 1) == ' ') // trim back space for flag
+        {
+            str = str.substr(0, str.size()-1);
+        }
     }
     
     if(str.substr(0, 3) == "-e " || str.substr(0, 3) == "-f " || str.substr(0, 3) == "-d " )

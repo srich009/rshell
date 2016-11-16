@@ -7,6 +7,11 @@
 
 Node* Interpreter::parse(std::string s)
 {
+    
+    if(s == "")
+    {
+        return 0;
+    }
     // REMOVE_COMMENTS
     //================================================================
     unsigned int pos = s.find("#"); // location of '#'
