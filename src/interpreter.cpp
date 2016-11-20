@@ -7,11 +7,10 @@
 
 Node* Interpreter::parse(std::string s)
 {
-    
-    if(s == "")
-    {
-        return 0;
-    }
+    // CATCH EMPTY
+    if(s.empty())
+    {return 0;}
+        
     // REMOVE_COMMENTS
     //================================================================
     unsigned int pos = s.find("#"); // location of '#'
@@ -22,7 +21,7 @@ Node* Interpreter::parse(std::string s)
     }
     //=================================================================
     
-    // check if ballanced [] && ()
+    // CHECK IF BALLANCED [] && ()
     //================================================================
     if(!isBalanced(s))
     {
@@ -31,9 +30,8 @@ Node* Interpreter::parse(std::string s)
     }
     //================================================================
     
-    
-    ///****************** HEY HEY HEY *****************************************************
-    
+    // PARSE PARENTHESES && HANDLE PRECEDENCE
+    //==================================================================
     std::vector<std::string> str_vec;
     std::istringstream iss(s);
     std::string temp;
@@ -80,12 +78,12 @@ Node* Interpreter::parse(std::string s)
                     break;
                 }
             }
-            //temp.erase(temp.begin() + temp.find('(')); COME BACK HERE IF YOU FUCK UP
+            //temp.erase(temp.begin() + temp.find('(')); //COME BACK HERE IF YOU FUCK UP
             //temp.erase(temp.begin() + temp.find_last_of(')'));
             lefnum = 0;
             rightnum = 0;
         }
-        
+
         str_vec.push_back(temp);
     }
     
@@ -97,12 +95,20 @@ Node* Interpreter::parse(std::string s)
     // str_vec = to the return val from new parse function
     // parse each string in the vector individually
     
-    ///***********************************************************************
+    //===================================================================
     
-    if(str_vec.at(0) == ";" || str_vec.at(0) == "&&" || str_vec.at(0) == "||")
+    //SYNTAX CHECK
+    if(!str_vec.empty())
     {
-        std::cout << "ERROR: Leading with connector" << std::endl;
-        return 0;
+        if(str_vec.at(0) == ";" || str_vec.at(0) == "&&" || str_vec.at(0) == "||")
+        {
+            std::cout << "ERROR: Leading with connector" << std::endl;
+            return 0;
+        }
+    }
+    else
+    {
+        return 0; // empty vector == no commands... ex. input = "()"
     }
     
     // HANDLE_SEMICOLON
@@ -112,16 +118,14 @@ Node* Interpreter::parse(std::string s)
         // last is semicolon
         if( (str_vec.at(i)).at(str_vec.at(i).size() -1) == ';' )
         {
-            std::string temp1 = ";";
-            std::vector<std::string>::iterator it = str_vec.begin() + (i + 1); // iterator to next past "x;"
-            //std::cout << str_vec.at(i).substr(0, str_vec.at(i).size() - 1) << std::endl;
+            std::vector<std::string>::iterator it = str_vec.begin() + (i + 1); // iterator to next string after "cur;"
             str_vec.at(i) = str_vec.at(i).substr(0, str_vec.at(i).size() - 1); // remove ';' from string
-            //std::cout << temp1 << std::endl;
-            str_vec.insert( it , temp1 ); // insert new ';' string
+            str_vec.insert( it , ";" ); // insert new ";" string into vector
             i++; // prevent infinte loop
         }
     }    
     //==================================================================
+    
     /*std::cout << "round 2" << std::endl;
     for(unsigned j = 0; j < str_vec.size(); j++)
     {
@@ -133,7 +137,7 @@ Node* Interpreter::parse(std::string s)
     std::vector<Object*> final_form; // vector of Object pointers, commands joined with their arguments separated by connectors
     std::string tempString;          // for each iteration, puts together command and args and pushes
     
-    // WW 
+    // xx
     for(unsigned i = 0; i < str_vec.size(); i++)
     {
         bool semiBool = (str_vec.at(i) == ";"); //checks if the current string is a connector
@@ -141,7 +145,7 @@ Node* Interpreter::parse(std::string s)
         bool orBool = (str_vec.at(i) == "||");
         bool blockBool = (str_vec.at(i).find("(") != std::string::npos);
         
-        // XX
+        // yy
         if(semiBool || andBool || orBool || blockBool) 
         {
             final_form.push_back(new Leaf(tempString)); // push command to vector
@@ -175,9 +179,9 @@ Node* Interpreter::parse(std::string s)
                 tempString += " ";
             }
         } 
-        // XX
+        // yy
         
-        // YY
+        // zz
         if(i + 1 == str_vec.size()) 
         {
             if(tempString != "")
@@ -185,13 +189,13 @@ Node* Interpreter::parse(std::string s)
                 final_form.push_back(new Leaf(tempString)); // get the last part
             }
         } 
-        // YY
+        // zz
         
-    }// WW
+    }// xx
     
-    //std::cout << "inside parse (before remove space)" << std::endl;
     
-        
+    // std::cout << "inside parse (before remove space)" << std::endl;
+            
     // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
     // check to see if rejoined correctly
     /*for(unsigned i = 0; i < final_form.size(); i++)
@@ -200,7 +204,7 @@ Node* Interpreter::parse(std::string s)
     }    
     std::cout << std::endl;  */  
     
-    for(unsigned i = 0; i < final_form.size(); i++)
+    for(unsigned i = 0; i < final_form.size(); i++) // ERASE ANY NULL OBJECTS
     {
         if(final_form.at(i)->get() == "")
         {
@@ -209,8 +213,7 @@ Node* Interpreter::parse(std::string s)
     }
     
     //std::cout << "inside parse (after remove space)" << std::endl;
-    
-        
+            
     // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
     // check to see if rejoined correctly
     /*for(unsigned i = 0; i < final_form.size(); i++)
@@ -219,15 +222,15 @@ Node* Interpreter::parse(std::string s)
     }    
     std::cout << std::endl;  */
     
-    //build root of the tree
+    // BUILD ROOT OF TREE
     //==========================================================================
-    Node* n = 0; // init as NULL
-    postfix(final_form);
-    n = buildTree(final_form);
+    Node* n = 0;                // init pointer as NULL
+    postfix(final_form);        // convert vector to postfix
+    n = buildTree(final_form);  // construct tree with stack
     //printTree(n);
     //==========================================================================
     
-    return n; // root of tree
+    return n; // root
 }
 //-------------------------------------------------------------------------------------------
 
@@ -273,12 +276,11 @@ bool Interpreter::isBalanced(std::string s) // check for ballanced number of sep
 
 void Interpreter::postfix(std::vector<Object*> &v)
 {
-   /*std::cout << "inside postfix (beginning)" << std::endl;
-    
+   //std::cout << "inside postfix (beginning)" << std::endl;
         
     // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
     // check to see if rejoined correctly
-    for(unsigned i = 0; i < v.size(); i++)
+   /*  for(unsigned i = 0; i < v.size(); i++)
     {
         std::cout << "\""<< v.at(i)->get() << "\" ";
     }    
@@ -333,7 +335,8 @@ void Interpreter::postfix(std::vector<Object*> &v)
     // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
 }
 //-------------------------------------------------------------------------------------------
-//"ls" ";"
+
+
 Node* Interpreter::buildTree(std::vector<Object*> v)
 {
     std::stack<Node*> s;
@@ -359,9 +362,9 @@ Node* Interpreter::buildTree(std::vector<Object*> v)
             {
                 
             }
-            else{
+            else
+            {
                 
-
                 o = new Node(v.at(i)->get());
                 if(s.size() >= 2)
                 {
@@ -370,12 +373,12 @@ Node* Interpreter::buildTree(std::vector<Object*> v)
                     o2 = s.top();
                     s.pop();
                     
-                o->setRight(o1);
-                o1->setPar(o);
-                o->setLeft(o2);
-                o2->setPar(o);
-                
-                s.push(o);
+                    o->setRight(o1);
+                    o1->setPar(o);
+                    o->setLeft(o2);
+                    o2->setPar(o);
+                    
+                    s.push(o);
                 }
             }
         }
@@ -383,7 +386,6 @@ Node* Interpreter::buildTree(std::vector<Object*> v)
     
     o = s.top();
     s.pop();
-    
     
     return o;
 }
