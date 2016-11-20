@@ -17,10 +17,9 @@ bool Action::exec(Node* n) // tree traversal algorithm
         //std::cout << "NULL Node* passed to exec" << std::endl;
         return false;       
     } 
-    
+
     bool a = false; 
     bool b = false; 
-    bool c = false; 
     
     if(n != 0 && ( (n->getKey() != "&&") && (n->getKey() != "||") && ( n->getKey() != ";") ) ) // single
     {
@@ -30,7 +29,7 @@ bool Action::exec(Node* n) // tree traversal algorithm
         {
             exit(0); 
         }
-        else if(in.substr(0, 5) == "test " || (in.at(0) == '[' && in.at(in.size()-2) == ']' ))
+        else if(in.substr(0, 5) == "test " || (in.at(0) == '[' && in.at(in.size()-2) == ']' )) // builtin
         {
             if( test(in) )
             {
@@ -48,49 +47,37 @@ bool Action::exec(Node* n) // tree traversal algorithm
             // implicit: convert( string ) -> convert (const char*) -> convert (char)
             if(executr((char*)(in.c_str())) == 1) 
             {
-                a = true;
+                return true;
             }
-            else
-            {
-                a = false;
-            }
-            
-            return a;
+            // else
+            return false;
         }
     }
     else // multi with connects
-    {        
-        std::string str = n->getKey(); // fill with connector for eval
-    
+    {
         // recurse exec function part A
-        c = exec(n->getLeft());
+        a = exec(n->getLeft());
     
         // logic control flow for the  {"&&", "||", ";"}
-        if(str.empty())
+        if(n->getKey().empty())
         {
             perror("ERROR: Missing connector");
             exit(1);
         }
         else // recurse exec function part B
         {            
-            if(str == "&&" && c == true) // &&
+            if(n->getKey() == "&&" && a == true) // &&
             {                
                 b = exec(n->getRight());
             }
-            else if(str == "||" && c == false) // ||
+            else if(n->getKey() == "||" && a == false) // ||
             {               
                 b = exec(n->getRight());
             }
-            else if(str == ";") // ;
+            else if(n->getKey() == ";") // ;
             {  
-                if(n->getRight() == 0){return c;} // ?? if is "cmd;"  where semi used as terminator
+                if(n->getRight() == 0){return a;} // ?? if is "cmd;"  where semi used as terminator
                 b = exec(n->getRight());
-            }
-            else // ? maybe not...
-            {
-                // std::cout << "str: " << str << std::endl;
-                // perror("ERROR: Unknown connector");
-                // exit(1);
             }
             
             return b;
@@ -102,7 +89,6 @@ bool Action::exec(Node* n) // tree traversal algorithm
     return false; // catch
 }
 //---------------------------------------------------------------
-
 
 
 int Action::executr(char* cmd) // execute char[] with execvp syscalls
@@ -145,11 +131,9 @@ int Action::executr(char* cmd) // execute char[] with execvp syscalls
     }
     else
     {
-        int i = 0;
         do
         {
             wpid = waitpid(pid, &status, WUNTRACED); //waits on child and retrieves status
-            i++;
         }
         while(!WIFEXITED(status) && !WIFSIGNALED(status)); //waits while child is not exited or killed by a signal
     }
