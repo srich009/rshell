@@ -23,6 +23,9 @@
 #include "header/pattern.h"
 #include "header/semiColon.h"
 
+// LOCAL FUNCTION
+std::string get_dir(); 
+
 int main()
 {
     // Get user name
@@ -43,14 +46,27 @@ int main()
     
     std::string uName = std::string(userName);
     std::string hName = std::string(hostName);
+    std::string curdir = "";
     std::string userInput = ""; 
     
     do
     {
-        std::cout << uName << "@" << hName << "$ "; // output prompt
+        // get current working directory
+        try
+        {
+            curdir = get_dir();
+        }
+        catch(std::exception& e)
+        {
+            std::cout << "ERROR: get_dir" << std::endl;
+            perror( e.what() );
+        }
+                
+        std::cout << uName << "@" << hName << ":" << curdir << " ";
+        std::cout << "$ ";                          // output prompt
         std::getline(std::cin, userInput);          // get user input 
         
-        Pattern* P = new Pattern(userInput); // construct pattern
+        Pattern* P = new Pattern(userInput);        // construct pattern
         
         // PARSE
         try
@@ -66,7 +82,6 @@ int main()
         // EXECUTE
         try
         {
-            //P->getI()->printTree(P->getL()->getRoot()); //prints tree
             P -> getA() -> exec( P -> getL() -> getRoot() ); // call exec function on root of tree
         }
         catch(std::exception& e)
@@ -78,4 +93,16 @@ int main()
     while(1); // terminate with special exit command
     
     return 0;
+}
+//===================================================================
+
+std::string get_dir()
+{
+    size_t sz = 100;
+    char buffer[100];
+    if( getcwd(buffer, sz) != 0)
+    {
+        return std::string(buffer);
+    }
+    return std::string();
 }

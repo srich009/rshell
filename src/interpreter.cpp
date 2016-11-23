@@ -78,19 +78,13 @@ Node* Interpreter::parse(std::string s)
                     break;
                 }
             }
-            //temp.erase(temp.begin() + temp.find('(')); //COME BACK HERE IF YOU FUCK UP
-            //temp.erase(temp.begin() + temp.find_last_of(')'));
+
             lefnum = 0;
             rightnum = 0;
         }
 
         str_vec.push_back(temp);
     }
-    
-    /*for(unsigned j = 0; j < str_vec.size(); j++)
-    {
-        std::cout << str_vec.at(j) << std::endl;
-    }*/
 
     // str_vec = to the return val from new parse function
     // parse each string in the vector individually
@@ -125,13 +119,7 @@ Node* Interpreter::parse(std::string s)
         }
     }    
     //==================================================================
-    
-    /*std::cout << "round 2" << std::endl;
-    for(unsigned j = 0; j < str_vec.size(); j++)
-    {
-        std::cout << str_vec.at(j) << std::endl;
-    }*/
-    
+        
     // REJOIN COMMANDS TO THEIR ARGS && SEPARATE WITH CONNECTORS
     //==================================================================
     std::vector<Object*> final_form; // vector of Object pointers, commands joined with their arguments separated by connectors
@@ -192,42 +180,24 @@ Node* Interpreter::parse(std::string s)
         // zz
         
     }// xx
-    
-    
-    // std::cout << "inside parse (before remove space)" << std::endl;
-            
-    // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
-    // check to see if rejoined correctly
-    /*for(unsigned i = 0; i < final_form.size(); i++)
-    {
-        std::cout << "\""<< final_form.at(i)->get() << "\" ";
-    }    
-    std::cout << std::endl;  */  
-    
-    for(unsigned i = 0; i < final_form.size(); i++) // ERASE ANY NULL OBJECTS
+    //==========================================================================    
+ 
+    // ERASE ANY NULL OBJECTS
+    //==========================================================================    
+    for(unsigned i = 0; i < final_form.size(); i++) 
     {
         if(final_form.at(i)->get() == "")
         {
             final_form.erase(final_form.begin() + i);
         }
     }
-    
-    //std::cout << "inside parse (after remove space)" << std::endl;
-            
-    // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
-    // check to see if rejoined correctly
-    /*for(unsigned i = 0; i < final_form.size(); i++)
-    {
-        std::cout << "\""<< final_form.at(i)->get() << "\" ";
-    }    
-    std::cout << std::endl;  */
+    //==========================================================================
     
     // BUILD ROOT OF TREE
     //==========================================================================
     Node* n = 0;                // init pointer as NULL
-    postfix(final_form);        // convert vector to postfix
-    n = buildTree(final_form);  // construct tree with stack
-    //printTree(n);
+    postfix(final_form);        // convert vector from infix to postfix
+    n = buildTree(final_form);  // construct tree with stack from postfix tokens
     //==========================================================================
     
     return n; // root
@@ -275,19 +245,7 @@ bool Interpreter::isBalanced(std::string s) // check for ballanced number of sep
 
 
 void Interpreter::postfix(std::vector<Object*> &v)
-{
-   //std::cout << "inside postfix (beginning)" << std::endl;
-        
-    // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
-    // check to see if rejoined correctly
-   /*  for(unsigned i = 0; i < v.size(); i++)
-    {
-        std::cout << "\""<< v.at(i)->get() << "\" ";
-    }    
-    std::cout << std::endl;    */
-    // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
-
-    
+{    
     std::stack<Object*> s;
     unsigned i = 0;
     std::vector<Object*> pfix;
@@ -324,15 +282,6 @@ void Interpreter::postfix(std::vector<Object*> &v)
     }
     
     v = pfix;
-    
-    // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
-    // check to see if rejoined correctly
-    /*for(unsigned i = 0; i < v.size(); i++)
-    {
-        std::cout << "\""<< v.at(i)->get() << "\" ";
-    }    
-    std::cout << std::endl;*/
-    // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
 }
 //-------------------------------------------------------------------------------------------
 
@@ -391,22 +340,3 @@ Node* Interpreter::buildTree(std::vector<Object*> v)
 }
 //------------------------------------------------------------
 
-void Interpreter::printTree(Node* n)
-{
-    if(n != 0)
-    {
-        printTree(n->getLeft());
-        /*if(n->getLeft() == 0 && n->getRight() == 0)
-        {
-            std::cout << "leaf: ";
-        }*/
-        std::cout << "current node: " <<n->getKey(); 
-                if(n->getPar() > 0)
-        {
-            std::cout << " parent: " << n->getPar()->getKey();
-        }
-        std::cout << std::endl;
-        printTree(n->getRight());
-    }
-
-}

@@ -14,7 +14,6 @@ bool Action::exec(Node* n) // tree traversal algorithm
 {
     if(n == 0) // error check NULL
     {        
-        //std::cout << "NULL Node* passed to exec" << std::endl;
         return false;       
     } 
 
@@ -116,7 +115,7 @@ int Action::executr(char* cmd) // execute char[] with execvp syscalls
     
     if(pid == 0) //if child
     { 
-        if(-1 == execvp(argv[0], argv)) //attempt to execute but if -1 calls perror
+        if(execvp(argv[0], argv) == -1) //attempt to execute but if -1 calls perror
         {
             std::string restring(argv[0]);
             perror(restring.c_str());
