@@ -1,4 +1,4 @@
-// This is the main file for rshell
+// main file for rshell
  
 #include <iostream>
 #include <string>
@@ -11,17 +11,10 @@
 #include <sys/types.h>
 #include <pwd.h>
 
-// JUST PUT ALL FOR NOW CHANGE LATER...
 #include "header/action.h"
-#include "header/and.h"
-#include "header/command.h"
-#include "header/connector.h"
 #include "header/interpreter.h"
 #include "header/line.h"
-#include "header/object.h"
-#include "header/or.h"
 #include "header/pattern.h"
-#include "header/semiColon.h"
 
 // LOCAL FUNCTION
 std::string get_dir(); 
@@ -29,7 +22,7 @@ std::string get_dir();
 int main()
 {
     // Get user name
-    char userName[64] = ""; // user name buffer
+    char userName[64]; // user name buffer
     if(getlogin_r(userName, sizeof(userName)-1) != 0) // error returns nonzero
     {
         perror("getLogin_r()");
@@ -51,14 +44,14 @@ int main()
     
     do
     {
-        // get current working directory
+        // get current working directory 
         try
         {
             curdir = get_dir();
         }
         catch(std::exception& e)
         {
-            std::cout << "ERROR: get_dir" << std::endl;
+            std::cout << "ERROR: get dir" << std::endl;
             perror( e.what() );
         }
                 
@@ -98,11 +91,19 @@ int main()
 
 std::string get_dir()
 {
-    size_t sz = 100;
-    char buffer[100];
-    if( getcwd(buffer, sz) != 0)
+    std::string str;
+    char* temp = 0;
+    temp = get_current_dir_name();
+    if(!temp)
     {
-        return std::string(buffer);
+        return std::string("ERROR");
+    }
+    else
+    {
+        str = std::string(temp);
+        delete temp;
+        temp = 0;
+        return str;
     }
     return std::string();
 }
