@@ -12,7 +12,7 @@ This version of rshell supports limited ```test``` functionality in both forms: 
 * ```test -e test/file/path```
 * ```[ -e test/file/path ]```
 
-The ```test``` command can be used with these flags, if no flag the -e flag is assumed
+The ```test``` command can be used with these flags, if no flag is found, the ```-e``` flag is assumed
 * ```-e``` checks if the file/directory exists
 * ```-f``` checks if the file/directory exists and is a regular file
 * ```-d``` checks if the file/directory exists and is a directory
@@ -48,6 +48,7 @@ $ bin/rshell
 * Current ```test``` function can only handle existence of Files and/or Directories.
 
 ## To Do
-* Implement full ```test``` function with flags using a decorator pattern
+* Implement command piping
+* Implement full ```test``` function (Decorator Pattern)
 * Include a way to use the arrow keys for navigation 
 * Include a command history, scroll up and down through past commands
