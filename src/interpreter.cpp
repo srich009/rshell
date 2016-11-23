@@ -229,6 +229,8 @@ for(unsigned i = 0; i < final_form.size(); i++)
 std::cout << '\n';
     
     n = buildTree(final_form);  // construct tree with stack from postfix tokens
+    
+std::cout << "print tree:\n"; printTree(n); std::cout << '\n';
     //==========================================================================
     
     return n; // root
@@ -371,3 +373,22 @@ Node* Interpreter::buildTree(std::vector<Object*> v)
 }
 //------------------------------------------------------------
 
+void Interpreter::printTree(Node* n)
+{
+    if(n != 0)
+    {
+        printTree(n->getLeft());
+        /*if(n->getLeft() == 0 && n->getRight() == 0)
+        {
+            std::cout << "leaf: ";
+        }*/
+        std::cout << "current node: " <<n->getKey(); 
+                if(n->getPar() > 0)
+        {
+            std::cout << " parent: " << n->getPar()->getKey();
+        }
+        std::cout << std::endl;
+        printTree(n->getRight());
+    }
+
+}

@@ -19,6 +19,8 @@ class Interpreter
     public:
         
         Node* parse(std::string s);
+        
+        void printTree(Node* n); // print debug
     
     private:
         
