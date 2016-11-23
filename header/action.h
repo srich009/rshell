@@ -14,6 +14,8 @@ class Action
         int executr(char* cmd);
         
         bool test(std::string);
+        
+        bool changeDir(std::string);
 };
 
 #endif // __ACTION_H__

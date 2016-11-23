@@ -2,6 +2,7 @@
 
 #include <stdexcept>
 #include <stdio.h>
+#include <stdlib.h>
 #include <cstdlib>    
 #include <iostream>   
 #include <cstring>
@@ -40,6 +41,18 @@ bool Action::exec(Node* n) // tree traversal algorithm
             else
             {
                 std::cout << "(False)" << std::endl;
+                return false;
+            }
+        }
+        else if(in.substr(0, 2) == "cd")
+        {
+            if(changeDir(in))
+            {
+                return true;
+            }
+            else
+            {   std::string warning = "rshell: cd:" + in.substr(2, in.size());
+                perror(warning.c_str());
                 return false;
             }
         }
@@ -244,4 +257,57 @@ bool Action::test(std::string str) // flags: -e, -d, -f
     }
     
     return false; // catch
+}
+
+bool Action::changeDir(std::string dir)
+{
+    char* oldPath;
+    oldPath = getenv("PWD");
+    
+    int n = 0;
+    
+    if(dir == "cd ")
+    {
+        char* home;
+        home = getenv("HOME");
+        n = chdir(home);
+        if(n < 0)
+        {
+            return false;
+        }
+        
+    }
+    else if(dir == "cd - ")
+    {
+        n = chdir("..");
+        if(n < 0)
+        {
+            return false;
+        }
+    }
+    else
+    {
+        dir = dir.substr(3, dir.size() - 4);
+        n = chdir(dir.c_str());
+        if(n < 0)
+        {
+            return false;
+        }
+    }
+    
+    char* path;
+    getcwd(path, FILENAME_MAX);
+    n = setenv("PWD", path, 1);
+    if(n < 0)
+    {
+        return false;
+    }
+    
+    n = setenv("OLDPWD", oldPath, 1);
+    if(n < 0)
+    {
+        return false;
+    }
+    
+    return true;
 }
