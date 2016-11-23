@@ -229,8 +229,6 @@ for(unsigned i = 0; i < final_form.size(); i++)
 std::cout << '\n';
     
     n = buildTree(final_form);  // construct tree with stack from postfix tokens
-    
-std::cout << "print tree:\n"; printTree(n); std::cout << '\n';
     //==========================================================================
     
     return n; // root
