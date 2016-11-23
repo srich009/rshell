@@ -1,4 +1,5 @@
 #include "../header/interpreter.h"
+
 #include <sstream>
 #include <cstring> //library for strtok
 #include <iostream> 
@@ -8,8 +9,10 @@
 Node* Interpreter::parse(std::string s)
 {
     // CATCH EMPTY
+    //==============
     if(s.empty())
     {return 0;}
+    //==============
         
     // REMOVE_COMMENTS
     //================================================================
@@ -21,7 +24,7 @@ Node* Interpreter::parse(std::string s)
     }
     //=================================================================
     
-    // CHECK IF BALLANCED [] && ()
+    // CHECK FOR BALLANCED [] && ()
     //================================================================
     if(!isBalanced(s))
     {
@@ -53,8 +56,10 @@ Node* Interpreter::parse(std::string s)
                     rightnum++;
                 }
             }
+            
             std::string ntemp;
             temp += " ";
+            
             while(iss >> ntemp)
             {
                 for(unsigned i = 0; i < ntemp.size(); i++)
@@ -68,7 +73,9 @@ Node* Interpreter::parse(std::string s)
                         rightnum++;
                     }
                 }
+                
                 temp += ntemp;
+                
                 if(lefnum != rightnum)
                 {
                     temp = temp + " ";
@@ -78,26 +85,20 @@ Node* Interpreter::parse(std::string s)
                     break;
                 }
             }
-            //temp.erase(temp.begin() + temp.find('(')); //COME BACK HERE IF YOU FUCK UP
-            //temp.erase(temp.begin() + temp.find_last_of(')'));
+
             lefnum = 0;
             rightnum = 0;
         }
 
         str_vec.push_back(temp);
     }
-    
-    /*for(unsigned j = 0; j < str_vec.size(); j++)
-    {
-        std::cout << str_vec.at(j) << std::endl;
-    }*/
 
     // str_vec = to the return val from new parse function
     // parse each string in the vector individually
-    
     //===================================================================
     
-    //SYNTAX CHECK
+    //SYNTAX CHECK (leading connector/empty vector)
+    //===================================================================
     if(!str_vec.empty())
     {
         if(str_vec.at(0) == ";" || str_vec.at(0) == "&&" || str_vec.at(0) == "||")
@@ -108,9 +109,11 @@ Node* Interpreter::parse(std::string s)
     }
     else
     {
+        std::cout << "ERROR: Empty argument" <<std::endl;
         return 0; // empty vector == no commands... ex. input = "()"
     }
-    
+    //===================================================================
+        
     // HANDLE_SEMICOLON
     //==================================================================
     for(unsigned i = 0; i < str_vec.size(); i++)
@@ -125,13 +128,7 @@ Node* Interpreter::parse(std::string s)
         }
     }    
     //==================================================================
-    
-    /*std::cout << "round 2" << std::endl;
-    for(unsigned j = 0; j < str_vec.size(); j++)
-    {
-        std::cout << str_vec.at(j) << std::endl;
-    }*/
-    
+        
     // REJOIN COMMANDS TO THEIR ARGS && SEPARATE WITH CONNECTORS
     //==================================================================
     std::vector<Object*> final_form; // vector of Object pointers, commands joined with their arguments separated by connectors
@@ -192,42 +189,46 @@ Node* Interpreter::parse(std::string s)
         // zz
         
     }// xx
-    
-    
-    // std::cout << "inside parse (before remove space)" << std::endl;
-            
-    // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
-    // check to see if rejoined correctly
-    /*for(unsigned i = 0; i < final_form.size(); i++)
-    {
-        std::cout << "\""<< final_form.at(i)->get() << "\" ";
-    }    
-    std::cout << std::endl;  */  
-    
-    for(unsigned i = 0; i < final_form.size(); i++) // ERASE ANY NULL OBJECTS
+    //========================================================================== 
+ 
+std::cout << "BEFORE" << '\n';
+for(unsigned i = 0; i < final_form.size(); i++)
+{
+    std::cout << i << ": " << "\""<< final_form.at(i)->get() << "\" " << std::endl;
+}  
+std::cout << '\n';
+ 
+    // ERASE ANY NULL OBJECTS
+    //==========================================================================    
+    for(unsigned i = 0; i < final_form.size(); i++) 
     {
         if(final_form.at(i)->get() == "")
         {
             final_form.erase(final_form.begin() + i);
         }
     }
+    //==========================================================================
     
-    //std::cout << "inside parse (after remove space)" << std::endl;
-            
-    // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
-    // check to see if rejoined correctly
-    /*for(unsigned i = 0; i < final_form.size(); i++)
-    {
-        std::cout << "\""<< final_form.at(i)->get() << "\" ";
-    }    
-    std::cout << std::endl;  */
-    
+std::cout << "AFTER" << '\n';
+for(unsigned i = 0; i < final_form.size(); i++)
+{
+    std::cout << i << ": " << "\""<< final_form.at(i)->get() << "\" " << std::endl;
+}    
+std::cout << '\n';
+        
     // BUILD ROOT OF TREE
     //==========================================================================
     Node* n = 0;                // init pointer as NULL
-    postfix(final_form);        // convert vector to postfix
-    n = buildTree(final_form);  // construct tree with stack
-    //printTree(n);
+    postfix(final_form);        // convert vector from infix to postfix
+    
+std::cout << "postfix" << '\n';
+for(unsigned i = 0; i < final_form.size(); i++)
+{
+    std::cout << i << ": " << "\""<< final_form.at(i)->get() << "\" " << std::endl;
+}    
+std::cout << '\n';
+    
+    n = buildTree(final_form);  // construct tree with stack from postfix tokens
     //==========================================================================
     
     return n; // root
@@ -275,19 +276,7 @@ bool Interpreter::isBalanced(std::string s) // check for ballanced number of sep
 
 
 void Interpreter::postfix(std::vector<Object*> &v)
-{
-   //std::cout << "inside postfix (beginning)" << std::endl;
-        
-    // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
-    // check to see if rejoined correctly
-   /*  for(unsigned i = 0; i < v.size(); i++)
-    {
-        std::cout << "\""<< v.at(i)->get() << "\" ";
-    }    
-    std::cout << std::endl;    */
-    // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
-
-    
+{    
     std::stack<Object*> s;
     unsigned i = 0;
     std::vector<Object*> pfix;
@@ -324,15 +313,6 @@ void Interpreter::postfix(std::vector<Object*> &v)
     }
     
     v = pfix;
-    
-    // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
-    // check to see if rejoined correctly
-    /*for(unsigned i = 0; i < v.size(); i++)
-    {
-        std::cout << "\""<< v.at(i)->get() << "\" ";
-    }    
-    std::cout << std::endl;*/
-    // THIS IS FOR TESTING, REMOVE LATER!!!  ***********************************
 }
 //-------------------------------------------------------------------------------------------
 

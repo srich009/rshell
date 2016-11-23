@@ -20,7 +20,7 @@ class Interpreter
         
         Node* parse(std::string s);
         
-        void printTree(Node* n);
+        void printTree(Node* n); // print debug
     
     private:
         

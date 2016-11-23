@@ -1,4 +1,4 @@
-// This is the main file for rshell
+// main file for rshell
  
 #include <iostream>
 #include <string>
@@ -11,22 +11,18 @@
 #include <sys/types.h>
 #include <pwd.h>
 
-// JUST PUT ALL FOR NOW CHANGE LATER...
 #include "header/action.h"
-#include "header/and.h"
-#include "header/command.h"
-#include "header/connector.h"
 #include "header/interpreter.h"
 #include "header/line.h"
-#include "header/object.h"
-#include "header/or.h"
 #include "header/pattern.h"
-#include "header/semiColon.h"
+
+// LOCAL FUNCTION
+std::string get_dir(); 
 
 int main()
 {
     // Get user name
-    char userName[64] = ""; // user name buffer
+    char userName[64]; // user name buffer
     if(getlogin_r(userName, sizeof(userName)-1) != 0) // error returns nonzero
     {
         perror("getLogin_r()");
@@ -43,14 +39,27 @@ int main()
     
     std::string uName = std::string(userName);
     std::string hName = std::string(hostName);
+    std::string curdir = "";
     std::string userInput = ""; 
     
     do
     {
-        std::cout << uName << "@" << hName << "$ "; // output prompt
+        // get current working directory 
+        try
+        {
+            curdir = get_dir();
+        }
+        catch(std::exception& e)
+        {
+            std::cout << "ERROR: get dir" << std::endl;
+            perror( e.what() );
+        }
+                
+        std::cout << uName << "@" << hName << ":" << curdir << " ";
+        std::cout << "$ ";                          // output prompt
         std::getline(std::cin, userInput);          // get user input 
         
-        Pattern* P = new Pattern(userInput); // construct pattern
+        Pattern* P = new Pattern(userInput);        // construct pattern
         
         // PARSE
         try
@@ -63,10 +72,13 @@ int main()
             perror( e.what() );
         }            
         
+        std::cout << "print tree:\n"; 
+        P->getI() -> printTree(P -> getL() -> getRoot() );
+        std::cout << '\n';
+        
         // EXECUTE
         try
         {
-            //P->getI()->printTree(P->getL()->getRoot()); //prints tree
             P -> getA() -> exec( P -> getL() -> getRoot() ); // call exec function on root of tree
         }
         catch(std::exception& e)
@@ -78,4 +90,24 @@ int main()
     while(1); // terminate with special exit command
     
     return 0;
+}
+//===================================================================
+
+std::string get_dir()
+{
+    std::string str;
+    char* temp = 0;
+    temp = get_current_dir_name();
+    if(!temp)
+    {
+        return std::string("UNKNOWN_DIR");
+    }
+    else
+    {
+        str = std::string(temp);
+        delete temp;
+        temp = 0;
+        return str;
+    }
+    return std::string();
 }
