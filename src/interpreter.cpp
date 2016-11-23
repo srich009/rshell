@@ -1,4 +1,5 @@
 #include "../header/interpreter.h"
+
 #include <sstream>
 #include <cstring> //library for strtok
 #include <iostream> 
@@ -8,8 +9,10 @@
 Node* Interpreter::parse(std::string s)
 {
     // CATCH EMPTY
+    //==============
     if(s.empty())
     {return 0;}
+    //==============
         
     // REMOVE_COMMENTS
     //================================================================
@@ -21,7 +24,7 @@ Node* Interpreter::parse(std::string s)
     }
     //=================================================================
     
-    // CHECK IF BALLANCED [] && ()
+    // CHECK FOR BALLANCED [] && ()
     //================================================================
     if(!isBalanced(s))
     {
@@ -53,8 +56,10 @@ Node* Interpreter::parse(std::string s)
                     rightnum++;
                 }
             }
+            
             std::string ntemp;
             temp += " ";
+            
             while(iss >> ntemp)
             {
                 for(unsigned i = 0; i < ntemp.size(); i++)
@@ -68,7 +73,9 @@ Node* Interpreter::parse(std::string s)
                         rightnum++;
                     }
                 }
+                
                 temp += ntemp;
+                
                 if(lefnum != rightnum)
                 {
                     temp = temp + " ";
@@ -91,7 +98,8 @@ Node* Interpreter::parse(std::string s)
     
     //===================================================================
     
-    //SYNTAX CHECK
+    //SYNTAX CHECK (leading connector/empty vector)
+    //===================================================================
     if(!str_vec.empty())
     {
         if(str_vec.at(0) == ";" || str_vec.at(0) == "&&" || str_vec.at(0) == "||")
@@ -102,8 +110,10 @@ Node* Interpreter::parse(std::string s)
     }
     else
     {
+        std::cout << "ERROR: Empty argument" <<std::endl;
         return 0; // empty vector == no commands... ex. input = "()"
     }
+    //===================================================================
     
     // HANDLE_SEMICOLON
     //==================================================================

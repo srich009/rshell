@@ -96,7 +96,7 @@ std::string get_dir()
     temp = get_current_dir_name();
     if(!temp)
     {
-        return std::string("ERROR");
+        return std::string("UNKNOWN_DIR");
     }
     else
     {

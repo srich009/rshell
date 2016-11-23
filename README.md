@@ -36,11 +36,16 @@ $ make
 $ bin/rshell
 ```
 
-## Bugs && Limitations
-* The host name obtained by ```gethostname()``` is limited to a maximum of 64 characters. Any name longer than that will be truncated. The hostName buffer is set to "UNKNOWN_HOST" if a failure occurs.
-* The user name obtained by ```getlogin_r()``` is limited to a maximum of 64 characters. Any name longer than that will be truncated. The userName buffer is set to "UNKNOWN_USER" if a failure occurs.
+## Bugs
+* If the user enters an argument leading with a connector, an error message is printed.
+* If the user enters empty parentheses ```"()"``` OR no argument to act on, an error message is printed.
 * If the user enters an empty test case ```"[]"``` OR ```"test"``` followed by no arguments, an execution error occurs, a message is printed.
-* Current ```test``` function can only handle existence of Files and/or Directories
+
+## Limitations
+* The host name obtained by ```gethostname()``` is limited to a maximum of 64 characters. Any name longer than that will be truncated. The hostName buffer is set to "UNKNOWN_HOST" if an error occurs.
+* The user name obtained by ```getlogin_r()``` is limited to a maximum of 64 characters. Any name longer than that will be truncated. The userName buffer is set to "UNKNOWN_USER" if an error occurs.
+* The directory name obtained through ```get_current_dir_name()``` is set to the environment variable ```PWD```. The current directory buffer is set to "UNKNOWN_DIR" if an error occurs.
+* Current ```test``` function can only handle existence of Files and/or Directories.
 
 ## To Do
 * Implement full ```test``` function with flags using a decorator pattern
