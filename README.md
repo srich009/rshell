@@ -52,3 +52,10 @@ $ bin/rshell
 * Implement full ```test``` function (Decorator Pattern)
 * Include a way to use the arrow keys for navigation 
 * Include a command history, scroll up and down through past commands
+
+# PARSE ERRORS WITH "()"
+
+* ```()()```
+* ```(ls) && pwd```
+* ```ls && (pwd) && echo test```
+* ``` pwd && ((ls) && vim -h)```
