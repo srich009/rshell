@@ -36,11 +36,6 @@ $ make
 $ bin/rshell
 ```
 
-## Bugs
-* If the user enters an argument leading with a connector, an error message is printed.
-* If the user enters empty parentheses ```"()"``` OR no argument to act on, an error message is printed.
-* If the user enters an empty test case ```"[]"``` OR ```"test"``` followed by no arguments, an execution error occurs, a message is printed.
-
 ## Limitations
 * The host name obtained by ```gethostname()``` is limited to a maximum of 64 characters. Any name longer than that will be truncated. The hostName buffer is set to "UNKNOWN_HOST" if an error occurs.
 * The user name obtained by ```getlogin_r()``` is limited to a maximum of 64 characters. Any name longer than that will be truncated. The userName buffer is set to "UNKNOWN_USER" if an error occurs.
@@ -48,14 +43,18 @@ $ bin/rshell
 * Current ```test``` function can only handle existence of Files and/or Directories.
 
 ## To Do
+* Implement I/O redirection
 * Implement command piping
 * Implement full ```test``` function (Decorator Pattern)
 * Include a way to use the arrow keys for navigation 
 * Include a command history, scroll up and down through past commands
 
-# PARSE ERRORS WITH "()"
-
-* ```()()```
-* ```(ls) && pwd```
-* ```ls && (pwd) && echo test```
-* ``` pwd && ((ls) && vim -h)```
+## Bugs
+* If the user enters an argument leading with a connector, an error message is printed.
+* If the user enters empty parentheses ```"()"``` OR no argument to act on, an error message is printed.
+* If the user enters an empty test case ```"[]"``` OR ```"test"``` followed by no arguments, an execution error occurs, a message is printed.
+* PARSE ERRORS WITH "()" && PRECEDENCE
+    * ```()()```
+    * ```(ls) && pwd```
+    * ```ls && (pwd) && echo test```
+    * ``` pwd && ((ls) && vim -h)```
