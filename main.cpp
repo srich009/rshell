@@ -72,9 +72,9 @@ int main()
             perror( e.what() );
         }            
         
-        std::cout << "print tree:\n"; 
+        /*std::cout << "print tree:\n"; 
         P->getI() -> printTree(P -> getL() -> getRoot() );
-        std::cout << '\n';
+        std::cout << '\n';*/
         
         // EXECUTE
         try

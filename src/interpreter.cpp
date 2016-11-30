@@ -191,12 +191,12 @@ Node* Interpreter::parse(std::string s)
     }// xx
     //========================================================================== 
  
-std::cout << "BEFORE" << '\n';
+/*std::cout << "BEFORE" << '\n';
 for(unsigned i = 0; i < final_form.size(); i++)
 {
     std::cout << i << ": " << "\""<< final_form.at(i)->get() << "\" " << std::endl;
 }  
-std::cout << '\n';
+std::cout << '\n';*/
  
     // ERASE ANY NULL OBJECTS
     //==========================================================================    
@@ -209,24 +209,24 @@ std::cout << '\n';
     }
     //==========================================================================
     
-std::cout << "AFTER" << '\n';
+/*std::cout << "AFTER" << '\n';
 for(unsigned i = 0; i < final_form.size(); i++)
 {
     std::cout << i << ": " << "\""<< final_form.at(i)->get() << "\" " << std::endl;
 }    
-std::cout << '\n';
+std::cout << '\n';*/
         
     // BUILD ROOT OF TREE
     //==========================================================================
     Node* n = 0;                // init pointer as NULL
     postfix(final_form);        // convert vector from infix to postfix
     
-std::cout << "postfix" << '\n';
+/*std::cout << "postfix" << '\n';
 for(unsigned i = 0; i < final_form.size(); i++)
 {
     std::cout << i << ": " << "\""<< final_form.at(i)->get() << "\" " << std::endl;
 }    
-std::cout << '\n';
+std::cout << '\n';*/
     
     n = buildTree(final_form);  // construct tree with stack from postfix tokens
     //==========================================================================
