@@ -50,6 +50,7 @@ $ bin/rshell
 * Include a command history, scroll up and down through past commands
 
 ## Bugs
+* memory leaks ``` make debug && valgrind bin/rshell```
 * If the user enters an argument leading with a connector, an error message is printed.
 * If the user enters empty parentheses ```"()"``` OR no argument to act on, an error message is printed.
 * If the user enters an empty test case ```"[]"``` OR ```"test"``` followed by no arguments, an execution error occurs, a message is printed.
