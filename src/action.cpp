@@ -223,7 +223,6 @@ bool Action::test(std::string str) // limited flags: -e, -d, -f
     {
         if(stat(str.c_str(), &buf) == 0)
         {
-            
             if(S_ISREG (buf.st_mode & S_IFMT))
             {
                 return true;
@@ -243,13 +242,13 @@ bool Action::test(std::string str) // limited flags: -e, -d, -f
     
     return false; // catch
 }
+//---------------------------------------------------------------
 
 bool Action::changeDir(std::string dir)
 {
     char* oldPath;
     oldPath = getenv("PWD");
-    //std::cout << "in cdir op is: " << oldPath << std::endl;
-    
+
     int n = 0;
     
     if(dir == "cd ")
@@ -287,7 +286,7 @@ bool Action::changeDir(std::string dir)
     char path [FILENAME_MAX];
     char* returnHolder;
     returnHolder = getcwd(path, FILENAME_MAX);
-    //std::cout << "getcwd: " << somethingelse << std::endl;
+
     n = setenv("PWD", path, 1);
     if(n < 0)
     {
@@ -300,13 +299,6 @@ bool Action::changeDir(std::string dir)
         return false;
     }
     
-    /*char* p; 
-    p = getenv("PWD");
-    std::cout << "pwd: " << p << std::endl;
-    char* op; 
-    op = getenv("OLDPWD");
-    std::cout << "oldpwd: " << op << std::endl;*/
-    
-    
     return true;
 }
+//---------------------------------------------------------------

@@ -338,13 +338,8 @@ Node* Interpreter::buildTree(std::vector<Object*> v)
         }
         else
         {
-            if(s.empty())
+            if(!s.empty()) // empty == do nothing
             {
-                
-            }
-            else
-            {
-                
                 o = new Node(v.at(i)->get());
                 if(s.size() >= 2)
                 {
@@ -390,3 +385,4 @@ void Interpreter::printTree(Node* n)
     }
 
 }
+//---------------------------------------------------------------
