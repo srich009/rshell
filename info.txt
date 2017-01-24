@@ -1,0 +1,30 @@
+Each class and what it contains/entails
+---------------------------------------
+
+pattern
+    - contains a line object
+    - contains an interpreter object
+    - contains action object
+
+line 
+    - contains the unformatted user input (std::string)
+    - contains the root of the AST (Node*)
+
+interpreter
+    - takes in a string and generates an Abstract Syntax Tree
+
+action 
+    - executes user input by traversing the AST generatred by interpreter
+
+node 
+    - structural representation of the user input
+    
+object
+    - defines compositional hierarchy for the interpreter
+    
+
+------------------------------------------
+
+pattern is created, line is given user input string
+pattern uses its interpreter on line->string , generates AST in line object
+pattern uses its action object on the line->AST , executes the tree
